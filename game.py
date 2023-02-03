@@ -4,5 +4,5 @@ playerInput = int(input(f"""
 
 	What do you want to do?
 	1) Start Game
-	q) Quit
+	2) Quit
 		\n"""))
