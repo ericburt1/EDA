@@ -1,24 +1,28 @@
+
+inventory = []
+
+
 def holder():
-	player = input(f"What do you want to do?\n").lower()
-	if player in ("n","north"):
+	player = validate("nsewugq?h")
+	if player == "n":
 		pass
-	elif player.lower() == "e" or player.lower() == "east":
+	elif player == "e" :
 		pass
-	elif player.lower() == "s" or player.lower() == "south":
+	elif player == "s":
 		pass
-	elif player.lower() == "w" or player.lower() == "west":
+	elif player == "w":
 		pass
-	elif player.lower() == "u" or player.lower() == "north":
+	elif player == "u":
 		pass
-	elif player.lower() == "g" or player.lower() == "grab":
+	elif player == "g":
+		gamelose("You left the game :(")
+	elif player == "?":
 		pass
-	elif player == "?" or player.lower() == "help":
-		pass
-	elif player.lower() == "q" or player.lower() == "quit":
-		quit()
+	elif player == "i":
+		displayInventory()
 	else:
 		print("That is not possible.")
-		start()
+
 		
 #Room one layout each set of parenthasis is an area with its functon ame 
 #(start)(keyR1)
@@ -29,7 +33,7 @@ def gamelose(cause):
 	print("\n"*5)
 	print(cause)
 	print("Game over!")
-	
+	quit()
 
 def helpdisplay(area):
 	print("\n"*5)
@@ -41,12 +45,16 @@ def helpdisplay(area):
 	East (e)
 	South (s)
 	West (w)
+	Inventory (i)
 	Help (?)
 		""")
 	leave = input("Back to game (y)")
-	if leave.lower() == "y":
-		area()
-	else:gamestarted = False
+	valid = False
+	while valid == False:
+		leave = input("Back to game (y)").lower()
+		if leave[0] == "y":
+			area()
+
 
 
 def welcome():
@@ -65,69 +73,81 @@ def welcome():
 def validate(values, prompt=f"What do you want to do?\n"):
 	while True:
 		response = input(prompt).lower()
-		if response[0] in values:
+		if response[0] == "i":
+			displayInventory()
+			return
+		elif response[0] == "q":
+			gamelose("You left the game :(")
+		elif response[0] in values:
 			return response
 
-def start(started = False):
+def start():
 	valid = False
 	while not valid:
-		print("\n"*5)
-		if started == False:
-			print("Welcome to EDA USER. If you need a reminder of controls type '?'")
-			print("You wake up in the corner of a white room.")
-		else:
-			print("You are back by your bed.")
+		print("\n"*2)
+		print("Welcome to EDA USER. If you need a reminder of controls type '?'")
+		print("You are in the corner of a white room.")
 		print("You notice a door south of you.")
 		print("\nMoveable directions: East, South.")
-		player = validate("nsewugq")
+		player = validate("nsewugq?i")
 		started = True
 		if player == "n":
 			print("You walk north into a wall.")
-		elif player.lower() == "e" or player.lower() == "east":
+		elif player == "e":
 			print("You move east.")
-		elif player.lower() == "s" or player.lower() == "south":
+			keyR1()
+		elif player == "s":
 			print("You move south.")
-		elif player.lower() == "w" or player.lower() == "west":
+		elif player == "w":
 			print("You walk west into a wall.")
-		elif player.lower() == "u" or player.lower() == "use":
+		elif player == "u":
 			print("You go ignore what is happeneding around you and go back to sleep")
 			gamelose("You went to sleep and woke up in your house.")
-		elif player.lower() == "g" or player.lower() == "grab":
+		elif player == "g":
 			print("You look around and don't see anything to pick up.")
-		elif player == "?" or player.lower() == "help":
+		elif player == "?":
 			helpdisplay(start)
-		elif player.lower() == "q" or player.lower() == "quit":
-			quit()
+		elif player == "q":
+			gamelose("You left the game :(")
+		elif player == "i":
+			displayInventory()
 		else:
-			print("That is not possible.")
+			print("Invalid Input.")
 
 
 def keyR1():
 	print("You look around and see an empty area other than ...")
-	print("a key! Laying there right on the ground!")
-	print("\nMoveable directions: North, South, West.")
-	player = input(f"What do you want to do?\n")
-	if player.lower() == "n" or player.lower() == "north":
-		pass
-	elif player.lower() == "e" or player.lower() == "east":
-		print("You walk west into a wall.")
-	elif player.lower() == "s" or player.lower() == "south":
-		pass
-	elif player.lower() == "w" or player.lower() == "west":
-		start()
-	elif player.lower() == "u" or player.lower() == "north":
-		pass
-	elif player.lower() == "g" or player.lower() == "grab":
-		pass
-	elif player == "?" or player.lower() == "help":
-		pass
-	elif player.lower() == "q" or player.lower() == "quit":
-		quit()
-	else:
-		print("That is not possible.")
-		keyR1()
+	print("a key this may come in handy.")
+	valid = False
+	while not valid:
+		player = validate("nsewugq?i")
+		if player == "n":
+			pass
+		elif player == "e" :
+			pass
+		elif player == "s":
+			pass
+		elif player == "w":
+			pass
+		elif player == "u":
+			pass
+		elif player == "g":
+			if "key" in inventory:
+				print("You already picked up the key!!")
+			else:
+				inventory.append("key")
+		elif player == "?":
+			pass
+		else:
+			print("Invald Input.")
 
-
+def displayInventory():
+	print("Inventory:\n")
+	for i in range(len(inventory)):
+		part = inventory[i]
+		print(f"{i+1}: {part}")
+	print()
+	return
 
 # FUCNTIONS DO NOT GO PAST HERE
 
