@@ -346,3 +346,4 @@ started = False
 inventory = []
 
 welcome()
+
