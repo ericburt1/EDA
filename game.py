@@ -16,11 +16,20 @@ def holder():
 		elif player == "u":
 			pass
 		elif player == "g":
-			gamelose("You left the game :(")
+			pass
 		elif player == "?":
 			helpdisplay()
 		elif player == "i":
 			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+		---------
+		| X | M |
+		| * | + |
+		| * * * |
+		--+------
+				""",mapR2)
 		else:
 			print("Invald Input.")
 
@@ -85,16 +94,15 @@ def develop_testing():
 	2) keyR1
 	3) doorR1
 	4) mapR2
-	5)
 	""")
 	area = input(f"What room do you want to go to?")
-	if area == "start":
+	if area == "1":
 		start()
-	elif area == "keyR1":
+	elif area == "2":
 		keyR1()
-	elif area == "doorR1":
+	elif area == "3":
 		doorR1()
-	elif area == "mapR2":
+	elif area == "4":
 		mapR2()
 	else: 
 		print(f"Invalid command")
@@ -109,6 +117,7 @@ def validate(values, prompt=f"What do you want to do?\n"):
 
 
 def displayInventory():
+	print("\n"*2)
 	print("Inventory:\n")
 	for i in range(len(inventory)):
 		part = inventory[i]
@@ -134,7 +143,7 @@ def displayInventory():
 
 def start():
 	print("\n"*2)
-	print("Welcome to EDA USER. If you need a reminder of controls type '?'")
+	print(f"Welcome to EDA {playerName}. If you need a reminder of controls type '?'")
 	print("You are in the corner of a white room.")
 	print("You notice a door south of you.")
 	print("\nMoveable directions: East, South.")
@@ -162,6 +171,7 @@ def start():
 			print("Invalid Input.")
 
 def keyR1():
+	print("\n"*2)
 	if "key" not in inventory:
 		print("You look around and see an empty area other than ...")
 		print("a key this may come in handy.")
@@ -198,6 +208,7 @@ def keyR1():
 			print("Invald Input.")
 
 def doorR1():
+	print("\n"*2)
 	print("You notice everything is white except a metal door.")
 	print("\nMovable directions: North, East.")
 	valid = False
@@ -231,6 +242,7 @@ def doorR1():
 			print("Invald Input.")
 
 def fillerR1():
+	print("\n"*2)
 	print("This appears to be a kitchen.")
 	print("The kitchen is very clean. No food appears to be there.")
 	print("\nMovable directions: North, West.")
@@ -267,6 +279,7 @@ def fillerR1():
 
 
 def displayMap(mapp,area):
+	
 	print(f"""
 	Key:
 	X is player
@@ -294,6 +307,9 @@ def displayMap(mapp,area):
 #
 
 def mapR2():
+	print("\n"*2)
+	if "map" not in inventory:
+		print(f"EDA: 'Good job {playerName}. That was you first trial. See if you can do this next one.'")
 	print("You can't go back the door locked when you went through.")
 	print("You look around and notice a chest.")
 	print("\nMovable directions: South")
@@ -305,7 +321,7 @@ def mapR2():
 		elif player == "e" :
 			print("You notice the wall has gone to a grey color.")
 		elif player == "s":
-			pass
+			hallWayR2()
 		elif player == "w":
 			print("You notice the wall has gone to a grey color.")
 		elif player == "u":
@@ -333,6 +349,155 @@ def mapR2():
 		else:
 			print("Invald Input.")
 
+def hallWayR2():
+	print("\n"*2)
+	print("You walk into a hallway that appears to have nothing in it.")
+	print("\nMovable directions: North, South")
+	valid = False
+	while not valid:
+		player = validate("nsewugq?im")
+		if player == "n":
+			mapR2()
+		elif player == "e" :
+			print("As you walk east you notice you aren't moving.")
+			print("Must be because of the wall.")
+		elif player == "s":
+			pass
+		elif player == "w":
+			print("You walk west and bump into the wall. Can't go that way.")
+		elif player == "u":
+			print("The hallway is empty you can't use anything.")
+			print("Did you mean to acces the map 'm'")
+		elif player == "g":
+			print("There's nothing to grab.")
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+		---------
+		| * | M |
+		| X | + |
+		| * * * |
+		--+------
+				""",mapR2)
+		else:
+			print("Invald Input.")
+
+def lockedDoorR2():
+	print("\n"*2)
+	print("You enter this room and notice a door that is south of you.")
+	print("It appears to have a lock on it.")
+	print("\nMovable directions: North, East, South")
+	valid = False
+	while not valid:
+		player = validate("nsewugq?im")
+		if player == "n":
+			hallWayR2()
+		elif player == "e" :
+			hallWay2R2()
+		elif player == "s":
+			print("The door is locked you can't get through it without a key.")
+		elif player == "w":
+			print("You walk west and bump into the wall. Can't go that way.")
+		elif player == "u":
+			if "key" in inventory:
+				pass
+			else:
+				print("Looks like you need a key for the door.")
+		elif player == "g":
+			print("You grab the door handle and you can't open the door.")
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+		---------
+		| * | M |
+		| * | + |
+		| X * * |
+		--+------
+				""",mapR2)
+		else:
+			print("Invald Input.")
+
+def hallWay2R2():
+	print("\n"*2)
+	print("You are in a damp and what looks like ruined hallway.")
+	print("Ceiling panels look loose. You might want to get into a different room.")
+	print("\nMovable directions: East, West")
+	valid = False
+	while not valid:
+		player = validate("nsewugq?im")
+		if player == "n":
+			print("You walk north into a wall.")
+		elif player == "e" :
+			pass
+		elif player == "s":
+			print("There is a wall that way, no use going there.")
+		elif player == "w":
+			lockedDoorR2()
+		elif player == "u":
+			print("The hallway is empty you can't use anything.")
+			print("Did you mean to acces the map 'm'")
+		elif player == "g":
+			print("Unless you want rotten items theres nothing to grab.")
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+		---------
+		| * | M |
+		| * | + |
+		| * X * |
+		--+------
+				""",mapR2)
+		else:
+			print("Invald Input.")
+
+def doorR2():
+	print("\n"*2)
+	print("You enter a room that has a door up North.")
+	print("Otherwise nothing else in this room. What is this place.")
+	print("\nMovable directions: North, West")
+	valid = False
+	while not valid:
+		player = validate("nsewugq?im")
+		if player == "n":
+			print("You walk north into a wall.")
+		elif player == "e" :
+			pass
+		elif player == "s":
+			print("There is a wall that way, no use going there.")
+		elif player == "w":
+			lockedDoorR2()
+		elif player == "u":
+			print("The hallway is empty you can't use anything.")
+			print("Did you mean to acces the map 'm'")
+		elif player == "g":
+			print("There is nothing to grab")
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+		---------
+		| * | M |
+		| * | + |
+		| * * X |
+		--+------
+				""",mapR2)
+		else:
+			print("Invald Input.")
 #
 # ROOM 2 END ROOM 2 END ROOM 2 END ROOM 2 END ROOM 2 END ROOM 2 END ROOM 2 END ROOM 2 END ROOM 2 END ROOM 2 END ROOM 2 END ROOM 2 END
 #
@@ -341,9 +506,11 @@ def mapR2():
 
 
 # VARIABLES START HERE
+import random
 rooms = 0
 started = False
 inventory = []
+playerName = f"contendor#{random.randrange(1001,9999)}"
 
 welcome()
 
