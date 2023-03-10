@@ -94,8 +94,9 @@ def develop_testing():
 	2) keyR1
 	3) doorR1
 	4) mapR2
+	5) keyR2
 	""")
-	area = input(f"What room do you want to go to?")
+	area = input(f"What room do you want to go to?\n")
 	if area == "1":
 		start()
 	elif area == "2":
@@ -104,6 +105,8 @@ def develop_testing():
 		doorR1()
 	elif area == "4":
 		mapR2()
+	elif area == "5":
+		keyR2()
 	else: 
 		print(f"Invalid command")
 
@@ -362,7 +365,7 @@ def hallWayR2():
 			print("As you walk east you notice you aren't moving.")
 			print("Must be because of the wall.")
 		elif player == "s":
-			pass
+			lockedDoorR2()
 		elif player == "w":
 			print("You walk west and bump into the wall. Can't go that way.")
 		elif player == "u":
@@ -404,7 +407,12 @@ def lockedDoorR2():
 			print("You walk west and bump into the wall. Can't go that way.")
 		elif player == "u":
 			if "key" in inventory:
-				pass
+				if 'small cube' not in inventory:
+					print('You want to go one but feel like your missing something.')
+					print('Look in all the rooms and see if you can find anything.')
+				else:
+					print('You put the key into the slot and the door shutters and slides open.')
+					print('You walk through the door to the next')
 			else:
 				print("Looks like you need a key for the door.")
 		elif player == "g":
@@ -429,6 +437,7 @@ def hallWay2R2():
 	print("\n"*2)
 	print("You are in a damp and what looks like ruined hallway.")
 	print("Ceiling panels look loose. You might want to get into a different room.")
+	print("One of the wall panels looks like it could be plied off. Only if you had something to ply it off with.")
 	print("\nMovable directions: East, West")
 	valid = False
 	while not valid:
@@ -436,12 +445,17 @@ def hallWay2R2():
 		if player == "n":
 			print("You walk north into a wall.")
 		elif player == "e" :
-			pass
+			doorR2()
 		elif player == "s":
 			print("There is a wall that way, no use going there.")
 		elif player == "w":
 			lockedDoorR2()
 		elif player == "u":
+			if 'glass shard' in inventory:
+				print("You put the glass shard in the little opening and pry.")
+				print("A small peice of the wall comes out reveiling a small cube in the compartment.")
+				print("You grab the small cube. It may come in handy later.")
+				inventory.append('small cube')
 			print("The hallway is empty you can't use anything.")
 			print("Did you mean to acces the map 'm'")
 		elif player == "g":
@@ -471,15 +485,15 @@ def doorR2():
 	while not valid:
 		player = validate("nsewugq?im")
 		if player == "n":
-			print("You walk north into a wall.")
+			keyR2()
 		elif player == "e" :
-			pass
+			print("You walk east into a wall.")
 		elif player == "s":
 			print("There is a wall that way, no use going there.")
 		elif player == "w":
-			lockedDoorR2()
+			hallWay2R2()
 		elif player == "u":
-			print("The hallway is empty you can't use anything.")
+			print("The try to use something but nothing works.")
 			print("Did you mean to acces the map 'm'")
 		elif player == "g":
 			print("There is nothing to grab")
@@ -494,6 +508,51 @@ def doorR2():
 		| * | M |
 		| * | + |
 		| * * X |
+		--+------
+				""",mapR2)
+		else:
+			print("Invald Input.")
+
+def keyR2():
+	print("\n"*2)
+	print("You walk through the door and see a key in the middle of the room.")
+	print("You see a mirror on the wall at the oppisite side of the room.")
+	print("\nMovable directions: South")
+	valid = False
+	while not valid:
+		player = validate("nsewugq?im")
+		if player == "n":
+			print("The mirror is there, wonder what it is?")
+		elif player == "e" :
+			print("You walk east into a wall.")
+		elif player == "s":
+			doorR2()
+		elif player == "w":
+			print("Just a wall.")
+		elif player == "u":
+			if "glass shard" not in inventory:
+				if 'key' in inventory:
+					print(f"You hit the key on the mirror and it shatters.")
+					print("You grab a peice of the broken mirror.")
+					inventory.append("glass shard")
+			else:
+				print("Maybe theres something to break that mirror.")
+		elif player == "g":
+			if 'key' not in inventory:
+				print("You grab the key. Its very heavy.")
+				print("Maybe you could break something with it.")
+				inventory.append('key')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+		---------
+		| * | X |
+		| * | + |
+		| * * * |
 		--+------
 				""",mapR2)
 		else:
