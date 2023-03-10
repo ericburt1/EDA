@@ -95,6 +95,7 @@ def develop_testing():
 	3) doorR1
 	4) mapR2
 	5) keyR2
+	6) startR3
 	""")
 	area = input(f"What room do you want to go to?\n")
 	if area == "1":
@@ -104,9 +105,14 @@ def develop_testing():
 	elif area == "3":
 		doorR1()
 	elif area == "4":
+		inventory.append('map')
 		mapR2()
 	elif area == "5":
+		inventory.append('map')
 		keyR2()
+	elif area == "6":
+		inventory.append('map')
+		startR3()
 	else: 
 		print(f"Invalid command")
 
@@ -285,11 +291,11 @@ def displayMap(mapp,area):
 	
 	print(f"""
 	Key:
-	X is player
+	X is player (if it takes up more than one space then you are in a large room)
 	|, --- are walls
 	+ are doors
 	* moveable spaces
-	M is an interactable
+	M is an interactable (Some items and interactables are hidden)
 	
 	MAP:
 	{mapp}
@@ -385,7 +391,7 @@ def hallWayR2():
 		| X | + |
 		| * * * |
 		--+------
-				""",mapR2)
+				""",hallWayR2)
 		else:
 			print("Invald Input.")
 
@@ -413,6 +419,9 @@ def lockedDoorR2():
 				else:
 					print('You put the key into the slot and the door shutters and slides open.')
 					print('You walk through the door to the next')
+					print('Once you walk through the door it shuts behind you.')
+					print(f"EDA: 'Excelent job {playerName}. The investors are proud of your efforts'")
+					startR3()
 			else:
 				print("Looks like you need a key for the door.")
 		elif player == "g":
@@ -429,7 +438,7 @@ def lockedDoorR2():
 		| * | + |
 		| X * * |
 		--+------
-				""",mapR2)
+				""",lockedDoorR2)
 		else:
 			print("Invald Input.")
 
@@ -456,8 +465,9 @@ def hallWay2R2():
 				print("A small peice of the wall comes out reveiling a small cube in the compartment.")
 				print("You grab the small cube. It may come in handy later.")
 				inventory.append('small cube')
-			print("The hallway is empty you can't use anything.")
-			print("Did you mean to acces the map 'm'")
+			else:
+				print("You notice a wall panel that looks like it could be plied off. Only if you had something.")
+				print("Did you mean to acces the map 'm'")
 		elif player == "g":
 			print("Unless you want rotten items theres nothing to grab.")
 		elif player == "?":
@@ -472,7 +482,7 @@ def hallWay2R2():
 		| * | + |
 		| * X * |
 		--+------
-				""",mapR2)
+				""",hallWay2R2)
 		else:
 			print("Invald Input.")
 
@@ -509,7 +519,7 @@ def doorR2():
 		| * | + |
 		| * * X |
 		--+------
-				""",mapR2)
+				""",doorR2)
 		else:
 			print("Invald Input.")
 
@@ -554,15 +564,118 @@ def keyR2():
 		| * | + |
 		| * * * |
 		--+------
-				""",mapR2)
+				""",keyR2)
 		else:
 			print("Invald Input.")
 #
 # ROOM 2 END ROOM 2 END ROOM 2 END ROOM 2 END ROOM 2 END ROOM 2 END ROOM 2 END ROOM 2 END ROOM 2 END ROOM 2 END ROOM 2 END ROOM 2 END
 #
 
-# FUCNTIONS DO NOT GO PAST HERE
+#Room 3 map
+#   -------------
+#   |x|  |rm|rmm|
+#   | |-+|-+|-+-|
+#   |  lh lh lh +locked
+#   --|-+|-+|-+-|
+#     |rm|rm|   |
+#     -----------
+#lh is long hallway to minimize the amount of empty hallways made
+#rm and rmm are just large rooms 
+# Empty rooms means something important is there. Start mystery in room three
+#player map 
+#	-------------------------
+#	| x | * * | * * | * * M |
+#	| * | - + | - + | - + - |
+#	| * * * * * * * * * * * +
+#	----| - + | - + | - + - |
+#	    | * * | M * | * * * |
+#	    ---------------------
 
+#
+# ROOM 3 START ROOM 3 START ROOM 3 START ROOM 3 START ROOM 3 START ROOM 3 START ROOM 3 START ROOM 3 START ROOM 3 START ROOM 3 START
+#
+
+def startR3():
+	print("This doesn't look like the other rooms so far.")
+	print("It seems to be an office and not just plain colored rooms.")
+	print("\nMovable directions: South")
+	valid = False
+	while not valid:
+		player = validate("nsewugq?im")
+		if player == "n":
+			print('Theres the door you entered the room from. Its tightly shut.')
+		elif player == "e" :
+			print('Theres a wall there.')
+		elif player == "s":
+			largeHallway1R3()
+		elif player == "w":
+			print('With your vast knowledge you know theres a wall there.')
+		elif player == "u":
+			print("The glass shard and cube wouldn't do anything here.")
+		elif player == "g":
+			print("You reach out and grab the air.")
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+	-------------------------
+	| x | * * | * * | * * M |
+	| * | - + | - + | - + - |
+	| * * * * * * * * * * * +
+	----| - + | - + | - + - |
+	    | * * | M * | * * * |
+	    ---------------------
+				""",startR3)
+		else:
+			print("Invald Input.")
+
+def largeHallway1R3():
+	print("You enter one long hallway")
+	print("There are some chairs and tables with decorations on the west and east side of the hallway.")
+	print("Eveything appears to be bolted down. You notice a door on the east side of the hallway.")
+	print("\nMovable directions: East")
+	valid = False
+	while not valid:
+		player = validate("nsewugq?im")
+		if player == "n":
+			startR3()
+		elif player == "e" :
+			pass
+		elif player == "s":
+			print('Thats a wall.')
+		elif player == "w":
+			print('There apears to be a solid barrier holding you back its called a wall.')
+		elif player == "u":
+			print("The glass shard and cube wouldn't do anything here.")
+		elif player == "g":
+			print("You reach out and grab the air.")
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+	-------------------------
+	| * | * * | * * | * * M |
+	| X | - + | - + | - + - |
+	| X * * * * * * * * * * +
+	----| - + | - + | - + - |
+	    | * * | M * | * * * |
+	    ---------------------
+				""",startR3)
+		else:
+			print("Invald Input.")
+
+
+#
+# ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END
+#
+
+# FUCNTIONS DO NOT GO PAST HERE
 
 # VARIABLES START HERE
 import random
