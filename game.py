@@ -46,7 +46,7 @@ def gamelose(cause):
 	print("\n"*2)
 	print(cause)
 	print("Game over!")
-	quit()
+	welcome()
 
 def helpdisplay(area):
 	print("\n"*2)
@@ -183,7 +183,7 @@ def keyR1():
 	print("\n"*2)
 	if "key" not in inventory:
 		print("You look around and see an empty area other than ...")
-		print("a key this may come in handy.")
+		print("a key. 'g' to grab")
 	else:
 		print("You are back in the room were the key was.")
 		print("The walls are very white.")
@@ -207,6 +207,7 @@ def keyR1():
 			if "key" in inventory:
 				print("You already picked up the key!!")
 			else:
+				print("You grab the key this may come in handy.")
 				inventory.append("key")
 		elif player == "?":
 			helpdisplay(keyR1)
@@ -241,6 +242,9 @@ def doorR1():
 						inventory.remove(inventory[i])
 						rooms = 1
 				mapR2()
+			else:
+				print("You try to open the door and notice it has a key hole in it.") 
+				print("Maybe there is a key around here.")
 		elif player == "g":
 			print("There is nothing to pick up")
 		elif player == "?":
@@ -346,15 +350,13 @@ def mapR2():
 		elif player == "i":
 			displayInventory()
 		elif player == "m":
-			print(inventory)
 			if "map" in inventory:
 				displayMap("""
 		---------
 		| X | M |
 		| * | + |
 		| * * * |
-		--+------
-				""",mapR2)
+		--+------""",mapR2)
 		else:
 			print("Invald Input.")
 
@@ -390,16 +392,15 @@ def hallWayR2():
 		| * | M |
 		| X | + |
 		| * * * |
-		--+------
-				""",hallWayR2)
+		--+------""",hallWayR2)
 		else:
 			print("Invald Input.")
 
 def lockedDoorR2():
 	print("\n"*2)
-	print("You enter this room and notice a door that is south of you.")
+	print("You enter this room and notice a door.")
 	print("It appears to have a lock on it.")
-	print("\nMovable directions: North, East, South")
+	print("\nMovable directions: North, East")
 	valid = False
 	while not valid:
 		player = validate("nsewugq?im")
@@ -408,7 +409,7 @@ def lockedDoorR2():
 		elif player == "e" :
 			hallWay2R2()
 		elif player == "s":
-			print("The door is locked you can't get through it without a key.")
+			print("The door is here maybe there is a key some where around here.")
 		elif player == "w":
 			print("You walk west and bump into the wall. Can't go that way.")
 		elif player == "u":
@@ -437,8 +438,7 @@ def lockedDoorR2():
 		| * | M |
 		| * | + |
 		| X * * |
-		--+------
-				""",lockedDoorR2)
+		--+------""",lockedDoorR2)
 		else:
 			print("Invald Input.")
 
@@ -466,10 +466,10 @@ def hallWay2R2():
 				print("You grab the small cube. It may come in handy later.")
 				inventory.append('small cube')
 			else:
-				print("You notice a wall panel that looks like it could be plied off. Only if you had something.")
+				print("One of the wall panels looks like if could be plied off. Maybe there is an item around here.")
 				print("Did you mean to acces the map 'm'")
 		elif player == "g":
-			print("Unless you want rotten items theres nothing to grab.")
+			print("You notice a wall panel that looks like it could be plied off. Only if you had something.")
 		elif player == "?":
 			helpdisplay()
 		elif player == "i":
@@ -481,8 +481,7 @@ def hallWay2R2():
 		| * | M |
 		| * | + |
 		| * X * |
-		--+------
-				""",hallWay2R2)
+		--+------""",hallWay2R2)
 		else:
 			print("Invald Input.")
 
@@ -518,8 +517,7 @@ def doorR2():
 		| * | M |
 		| * | + |
 		| * * X |
-		--+------
-				""",doorR2)
+		--+------""",doorR2)
 		else:
 			print("Invald Input.")
 
@@ -563,8 +561,7 @@ def keyR2():
 		| * | X |
 		| * | + |
 		| * * * |
-		--+------
-				""",keyR2)
+		--+------""",keyR2)
 		else:
 			print("Invald Input.")
 #
