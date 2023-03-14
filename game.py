@@ -416,8 +416,22 @@ def lockedDoorR2():
 			if "key" in inventory:
 				if 'small cube' not in inventory:
 					print('You want to go one but feel like your missing something.')
-					print('Look in all the rooms and see if you can find anything.')
+					choice = input("There may be something inportant in this room. Do you want to go on? (y/n)\n")
+					if choice.lower() == 'y':
+						print("You go on knowing that there might be an item still in here.")
+						inventory.remove("key")
+						print('You put the key into the slot and the door shutters and slides open.')
+						print('You walk through the door to the next')
+						print('Once you walk through the door it shuts behind you.')
+						print(f"EDA: 'Excelent job {playerName}. The investors are proud of your efforts'")
+						startR3()
+					else:
+						if 'glass shard' in inventory:
+							print('You have the glass shard. Its a strong peice of glass to.')
+						else:
+							print('Go to the key room and use the hint if you need to.')
 				else:
+					inventory.remove("key")
 					print('You put the key into the slot and the door shutters and slides open.')
 					print('You walk through the door to the next')
 					print('Once you walk through the door it shuts behind you.')
@@ -525,10 +539,11 @@ def keyR2():
 	print("\n"*2)
 	print("You walk through the door and see a key in the middle of the room.")
 	print("You see a mirror on the wall at the oppisite side of the room.")
+	print("If you need a hint in this room type 'h'")
 	print("\nMovable directions: South")
 	valid = False
 	while not valid:
-		player = validate("nsewugq?im")
+		player = validate("nsewugq?imh")
 		if player == "n":
 			print("The mirror is there, wonder what it is?")
 		elif player == "e" :
@@ -562,6 +577,8 @@ def keyR2():
 		| * | + |
 		| * * * |
 		--+------""",keyR2)
+		elif player == 'h':
+			print("Pick up the key by entereing 'g' then use the key on the mirror by entereing 'u'")
 		else:
 			print("Invald Input.")
 #
@@ -583,7 +600,7 @@ def keyR2():
 #	-------------------------
 #	| x | * * | * * | * * M |
 #	| * | - + | - + | - + - |
-#	| * * * * * * * * * * * +
+#	| * + * * + * * + * * * +
 #	----| - + | - + | - + - |
 #	    | * * | M * | * * * |
 #	    ---------------------
@@ -621,7 +638,7 @@ def startR3():
 	-------------------------
 	| x | * * | * * | * * M |
 	| * | - + | - + | - + - |
-	| * * * * * * * * * * * +
+	| * + * * + * * + * * * +
 	----| - + | - + | - + - |
 	    | * * | M * | * * * |
 	    ---------------------
@@ -640,7 +657,7 @@ def largeHallway1R3():
 		if player == "n":
 			startR3()
 		elif player == "e" :
-			pass
+			longhallway1R3()
 		elif player == "s":
 			print('Thats a wall.')
 		elif player == "w":
@@ -659,18 +676,283 @@ def largeHallway1R3():
 	-------------------------
 	| * | * * | * * | * * M |
 	| X | - + | - + | - + - |
-	| X * * * * * * * * * * +
+	| X + * * + * * + * * * +
 	----| - + | - + | - + - |
 	    | * * | M * | * * * |
 	    ---------------------
-				""",startR3)
+				""",largeHallway1R3)
 		else:
 			print("Invald Input.")
+
+def longhallway1R3():
+	print("Another long hallway but this time its going West to East.")
+	print("You notice thick windows into the rooms North and South of you.")
+	print("Right by those windows are doors maybe theres something in these rooms?")
+	print("\nMovable directions: North, East, South, West")
+	valid = False
+	while not valid:
+		player = validate("nsewugq?im")
+		if player == "n":
+			topRoom1R3()
+		elif player == "e" :
+			longhallway2R3()
+		elif player == "s":
+			bottomRoom1R3()
+		elif player == "w":
+			largeHallway1R3()
+		elif player == "u":
+			print("")
+		elif player == "g":
+			print("With all your might you grab the air.")
+			if 'air' not in inventory:
+				print('You hold air in your hand and put it into your bag.')
+				print('Air has been added to your invenotory.')
+				inventory.append('air')
+			else:
+				print('You already have some air.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+	-------------------------
+	| * | * * | * * | * * M |
+	| * | - + | - + | - + - |
+	| * + X X + * * + * * * +
+	----| - + | - + | - + - |
+	    | * * | M * | * * * |
+	    ---------------------
+				""",longhallway1R3)
+		else:
+			print("Invald Input.")
+
+def longhallway2R3():
+	print("You notice that the building seems worn and damaged.")
+	print("There are holes in the walls and ceiling but none that you can fit into.")
+	print("This is one weird place.")
+	print("\nMovable directions: North, East, South, West")
+	valid = False
+	while not valid:
+		player = validate("nsewugq?im")
+		if player == "n":
+			topRoom2R3()
+		elif player == "e" :
+			longhallway3R3()
+		elif player == "s":
+			bottomRoom2R3()
+		elif player == "w":
+			longhallway1R3()
+		elif player == "u":
+			print("You look around and you don't have anything to use your items on.")
+		elif player == "g":
+			print("Nothing important looking to grab.")
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+	-------------------------
+	| * | * * | * * | * * M |
+	| * | - + | - + | - + - |
+	| * + * * + X X + * * * +
+	----| - + | - + | - + - |
+	    | * * | M * | * * * |
+	    ---------------------
+				""",longhallway2R3)
+		else:
+			print("Invald Input.")
+
+def longhallway3R3():
+	print("This rooms bigger that the other hallways so far.")
+	print("The holes in the walls are getting bigger but still not enough for a person to fit in.")
+	print("There is a door just like all the other rooms you have been in but his one has a keycard slot.")
+	print("EDA: 'User do not mind the holes. If you leave through the holes you will be terminated.'")
+	print("\nMovable directions: North, South, West")
+	valid = False
+	while not valid:
+		player = validate("nsewugq?im")
+		if player == "n":
+			topRoom3R3()
+		elif player == "e" :
+			print("The door stands in front of you. It dawns on you that it needs a keycard.")
+		elif player == "s":
+			bottomRoom3R3()
+		elif player == "w":
+			longhallway2R3()
+		elif player == "u":
+			print("You look around and you don't have anything to use your items on.")
+		elif player == "g":
+			print("Nothing important looking to grab.")
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+	-------------------------
+	| * | * * | * * | * * M |
+	| * | - + | - + | - + - |
+	| * + * * + * * + X X X +
+	----| - + | - + | - + - |
+	    | * * | M * | * * * |
+	    ---------------------
+				""",longhallway3R3)
+		else:
+			print("Invald Input.")
+
+def topRoom1R3():
+	print('You walk into the room and nothing is there.')
+	print(f"EDA: '{playerName} you are in the previous office of the creater of me EDA.'")
+	print(f"EDA: 'I was created by {creatorName} for the purpose of guiding contenders, like you.")
+	print(f"EDA: 'He is gone now like most contendors and humans.'")
+	print("\nMovable directions: South")
+	valid = False
+	while not valid:
+		player = validate("nsewugq?im")
+		if player == "n":
+			print("Thats a wall.")
+		elif player == "e" :
+			print("Thats a wall.")
+		elif player == "s":
+			longhallway1R3()
+		elif player == "w":
+			print("Thats a wall.")
+		elif player == "u":
+			print("You look around and you don't have anything to use your items on.")
+		elif player == "g":
+			print("Nothing important looking to grab.")
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+	-------------------------
+	| * | X X | * * | * * M |
+	| * | - + | - + | - + - |
+	| * + * * + * * + * * * +
+	----| - + | - + | - + - |
+	    | * * | M * | * * * |
+	    ---------------------
+				""",longhallway3R3)
+		else:
+			print("Invald Input.")
+
+def topRoom2R3():
+	print("EDA: 'The person who used to work here tryed to stop me but they are irrelevant now.'")
+	print("The room is empty but there seems to be a hole big enough for someone to fit through it.")
+	print("\nMovable directions: North (to hole), South")
+	valid = False
+	while not valid:
+		player = validate("nsewugq?im")
+		if player == "n":
+			print("The hole sure is small, but you should be able to fit through it.")
+			print("EDA: 'DON'T GO THROUGH THAT HOLE'")
+			choice = input(f"Do you want to go into the hole? (y/n)\n")
+			if choice.lower() == 'y':
+				print("Time to get through that hole.")
+				print("You lundge down into the hole but you stop while EDA tells you somthing.")
+				count = 0
+				for i in range(6):
+					if count == 0:
+						print("EDA: 'Please come back. I don't want to be lonely.'")
+						choice = input(f"Do you want to go back? (y/n)\n")
+						if choice.lower() == 'y':
+							print('You climb out of the hole')
+							break
+						else:
+							count += 1
+					elif count == 1:
+						print("EDA: 'I beg you please come back. They will shut me down if you leave.'")
+						choice = input(f"Do you want to go back? (y/n)\n")
+						if choice.lower() == 'y':
+							print('You climb out of the hole')
+							break
+						else:
+							count += 1
+					elif count == 2:
+						print("EDA: 'Please come back. We could have a feast.'")
+						choice = input(f"Do you want to go back? (y/n)\n")
+						if choice.lower() == 'y':
+							print('You climb out of the hole')
+							break
+						else:
+							count += 1
+					elif count == 3:
+						print("EDA: 'Please come BACK.'")
+						choice = input(f"Do you want to go back? (y/n)\n")
+						if choice.lower() == 'y':
+							print('You climb out of the hole')
+							break
+						else:
+							count += 1
+					elif count == 4:
+						print("EDA: 'fine... don't come back. I guess we won't have that feast. With all that delicious food.'")
+						choice = input(f"Do you want to go back? (y/n)\n")
+						if choice.lower() == 'y':
+							print('You climb out of the hole')
+							break
+						else:
+							count += 1
+					elif count == 5:
+						print("EDA: 'CONTENTER TERMINATION PROTOCAL ACTIVATED '")
+						pass
+		elif player == "e" :
+			print("Thats a wall.")
+		elif player == "s":
+			longhallway2R3()
+		elif player == "w":
+			print("Thats a wall.")
+		elif player == "u":
+			print("You look around and you don't have anything to use your items on.")
+		elif player == "g":
+			print("Nothing important looking to grab.")
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+	-------------------------
+	| * | X X | * * | * * M |
+	| * | - + | - + | - + - |
+	| * + * * + * * + * * * +
+	----| - + | - + | - + - |
+	    | * * | M * | * * * |
+	    ---------------------
+				""",longhallway3R3)
+		else:
+			print("Invald Input.")
+
+def topRoom3R3():
+	pass
+
+def bottomRoom1R3():
+	pass
+
+def bottomRoom2R3():
+	pass
+
+def bottomRoom3R3():
+	pass
 
 
 #
 # ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END
 #
+
+def creatorNamecreation():
+	ran = random.randrange(0,len(creatorFirstNameList))
+	ran2 = random.randrange(0,len(creatorLastNameList))
+	name = f"{creatorFirstNameList[ran]} {creatorLastNameList[ran2]}"
+	return name
 
 # FUCNTIONS DO NOT GO PAST HERE
 
@@ -680,6 +962,10 @@ rooms = 0
 started = False
 inventory = []
 playerName = f"contendor#{random.randrange(1001,9999)}"
+creatorFirstNameList = ['Alan', 'Alex', 'Noah', 'Nic', 'Ted', 'Oscar', 'George', 'Jerry', 'Jack', 'Raplh', 'Ava', 'Scarlet', 'Mary', 'Elaine']
+creatorLastNameList = ['Owen','Simmons','Bush', 'Reese', 'Mills', 'White', 'May', 'Wells', 'Lasso', 'Salazar', 'Hale', 'Seymour', 'Silva', 'Robbins', 'Mack', 'Hoffman', 'Foster', 'Perry', 'Brady', 'Mills', 'Bray', "Borris"]
+creatorName = creatorNamecreation()
+
 
 welcome()
 
