@@ -647,9 +647,18 @@ def startR3():
 			print("Invald Input.")
 
 def largeHallway1R3():
-	print("You enter one long hallway")
-	print("There are some chairs and tables with decorations on the west and east side of the hallway.")
-	print("Eveything appears to be bolted down. You notice a door on the east side of the hallway.")
+	if actionsR3 == 2:
+		print('You walk into the Large hallway and notice a little slot open at the south end of the room.')
+		if 'small cube' in inventory:
+			if 'medium cube' not in inventory:
+				print('This looks very similar to the cube from the last room. But this one more of a medium size.')
+				print('You grab the cube. It may come in handy later')
+			else:
+				print('You look at the spot were the medium cube used to be.')
+	else:
+		print("You enter one long hallway")
+		print("There are some chairs and tables with decorations on the west and east side of the hallway.")
+		print("Eveything appears to be bolted down. You notice a door on the east side of the hallway.")
 	print("\nMovable directions: East")
 	valid = False
 	while not valid:
@@ -784,7 +793,10 @@ def longhallway3R3():
 		elif player == "w":
 			longhallway2R3()
 		elif player == "u":
-			print("You look around and you don't have anything to use your items on.")
+			if 'keycard' in inventory:
+				print('You swipe the key card and you hear a beep sound. A light turns green and the door unlocks.')
+				print('You walk through and you are in yet another room.')
+				riddleRoom1()
 		elif player == "g":
 			print("Nothing important looking to grab.")
 		elif player == "?":
@@ -1012,14 +1024,120 @@ def bottomRoom1R3():
 			print("Invald Input.")
 
 def bottomRoom2R3():
-	pass
+	if 'tiny cube' in inventory:
+		print('You see the table were the tiny toy cube was set on.')
+	else:
+		print('There is a table in this room with a tiny cube on it.')
+	print("\nMovable directions: North")
+	valid = False
+	while not valid:
+		player = validate("nsewugq?im")
+		if player == "n":
+			longhallway2R3()
+		elif player == "e" :
+			print("Thats a wall.")
+		elif player == "s":
+			print("Thats a wall.")
+		elif player == "w":
+			print("Thats a wall.")
+		elif player == "u":
+			print("You look around and you don't have anything to use your items on.")
+		elif player == "g":
+			if 'tiny cube' not in inventory:
+				if actionsR3 == 0:
+					inventory.append('tiny cube')
+					print('You grab the tiny cube.')
+					actionsR3 = 1
+				else:
+					print('You already grabbed the small cube')
+			else:
+				print('You already grabbed the small cube')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+	-------------------------
+	| * | * * | * * | * * M |
+	| * | - + | - + | - + - |
+	| * + * * + * * + * * * +
+	----| - + | - + | - + - |
+	    | * * | X X | * * * |
+	    ---------------------
+				""",topRoom1R3)
+		else:
+			print("Invald Input.")
 
 def bottomRoom3R3():
-	pass
+	print('The room looks more like a recreation room.')
+	print('The rec room also has a spot that looks like its for children.')
+	print('Theres a toy that has a tiny square slot on the lid of it.')
+	print('There is a very nice painting on the wall.')
+	print("\nMovable directions: North")
+	valid = False
+	while not valid:
+		player = validate("nsewugq?im")
+		if player == "n":
+			longhallway3R3()
+		elif player == "e" :
+			print("Thats a wall.")
+		elif player == "s":
+			print("Thats a wall.")
+		elif player == "w":
+			print("Thats a wall.")
+		elif player == "u":
+			if 'tiny cube' in inventory:
+				print('You walk over to the toy and put the tiny cube in.')
+				print('You hear a ding and it sounds like something opened somewere.')
+				inventory.remove('tiny cube')
+				actionsR3 = 2
+			else:
+				print('You walk over to the toy and think maybe there is something that would fit in there.')
+		elif player == "g":
+			print('You look around and see nothing to grab.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+	-------------------------
+	| * | * * | * * | * * M |
+	| * | - + | - + | - + - |
+	| * + * * + * * + * * * +
+	----| - + | - + | - + - |
+	    | * * | M * | X X X |
+	    ---------------------
+				""",topRoom1R3)
+		else:
+			print("Invald Input.")
 
 
 #
 # ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END
+#
+
+#
+# RIDDLE ROOM START RIDDLE ROOM START RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END
+#
+
+def riddleRoom1():
+	print(f"EDA: 'Congratulations {playerName} you made it to the Riddle section.")
+	print(f"EDA: 'To get to the next room you need to select the correct door.")
+	print(f"EDA: 'If you answer incorrectly you will lose a points. You start with 3 and have 3 riddles to get through.")
+	print(f"EDA: 'Good Luck {playerName}")
+
+def riddleRoom2():
+	pass
+
+def riddleRoom3():
+	pass
+
+#
+# RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END
 #
 
 def creatorNamecreation():
@@ -1035,6 +1153,7 @@ import random
 rooms = 0
 started = False
 inventory = []
+actionsR3 = 0
 playerName = f"contendor#{random.randrange(1001,9999)}"
 creatorFirstNameList = ['Alan', 'Alex', 'Noah', 'Nic', 'Ted', 'Oscar', 'George', 'Jerry', 'Jack', 'Raplh', 'Ava', 'Scarlet', 'Mary', 'Elaine']
 creatorLastNameList = ['Owen','Simmons','Bush', 'Reese', 'Mills', 'White', 'May', 'Wells', 'Lasso', 'Salazar', 'Hale', 'Seymour', 'Silva', 'Robbins', 'Mack', 'Hoffman', 'Foster', 'Perry', 'Brady', 'Mills', 'Bray', "Borris"]
