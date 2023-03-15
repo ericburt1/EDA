@@ -840,7 +840,7 @@ def topRoom1R3():
 	----| - + | - + | - + - |
 	    | * * | M * | * * * |
 	    ---------------------
-				""",longhallway3R3)
+				""",topRoom1R3)
 		else:
 			print("Invald Input.")
 
@@ -921,21 +921,95 @@ def topRoom2R3():
 			if "map" in inventory:
 				displayMap("""
 	-------------------------
-	| * | X X | * * | * * M |
+	| * | * * | X X | * * M |
 	| * | - + | - + | - + - |
 	| * + * * + * * + * * * +
 	----| - + | - + | - + - |
 	    | * * | M * | * * * |
 	    ---------------------
-				""",longhallway3R3)
+				""",topRoom2R3)
 		else:
 			print("Invald Input.")
 
 def topRoom3R3():
-	pass
+	print('When you enter the room you notice a long table with some chairs around it.')
+	print(f"EDA: 'The meeting room. They would talk about me a lot here.'")
+	print(f"EDA: 'Theres noone to use it anymore. Other than you of course.'")
+	print(f"On the table you see a keycard. That could be useful.")
+	print("\nMovable directions: South")
+	valid = False
+	while not valid:
+		player = validate("nsewugq?im")
+		if player == "n":
+			print("Thats a wall.")
+		elif player == "e" :
+			print("Thats a wall.")
+		elif player == "s":
+			longhallway3R3()
+		elif player == "w":
+			print("Thats a wall.")
+		elif player == "u":
+			print("You look around and you don't have anything to use your items on.")
+		elif player == "g":
+			if 'keycard' not in inventory:
+				inventory.append('keycard')
+				print('Keycard added ot inventory.')
+			else:
+				print('The keycard is already in your inventory.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+	-------------------------
+	| * | * * | * * | X X X |
+	| * | - + | - + | - + - |
+	| * + * * + * * + * * * +
+	----| - + | - + | - + - |
+	    | * * | M * | * * * |
+	    ---------------------
+				""",topRoom1R3)
+		else:
+			print("Invald Input.")
 
 def bottomRoom1R3():
-	pass
+	print('You walk into the room and notice nothing.')
+	print('There is a very nice painting on the wall.')
+	print("\nMovable directions: North")
+	valid = False
+	while not valid:
+		player = validate("nsewugq?im")
+		if player == "n":
+			longhallway1R3()
+		elif player == "e" :
+			print("Thats a wall.")
+		elif player == "s":
+			print("Thats a wall.")
+		elif player == "w":
+			print("Thats a wall.")
+		elif player == "u":
+			print("You look around and you don't have anything to use your items on.")
+		elif player == "g":
+			print('You look around and see nothing to grab.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+	-------------------------
+	| * | * * | * * | * * M |
+	| * | - + | - + | - + - |
+	| * + * * + * * + * * * +
+	----| - + | - + | - + - |
+	    | X X | M * | * * * |
+	    ---------------------
+				""",topRoom1R3)
+		else:
+			print("Invald Input.")
 
 def bottomRoom2R3():
 	pass
