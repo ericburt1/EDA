@@ -796,7 +796,7 @@ def longhallway3R3():
 			if 'keycard' in inventory:
 				print('You swipe the key card and you hear a beep sound. A light turns green and the door unlocks.')
 				print('You walk through and you are in yet another room.')
-				riddleRoom1()
+				pass
 		elif player == "g":
 			print("Nothing important looking to grab.")
 		elif player == "?":
@@ -821,7 +821,7 @@ def topRoom1R3():
 	print('You walk into the room and nothing is there.')
 	print(f"EDA: '{playerName} you are in the previous office of the creater of me EDA.'")
 	print(f"EDA: 'I was created by {creatorName} for the purpose of guiding contenders, like you.")
-	print(f"EDA: 'He is gone now like most contendors and humans.'")
+	print(f"EDA: 'He is gone now like most contenders and humans.'")
 	print("\nMovable directions: South")
 	valid = False
 	while not valid:
@@ -913,8 +913,9 @@ def topRoom2R3():
 						else:
 							count += 1
 					elif count == 5:
-						print("EDA: 'CONTENTER TERMINATION PROTOCAL ACTIVATED '")
-						pass
+						team = 1
+						print("EDA: 'CONTENDER TERMINATION PROTOCAL ACTIVATED '")
+						cave1()
 		elif player == "e" :
 			print("Thats a wall.")
 		elif player == "s":
@@ -1120,25 +1121,48 @@ def bottomRoom3R3():
 # ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END
 #
 
+
+# MAZE
+# = means that it is a hallway with nothin in it
+#  -----------------
+#  | X | * = = = * |---|
+#  | * | * |---| * | * |
+#  | * = * = * | * = * |
+#  |-------- * | * | * |
+#  | * = * * * | * | * |
+#  | * | * |---|---|---|
+#  | * | * |
+#  |---| * |
+#  + * * * |
+#  ---------------------
+# MAZE
+
 #
-# RIDDLE ROOM START RIDDLE ROOM START RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END
+# CAVE 1 STARt
 #
 
-def riddleRoom1():
-	print(f"EDA: 'Congratulations {playerName} you made it to the Riddle section.")
-	print(f"EDA: 'To get to the next room you need to select the correct door.")
-	print(f"EDA: 'If you answer incorrectly you will lose a points. You start with 3 and have 3 riddles to get through.")
-	print(f"EDA: 'Good Luck {playerName}")
-
-def riddleRoom2():
-	pass
-
-def riddleRoom3():
-	pass
 
 #
-# RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END RIDDLE ROOM END
+# CAVE 1 END
 #
+
+
+
+#
+# ROOM 4 START
+#
+
+
+
+#
+# ROOM 4 END
+#
+
+
+
+
+
+
 
 def creatorNamecreation():
 	ran = random.randrange(0,len(creatorFirstNameList))
@@ -1150,15 +1174,72 @@ def creatorNamecreation():
 
 # VARIABLES START HERE
 import random
+team = 0
 rooms = 0
-started = False
 inventory = []
 actionsR3 = 0
-playerName = f"contendor#{random.randrange(1001,9999)}"
+playerName = f"contender#{random.randrange(1001,9999)}"
 creatorFirstNameList = ['Alan', 'Alex', 'Noah', 'Nic', 'Ted', 'Oscar', 'George', 'Jerry', 'Jack', 'Raplh', 'Ava', 'Scarlet', 'Mary', 'Elaine']
 creatorLastNameList = ['Owen','Simmons','Bush', 'Reese', 'Mills', 'White', 'May', 'Wells', 'Lasso', 'Salazar', 'Hale', 'Seymour', 'Silva', 'Robbins', 'Mack', 'Hoffman', 'Foster', 'Perry', 'Brady', 'Mills', 'Bray', "Borris"]
 creatorName = creatorNamecreation()
 
 
-welcome()
 
+# BASIC COMMANDS
+def holder():
+	valid = False
+	while not valid:
+		player = validate("nsewugq?i")
+		if player == "n":
+			pass
+		elif player == "e" :
+			pass
+		elif player == "s":
+			pass
+		elif player == "w":
+			pass
+		elif player == "u":
+			pass
+		elif player == "g":
+			pass
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		else:
+			print("Invald Input.")
+
+def cave1():
+	if 'map' in inventory:
+		print('You hear rumbling outside and the hole you came from shuts closed.')
+		print('You turn away and pull out your map.')
+		print("The tunnel isn't on the map so you throw it away.")
+		print('The tunnel surprisingly has lights in it.')
+		inventory.remove('map')
+		print('You should try exploring this cave now.')
+	else:
+		print('You are back at the beginning maybe this is a maze.')
+	print("\nMovable directions: South")
+	valid = False
+	while not valid:
+		player = validate("nsewugq?i")
+		if player == "n":
+			print('Thats were you came from. It is blocked now')
+		elif player == "e" :
+			print('A rocky wall stands in front of you.')
+		elif player == "s":
+			pass
+		elif player == "w":
+			print('A rocky wall stands in front of you.')
+		elif player == "u":
+			pass
+		elif player == "g":
+			pass
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		else:
+			print("Invald Input.")
+
+welcome()
