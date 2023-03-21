@@ -1138,52 +1138,8 @@ def bottomRoom3R3():
 # MAZE
 
 #
-# CAVE 1 STARt
+# CAVE 1 START
 #
-
-
-#
-# CAVE 1 END
-#
-
-
-
-#
-# ROOM 4 START
-#
-
-
-
-#
-# ROOM 4 END
-#
-
-
-
-
-
-
-
-def creatorNamecreation():
-	ran = random.randrange(0,len(creatorFirstNameList))
-	ran2 = random.randrange(0,len(creatorLastNameList))
-	name = f"{creatorFirstNameList[ran]} {creatorLastNameList[ran2]}"
-	return name
-
-# FUCNTIONS DO NOT GO PAST HERE
-
-# VARIABLES START HERE
-import random
-team = 0
-rooms = 0
-inventory = []
-actionsR3 = 0
-playerName = f"contender#{random.randrange(1001,9999)}"
-creatorFirstNameList = ['Alan', 'Alex', 'Noah', 'Nic', 'Ted', 'Oscar', 'George', 'Jerry', 'Jack', 'Raplh', 'Ava', 'Scarlet', 'Mary', 'Elaine']
-creatorLastNameList = ['Owen','Simmons','Bush', 'Reese', 'Mills', 'White', 'May', 'Wells', 'Lasso', 'Salazar', 'Hale', 'Seymour', 'Silva', 'Robbins', 'Mack', 'Hoffman', 'Foster', 'Perry', 'Brady', 'Mills', 'Bray', "Borris"]
-creatorName = creatorNamecreation()
-
-
 
 # BASIC COMMANDS
 def holder():
@@ -1228,18 +1184,150 @@ def cave1():
 		elif player == "e" :
 			print('A rocky wall stands in front of you.')
 		elif player == "s":
-			pass
+			cave2()
 		elif player == "w":
 			print('A rocky wall stands in front of you.')
 		elif player == "u":
-			pass
+			print('Nothing looks interactable.')
 		elif player == "g":
-			pass
+			print('There is nothing to grab.')
 		elif player == "?":
 			helpdisplay()
 		elif player == "i":
 			displayInventory()
 		else:
 			print("Invald Input.")
+
+def cave2():
+	print('You walk into another cave.')
+	print('On the wall you notice a partial map in the wall.')
+	print('''-----
+| X |
+| * |
+| * =
+------''')
+	print('Movable directions: North, South')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?i")
+		if player == "n":
+			cave1()
+		elif player == "e" :
+			print('A rocky wall stands in front of you.')
+		elif player == "s":
+			cave3()
+		elif player == "w":
+			print('A rocky wall stands in front of you.')
+		elif player == "u":
+			print("Those two things don't go together.")
+		elif player == "g":
+			print('There is nothing to grab.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		else:
+			print("Invald Input.")
+
+def cave3():
+	print('You walk into another cave.')
+	print('Looks like there is a turn in this room.')
+	print('Movable directions: North, East')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?i")
+		if player == "n":
+			cave2()
+		elif player == "e" :
+			cave4()
+		elif player == "s":
+			print('A rocky wall stands in front of you.')
+		elif player == "w":
+			print('A rocky wall stands in front of you.')
+		elif player == "u":
+			print("Those two things don't go together.")
+		elif player == "g":
+			print('There is nothing to grab.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		else:
+			print("Invald Input.")
+
+def cave4():
+	print('You enter into another cave.')
+	print('Another etching in the wall.')
+	print('''-----------------
+| * | 
+| * | * |
+| * = X = * |
+---------''')
+	print('Movable directions: North, East')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?i")
+		if player == "n":
+			cave1n() # this is from x going up that pathway
+		elif player == "e" :
+			cave1e() # this is from x going east that pathway
+		elif player == "s":
+			print('A rocky wall stands in front of you.')
+		elif player == "w":
+			print('A rocky wall stands in front of you.')
+		elif player == "u":
+			print("Those two things don't go together.")
+		elif player == "g":
+			print('There is nothing to grab.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		else:
+			print("Invald Input.")
+#
+# CAVE 1 END
+#
+
+
+
+#
+# ROOM 4 START
+#
+
+
+
+#
+# ROOM 4 END
+#
+
+
+
+
+
+
+
+def creatorNamecreation():
+	ran = random.randrange(0,len(creatorFirstNameList))
+	ran2 = random.randrange(0,len(creatorLastNameList))
+	name = f"{creatorFirstNameList[ran]} {creatorLastNameList[ran2]}"
+	return name
+
+# FUCNTIONS DO NOT GO PAST HERE
+
+# VARIABLES START HERE
+import random
+team = 0
+rooms = 0
+inventory = []
+actionsR3 = 0
+playerName = f"contender#{random.randrange(1001,9999)}"
+creatorFirstNameList = ['Alan', 'Alex', 'Noah', 'Nic', 'Ted', 'Oscar', 'George', 'Jerry', 'Jack', 'Raplh', 'Ava', 'Scarlet', 'Mary', 'Elaine']
+creatorLastNameList = ['Owen','Simmons','Bush', 'Reese', 'Mills', 'White', 'May', 'Wells', 'Lasso', 'Salazar', 'Hale', 'Seymour', 'Silva', 'Robbins', 'Mack', 'Hoffman', 'Foster', 'Perry', 'Brady', 'Mills', 'Bray', "Borris"]
+creatorName = creatorNamecreation()
+
+
+
+
 
 welcome()
