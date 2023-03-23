@@ -67,7 +67,9 @@ def helpdisplay(area):
 		if leave[0] == "y":
 			area()
 
+
 def welcome():
+	global output 
 	output = int(input(f"""
 	Welcome to EDA.
 
@@ -84,6 +86,8 @@ def welcome():
 		quit()
 	elif output == 890:
 		develop_testing()
+	elif output == 4:
+		start()
 	
 
 def develop_testing():
@@ -122,7 +126,7 @@ def validate(values, prompt=f"What do you want to do?\n"):
 		if response[0] == "q":
 			gamelose("You left the game :(")
 		elif response[0] in values:
-			return response
+			return response[0]
 
 
 def displayInventory():
@@ -152,6 +156,7 @@ def displayInventory():
 
 def start():
 	print("\n"*2)
+	debugRun('start()')
 	print(f"Welcome to EDA {playerName}. If you need a reminder of controls type '?'")
 	print("You are in the corner of a white room.")
 	print("You notice a door south of you.")
@@ -160,13 +165,13 @@ def start():
 	while not valid:
 		player = validate("nsewugq?im")
 		if player == "n":
-			print("You walk north into a wall.")
+			randomWallmessage()
 		elif player == "e":
 			keyR1()
 		elif player == "s":
 			doorR1()
 		elif player == "w":
-			print("You walk west into a wall.")
+			randomWallmessage()
 		elif player == "u":
 			print("You go ignore what is happeneding around you and go back to sleep")
 			gamelose("You went to sleep and woke up in your house.")
@@ -181,6 +186,7 @@ def start():
 
 def keyR1():
 	print("\n"*2)
+	debugRun('keyR1()')
 	if "key" not in inventory:
 		print("You look around and see an empty area other than ...")
 		print("a key. 'g' to grab")
@@ -192,9 +198,9 @@ def keyR1():
 	while not valid:
 		player = validate("nsewugq?im")
 		if player == "n":
-			print("You walk north into a wall.")
+			randomWallmessage()
 		elif player == "e" :
-			print("You walk east into a wall.")
+			randomWallmessage()
 		elif player == "s":
 			fillerR1()
 		elif player == "w":
@@ -219,6 +225,7 @@ def keyR1():
 
 def doorR1():
 	print("\n"*2)
+	debugRun('doorR1()')
 	print("You notice everything is white except a metal door.")
 	print("\nMovable directions: North, East.")
 	valid = False
@@ -231,7 +238,7 @@ def doorR1():
 		elif player == "s":
 			print("The door is here. It's locked.")
 		elif player == "w":
-			print("You walk west into a wall.")
+			randomWallmessage()
 		elif player == "u":
 			if "key" in inventory:
 				print("You hear a click in the door. The key is stuck in the door.")
@@ -256,6 +263,7 @@ def doorR1():
 
 def fillerR1():
 	print("\n"*2)
+	debugRun('fillerR1()')
 	print("This appears to be a kitchen.")
 	print("The kitchen is very clean. No food appears to be there.")
 	print("\nMovable directions: North, West.")
@@ -265,9 +273,9 @@ def fillerR1():
 		if player == "n":
 			keyR1()
 		elif player == "e" :
-			print("You try walking through the wall. It does'nt work very well.")
+			randomWallmessage()
 		elif player == "s":
-			print("You try walking through the wall. It does'nt work very well.")
+			randomWallmessage()
 		elif player == "w":
 			doorR1()
 		elif player == "u":
@@ -321,6 +329,7 @@ def displayMap(mapp,area):
 
 def mapR2():
 	print("\n"*2)
+	debugRun('mapR2()')
 	if "map" not in inventory:
 		print(f"EDA: 'Good job {playerName}. That was you first trial. See if you can do this next one.'")
 	print("You can't go back the door locked when you went through.")
@@ -336,7 +345,7 @@ def mapR2():
 		elif player == "s":
 			hallWayR2()
 		elif player == "w":
-			print("You notice the wall has gone to a grey color.")
+			randomWallmessage()
 		elif player == "u":
 			if "map" in inventory:
 				print("To acces the map enter 'm'")
@@ -362,6 +371,7 @@ def mapR2():
 
 def hallWayR2():
 	print("\n"*2)
+	debugRun('hallWayR2()')
 	print("You walk into a hallway that appears to have nothing in it.")
 	print("\nMovable directions: North, South")
 	valid = False
@@ -370,12 +380,11 @@ def hallWayR2():
 		if player == "n":
 			mapR2()
 		elif player == "e" :
-			print("As you walk east you notice you aren't moving.")
-			print("Must be because of the wall.")
+			randomWallmessage()
 		elif player == "s":
 			lockedDoorR2()
 		elif player == "w":
-			print("You walk west and bump into the wall. Can't go that way.")
+			randomWallmessage()
 		elif player == "u":
 			print("The hallway is empty you can't use anything.")
 			print("Did you mean to acces the map 'm'")
@@ -398,6 +407,7 @@ def hallWayR2():
 
 def lockedDoorR2():
 	print("\n"*2)
+	debugRun('lockedDoorR2()')
 	print("You enter this room and notice a door.")
 	print("It appears to have a lock on it.")
 	print("\nMovable directions: North, East")
@@ -411,7 +421,7 @@ def lockedDoorR2():
 		elif player == "s":
 			print("The door is here maybe there is a key some where around here.")
 		elif player == "w":
-			print("You walk west and bump into the wall. Can't go that way.")
+			randomWallmessage()
 		elif player == "u":
 			if "key" in inventory:
 				if 'small cube' not in inventory:
@@ -458,6 +468,7 @@ def lockedDoorR2():
 
 def hallWay2R2():
 	print("\n"*2)
+	debugRun('hallWay2R2()')
 	print("You are in a damp and what looks like ruined hallway.")
 	print("Ceiling panels look loose. You might want to get into a different room.")
 	print("One of the wall panels looks like it could be plied off. Only if you had something to ply it off with.")
@@ -466,15 +477,15 @@ def hallWay2R2():
 	while not valid:
 		player = validate("nsewugq?im")
 		if player == "n":
-			print("You walk north into a wall.")
+			randomWallmessage()
 		elif player == "e" :
 			doorR2()
 		elif player == "s":
-			print("There is a wall that way, no use going there.")
+			randomWallmessage()
 		elif player == "w":
 			lockedDoorR2()
 		elif player == "u":
-			if 'glass shard' in inventory:
+			if 'small cube' not in inventory:
 				print("You put the glass shard in the little opening and pry.")
 				print("A small peice of the wall comes out reveiling a small cube in the compartment.")
 				print("You grab the small cube. It may come in handy later.")
@@ -501,6 +512,7 @@ def hallWay2R2():
 
 def doorR2():
 	print("\n"*2)
+	debugRun('doorR2()')
 	print("You enter a room that has a door up North.")
 	print("Otherwise nothing else in this room. What is this place.")
 	print("\nMovable directions: North, West")
@@ -510,9 +522,9 @@ def doorR2():
 		if player == "n":
 			keyR2()
 		elif player == "e" :
-			print("You walk east into a wall.")
+			randomWallmessage()
 		elif player == "s":
-			print("There is a wall that way, no use going there.")
+			randomWallmessage()
 		elif player == "w":
 			hallWay2R2()
 		elif player == "u":
@@ -537,6 +549,7 @@ def doorR2():
 
 def keyR2():
 	print("\n"*2)
+	debugRun('keyR2()')
 	print("You walk through the door and see a key in the middle of the room.")
 	print("You see a mirror on the wall at the oppisite side of the room.")
 	print("If you need a hint in this room type 'h'")
@@ -547,7 +560,7 @@ def keyR2():
 		if player == "n":
 			print("The mirror is there, wonder what it is?")
 		elif player == "e" :
-			print("You walk east into a wall.")
+			randomWallmessage()
 		elif player == "s":
 			doorR2()
 		elif player == "w":
@@ -610,6 +623,8 @@ def keyR2():
 #
 
 def startR3():
+	print("\n"*2)
+	debugRun('startR3()')
 	print("This doesn't look like the other rooms so far.")
 	print("It seems to be an office and not just plain colored rooms.")
 	print("\nMovable directions: South")
@@ -619,11 +634,11 @@ def startR3():
 		if player == "n":
 			print('Theres the door you entered the room from. Its tightly shut.')
 		elif player == "e" :
-			print('Theres a wall there.')
+			randomWallmessage()
 		elif player == "s":
 			largeHallway1R3()
 		elif player == "w":
-			print('With your vast knowledge you know theres a wall there.')
+			randomWallmessage()
 		elif player == "u":
 			print("The glass shard and cube wouldn't do anything here.")
 		elif player == "g":
@@ -647,6 +662,8 @@ def startR3():
 			print("Invald Input.")
 
 def largeHallway1R3():
+	print("\n"*2)
+	debugRun('largeHallwat1R3()')
 	if actionsR3 == 2:
 		print('You walk into the Large hallway and notice a little slot open at the south end of the room.')
 		if 'small cube' in inventory:
@@ -668,9 +685,9 @@ def largeHallway1R3():
 		elif player == "e" :
 			longhallway1R3()
 		elif player == "s":
-			print('Thats a wall.')
+			randomWallmessage()
 		elif player == "w":
-			print('There apears to be a solid barrier holding you back its called a wall.')
+			randomWallmessage()
 		elif player == "u":
 			print("The glass shard and cube wouldn't do anything here.")
 		elif player == "g":
@@ -694,6 +711,8 @@ def largeHallway1R3():
 			print("Invald Input.")
 
 def longhallway1R3():
+	print("\n"*2)
+	debugRun('longhallway1R3()')
 	print("Another long hallway but this time its going West to East.")
 	print("You notice thick windows into the rooms North and South of you.")
 	print("Right by those windows are doors maybe theres something in these rooms?")
@@ -738,6 +757,8 @@ def longhallway1R3():
 			print("Invald Input.")
 
 def longhallway2R3():
+	print("\n"*2)
+	debugRun('longhallway2R3()')
 	print("You notice that the building seems worn and damaged.")
 	print("There are holes in the walls and ceiling but none that you can fit into.")
 	print("This is one weird place.")
@@ -776,6 +797,8 @@ def longhallway2R3():
 			print("Invald Input.")
 
 def longhallway3R3():
+	print("\n"*2)
+	debugRun('longhallway3R3()')
 	print("This rooms bigger that the other hallways so far.")
 	print("The holes in the walls are getting bigger but still not enough for a person to fit in.")
 	print("There is a door just like all the other rooms you have been in but his one has a keycard slot.")
@@ -818,6 +841,8 @@ def longhallway3R3():
 			print("Invald Input.")
 
 def topRoom1R3():
+	print("\n"*2)
+	debugRun('topRoom1R3()')
 	print('You walk into the room and nothing is there.')
 	print(f"EDA: '{playerName} you are in the previous office of the creater of me EDA.'")
 	print(f"EDA: 'I was created by {creatorName} for the purpose of guiding contenders, like you.")
@@ -827,13 +852,13 @@ def topRoom1R3():
 	while not valid:
 		player = validate("nsewugq?im")
 		if player == "n":
-			print("Thats a wall.")
+			randomWallmessage()
 		elif player == "e" :
-			print("Thats a wall.")
+			randomWallmessage()
 		elif player == "s":
 			longhallway1R3()
 		elif player == "w":
-			print("Thats a wall.")
+			randomWallmessage()
 		elif player == "u":
 			print("You look around and you don't have anything to use your items on.")
 		elif player == "g":
@@ -857,6 +882,8 @@ def topRoom1R3():
 			print("Invald Input.")
 
 def topRoom2R3():
+	print("\n"*2)
+	debugRun('topRoom2R3()')
 	print("EDA: 'The person who used to work here tryed to stop me but they are irrelevant now.'")
 	print("The room is empty but there seems to be a hole big enough for someone to fit through it.")
 	print("\nMovable directions: North (to hole), South")
@@ -917,11 +944,11 @@ def topRoom2R3():
 						print("EDA: 'CONTENDER TERMINATION PROTOCAL ACTIVATED '")
 						cave1()
 		elif player == "e" :
-			print("Thats a wall.")
+			randomWallmessage()
 		elif player == "s":
 			longhallway2R3()
 		elif player == "w":
-			print("Thats a wall.")
+			randomWallmessage()
 		elif player == "u":
 			print("You look around and you don't have anything to use your items on.")
 		elif player == "g":
@@ -945,6 +972,8 @@ def topRoom2R3():
 			print("Invald Input.")
 
 def topRoom3R3():
+	print("\n"*2)
+	debugRun('topRoom3R3()')
 	print('When you enter the room you notice a long table with some chairs around it.')
 	print(f"EDA: 'The meeting room. They would talk about me a lot here.'")
 	print(f"EDA: 'Theres noone to use it anymore. Other than you of course.'")
@@ -954,13 +983,13 @@ def topRoom3R3():
 	while not valid:
 		player = validate("nsewugq?im")
 		if player == "n":
-			print("Thats a wall.")
+			randomWallmessage()
 		elif player == "e" :
-			print("Thats a wall.")
+			randomWallmessage()
 		elif player == "s":
 			longhallway3R3()
 		elif player == "w":
-			print("Thats a wall.")
+			randomWallmessage()
 		elif player == "u":
 			print("You look around and you don't have anything to use your items on.")
 		elif player == "g":
@@ -988,6 +1017,8 @@ def topRoom3R3():
 			print("Invald Input.")
 
 def bottomRoom1R3():
+	print("\n"*2)
+	debugRun('bottomRoom1R3()')
 	print('You walk into the room and notice nothing.')
 	print('There is a very nice painting on the wall.')
 	print("\nMovable directions: North")
@@ -997,11 +1028,11 @@ def bottomRoom1R3():
 		if player == "n":
 			longhallway1R3()
 		elif player == "e" :
-			print("Thats a wall.")
+			randomWallmessage()
 		elif player == "s":
-			print("Thats a wall.")
+			randomWallmessage()
 		elif player == "w":
-			print("Thats a wall.")
+			randomWallmessage()
 		elif player == "u":
 			print("You look around and you don't have anything to use your items on.")
 		elif player == "g":
@@ -1025,6 +1056,8 @@ def bottomRoom1R3():
 			print("Invald Input.")
 
 def bottomRoom2R3():
+	print("\n"*2)
+	debugRun('bottomRoom2R3()')
 	if 'tiny cube' in inventory:
 		print('You see the table were the tiny toy cube was set on.')
 	else:
@@ -1036,11 +1069,11 @@ def bottomRoom2R3():
 		if player == "n":
 			longhallway2R3()
 		elif player == "e" :
-			print("Thats a wall.")
+			randomWallmessage()
 		elif player == "s":
-			print("Thats a wall.")
+			randomWallmessage()
 		elif player == "w":
-			print("Thats a wall.")
+			randomWallmessage()
 		elif player == "u":
 			print("You look around and you don't have anything to use your items on.")
 		elif player == "g":
@@ -1072,6 +1105,8 @@ def bottomRoom2R3():
 			print("Invald Input.")
 
 def bottomRoom3R3():
+	print("\n"*2)
+	debugRun('bottomRoom3R3()')
 	print('The room looks more like a recreation room.')
 	print('The rec room also has a spot that looks like its for children.')
 	print('Theres a toy that has a tiny square slot on the lid of it.')
@@ -1083,11 +1118,11 @@ def bottomRoom3R3():
 		if player == "n":
 			longhallway3R3()
 		elif player == "e" :
-			print("Thats a wall.")
+			randomWallmessage()
 		elif player == "s":
-			print("Thats a wall.")
+			randomWallmessage()
 		elif player == "w":
-			print("Thats a wall.")
+			randomWallmessage()
 		elif player == "u":
 			if 'tiny cube' in inventory:
 				print('You walk over to the toy and put the tiny cube in.')
@@ -1143,6 +1178,8 @@ def bottomRoom3R3():
 
 # BASIC COMMANDS
 def holder():
+	print("\n"*2)
+	debugRun('holder()')
 	valid = False
 	while not valid:
 		player = validate("nsewugq?i")
@@ -1166,6 +1203,8 @@ def holder():
 			print("Invald Input.")
 
 def cave1():
+	print("\n"*2)
+	debugRun('cave1()')
 	if 'map' in inventory:
 		print('You hear rumbling outside and the hole you came from shuts closed.')
 		print('You turn away and pull out your map.')
@@ -1199,6 +1238,8 @@ def cave1():
 			print("Invald Input.")
 
 def cave2():
+	print("\n"*2)
+	debugRun('cave2()')
 	print('You walk into another cave.')
 	print('On the wall you notice a partial map in the wall.')
 	print('''-----
@@ -1230,6 +1271,8 @@ def cave2():
 			print("Invald Input.")
 
 def cave3():
+	print("\n"*2)
+	debugRun('cave3()')
 	print('You walk into another cave.')
 	print('Looks like there is a turn in this room.')
 	print('Movable directions: North, East')
@@ -1256,6 +1299,8 @@ def cave3():
 			print("Invald Input.")
 
 def cave4():
+	print("\n"*2)
+	debugRun('cave4()')
 	print('You enter into another cave.')
 	print('Another etching in the wall.')
 	print('''-----------------
@@ -1268,7 +1313,7 @@ def cave4():
 	while not valid:
 		player = validate("nsewugq?i")
 		if player == "n":
-			cave1n() # this is from x going up that pathway
+			cave1n() # this is from x going north that pathway
 		elif player == "e" :
 			cave1e() # this is from x going east that pathway
 		elif player == "s":
@@ -1285,10 +1330,195 @@ def cave4():
 			displayInventory()
 		else:
 			print("Invald Input.")
+
+def cave1n():
+	print("\n"*2)
+	debugRun('cave1n()')
+	print('You enter into another cave.')
+	print('This must be a maze.')
+	print('This time there is not etching in the wall.')
+	#print('''---------
+#| * = 
+#| X |
+#= * = * |
+#---------''')
+	print('Movable directions: North, East')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?i")
+		if player == "n":
+			cave2n()
+		elif player == "e" :
+			print('A rocky wall stands in front of you.')
+		elif player == "s":
+			cave4()
+		elif player == "w":
+			print('A rocky wall stands in front of you.')
+		elif player == "u":
+			print("Use try to use something it does not work.")
+		elif player == "g":
+			print('There is nothing to grab.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		else:
+			print("Invald Input.")
+
+def cave2n():
+	print("\n"*2)
+	debugRun('cave2n()')
+	if 'small paper' not in inventory:
+		small_paper()
+	else:
+		print('You enter a small cave. There is a tunnel going East.')
+		print('Movable directions: East, South')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?i")
+		if player == "n":
+			print('A rocky wall stops you from going any further.')
+		elif player == "e" :
+			cave5n()
+		elif player == "s":
+			cave1n()
+		elif player == "w":
+			print('A rocky wall stands in front of you.')
+		elif player == "u":
+			print("Use try to use something it does not work.")
+		elif player == "g":
+			print('There is nothing to grab.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		else:
+			print("Invald Input.")
+
+def cave3n():
+	print("\n"*2)
+	debugRun('cave3n()')
+	print('You enter a small rocky room. A tunnel is going West.')
+	print('Movable directions: South, West')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?i")
+		if player == "n":
+			print('A rocky wall stops you from going any further.')
+		elif player == "e" :
+			print('Something is in the way')
+		elif player == "s":
+			cave4n()
+		elif player == "w":
+			cave2n()
+		elif player == "u":
+			print("Use try to use something it does not work.")
+		elif player == "g":
+			print('There is nothing to grab.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		else:
+			print("Invald Input.")
+
+def cave4n():
+	print("\n"*2)
+	debugRun('cave4n()')
+	print('You walk into the cave but now the ground is a metal grait.')
+	print('You are walking on a pathway suspened over a cavern.')
+	print('Movable directions: North, South')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?i")
+		if player == "n":
+			print('You start walking and stop realizing you would fall into the cavern.')
+		elif player == "e" :
+			print('You start walking and stop realizing you would fall into the cavern.')
+		elif player == "s":
+			cave5n()
+		elif player == "w":
+			print('You start walking and stop realizing you would fall into the cavern.')
+		elif player == "u":
+			print("Use try to use something it does not work.")
+		elif player == "g":
+			print('There is nothing to grab.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		else:
+			print("Invald Input.")
+
+def cave5n():
+	print("\n"*2)
+	debugRun('cave5n()')
+	print('')
+	print('Movable directions: East, South, West')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?i")
+		if player == "n":
+			print('A rocky wall stops you from going any further.')
+		elif player == "e" :
+			print('Something is in the way')
+		elif player == "s":
+			cave4n()
+		elif player == "w":
+			cave2n()
+		elif player == "u":
+			print("Use try to use something it does not work.")
+		elif player == "g":
+			print('There is nothing to grab.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		else:
+			print("Invald Input.")
+
+def cave6n():
+	pass
+
+def cave7n():
+	pass
+
+def cave8n():
+	pass
+
+def cave9n():
+	pass
+
+def cave10n():
+	pass
+
+def cave11nGenerator():
+	pass
 #
 # CAVE 1 END
 #
 
+def small_paper():
+	print('You find a small piece of paper on the ground.')
+	print('It says "For one to leave the maze one must activate all three generators."')
+	print('Time to start looking for some generators.')
+	inventory.append('small paper')
+	return
+
+# MAZE
+# = means that it is a hallway with nothin in it
+#  -----------------
+#  | c1| 2n= = = 3n|---|
+#  | c2| 1n|---| 4n| 8n|
+#  | c3= c4= 1e| 5n= 9n|
+#  |-------- 2e| 6n|10n|
+#  | 1s=5e 4e3e| 7n|11n|
+#  | 2s| 6e|---|---|---|
+#  | 3s| 7e|
+#  |---| 8e|
+#  +11 10 9e|
+#  ---------------------
+# MAZE
 
 
 #
@@ -1317,6 +1547,9 @@ def creatorNamecreation():
 
 # VARIABLES START HERE
 import random
+output = 0
+debugthing = 0
+gensActivated = 0
 team = 0
 rooms = 0
 inventory = []
@@ -1325,9 +1558,19 @@ playerName = f"contender#{random.randrange(1001,9999)}"
 creatorFirstNameList = ['Alan', 'Alex', 'Noah', 'Nic', 'Ted', 'Oscar', 'George', 'Jerry', 'Jack', 'Raplh', 'Ava', 'Scarlet', 'Mary', 'Elaine']
 creatorLastNameList = ['Owen','Simmons','Bush', 'Reese', 'Mills', 'White', 'May', 'Wells', 'Lasso', 'Salazar', 'Hale', 'Seymour', 'Silva', 'Robbins', 'Mack', 'Hoffman', 'Foster', 'Perry', 'Brady', 'Mills', 'Bray', "Borris"]
 creatorName = creatorNamecreation()
+wallMessages = ['You walk into a wall.', 'A wall stops you from going any further.', 'With your vast knowledge you know theres a wall there.', "You try walking through the wall. It doesn't work very well.", "As you walk that way you notice you aren't moving.", "You walk over and bump into the wall. Can't go that way.", "There is a wall that way, no use going there.", "There's a wall there.", "That's a wall.", "There appears to be a solid barrier holding you back its called a wall."]
 
+def debugRun(area):
+	if output == 4:
+		print(area)
+		return
+	else:
+		return
 
+def randomWallmessage():
+	randomNum = random.randrange(0,len(wallMessages))
+	print(wallMessages[randomNum])
+	return
 
-
-
+debugRun('start')
 welcome()
