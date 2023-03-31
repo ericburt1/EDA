@@ -1,5 +1,23 @@
 
+class Save(object):
+	def __init__(self):
+		self.creatorName = creatorNamecreation()
+		self.playerName = f"contender#{random.randrange(1001,9999)}"
+		self.inventory = []
+	
+	@property
+	def inventory(self):
+		return self.inventory
+	
+	@inventory.setter
+	def inventory(self, newItem):
+		if newItem not in self.inventory:
+			self.inventory.append(newItem)
+		else:
+			print('That Item is already in your inventory.')
 
+	def __str__(self):
+		print(f'Player Name: {self.playerName}. Scientist Name: {self.creatorName}')
 
 def holder():
 	valid = False
@@ -109,13 +127,13 @@ def develop_testing():
 	elif area == "3":
 		doorR1()
 	elif area == "4":
-		inventory.append('map')
+		information.inventory.append('map')
 		mapR2()
 	elif area == "5":
-		inventory.append('map')
+		information.inventory.append('map')
 		keyR2()
 	elif area == "6":
-		inventory.append('map')
+		information.inventory.append('map')
 		startR3()
 	else: 
 		print(f"Invalid command")
@@ -157,7 +175,7 @@ def displayInventory():
 def start():
 	print("\n"*2)
 	debugRun('start()')
-	print(f"Welcome to EDA {playerName}. If you need a reminder of controls type '?'")
+	print(f"Welcome to EDA {information.playerName}. If you need a reminder of controls type '?'")
 	print("You are in the corner of a white room.")
 	print("You notice a door south of you.")
 	print("\nMoveable directions: East, South.")
@@ -214,7 +232,7 @@ def keyR1():
 				print("You already picked up the key!!")
 			else:
 				print("You grab the key this may come in handy.")
-				inventory.append("key")
+				information.inventory.append("key")
 		elif player == "?":
 			helpdisplay(keyR1)
 		elif player == "i":		
@@ -331,7 +349,7 @@ def mapR2():
 	print("\n"*2)
 	debugRun('mapR2()')
 	if "map" not in inventory:
-		print(f"EDA: 'Good job {playerName}. That was you first trial. See if you can do this next one.'")
+		print(f"EDA: 'Good job {information.playerName}. That was you first trial. See if you can do this next one.'")
 	print("You can't go back the door locked when you went through.")
 	print("You look around and notice a chest.")
 	print("\nMovable directions: South")
@@ -347,13 +365,13 @@ def mapR2():
 		elif player == "w":
 			randomWallmessage()
 		elif player == "u":
-			if "map" in inventory:
+			if "map" in information.inventory:
 				print("To acces the map enter 'm'")
 		elif player == "g":
-			if "map" not in inventory:
+			if "map" not in information.inventory:
 				print("You move towards the chest and open it.")
 				print("You found a MAP. To veiw the map enter 'm'" )
-				inventory.append("map")
+				information.inventory.append("map")
 		elif player == "?":
 			helpdisplay()
 		elif player == "i":
@@ -433,7 +451,7 @@ def lockedDoorR2():
 						print('You put the key into the slot and the door shutters and slides open.')
 						print('You walk through the door to the next')
 						print('Once you walk through the door it shuts behind you.')
-						print(f"EDA: 'Excelent job {playerName}. The investors are proud of your efforts'")
+						print(f"EDA: 'Excelent job {information.playerName}. The investors are proud of your efforts'")
 						startR3()
 					else:
 						if 'glass shard' in inventory:
@@ -445,7 +463,7 @@ def lockedDoorR2():
 					print('You put the key into the slot and the door shutters and slides open.')
 					print('You walk through the door to the next')
 					print('Once you walk through the door it shuts behind you.')
-					print(f"EDA: 'Excelent job {playerName}. The investors are proud of your efforts'")
+					print(f"EDA: 'Excelent job {information.playerName}. The investors are proud of your efforts'")
 					startR3()
 			else:
 				print("Looks like you need a key for the door.")
@@ -574,7 +592,7 @@ def keyR2():
 			else:
 				print("Maybe theres something to break that mirror.")
 		elif player == "g":
-			if 'key' not in inventory:
+			if 'key' not in information.inventory:
 				print("You grab the key. Its very heavy.")
 				print("Maybe you could break something with it.")
 				inventory.append('key')
@@ -844,8 +862,8 @@ def topRoom1R3():
 	print("\n"*2)
 	debugRun('topRoom1R3()')
 	print('You walk into the room and nothing is there.')
-	print(f"EDA: '{playerName} you are in the previous office of the creater of me EDA.'")
-	print(f"EDA: 'I was created by {creatorName} for the purpose of guiding contenders, like you.")
+	print(f"EDA: '{information.playerName} you are in the previous office of the creater of me EDA.'")
+	print(f"EDA: 'I was created by {information.creatorName} for the purpose of guiding contenders, like you.")
 	print(f"EDA: 'He is gone now like most contenders and humans.'")
 	print("\nMovable directions: South")
 	valid = False
@@ -1355,7 +1373,7 @@ def cave1n():
 		elif player == "w":
 			print('A rocky wall stands in front of you.')
 		elif player == "u":
-			print("Use try to use something it does not work.")
+			print("You try to use something it does not work.")
 		elif player == "g":
 			print('There is nothing to grab.')
 		elif player == "?":
@@ -1385,7 +1403,7 @@ def cave2n():
 		elif player == "w":
 			print('A rocky wall stands in front of you.')
 		elif player == "u":
-			print("Use try to use something it does not work.")
+			print("You try to use something it does not work.")
 		elif player == "g":
 			print('There is nothing to grab.')
 		elif player == "?":
@@ -1412,7 +1430,7 @@ def cave3n():
 		elif player == "w":
 			cave2n()
 		elif player == "u":
-			print("Use try to use something it does not work.")
+			print("You try to use something it does not work.")
 		elif player == "g":
 			print('There is nothing to grab.')
 		elif player == "?":
@@ -1440,7 +1458,7 @@ def cave4n():
 		elif player == "w":
 			print('You start walking and stop realizing you would fall into the cavern.')
 		elif player == "u":
-			print("Use try to use something it does not work.")
+			print("You try to use something it does not work.")
 		elif player == "g":
 			print('There is nothing to grab.')
 		elif player == "?":
@@ -1453,21 +1471,26 @@ def cave4n():
 def cave5n():
 	print("\n"*2)
 	debugRun('cave5n()')
-	print('')
-	print('Movable directions: East, South, West')
+	print('You enter a cave that has a crossing.')
+	print('On the wall you notice some markings.')
+	print('''| * | * |
+| X = * |
+| * | * |
+	''')
+	print('Movable directions: North, East, South')
 	valid = False
 	while not valid:
 		player = validate("nsewugq?i")
 		if player == "n":
-			print('A rocky wall stops you from going any further.')
-		elif player == "e" :
-			print('Something is in the way')
-		elif player == "s":
 			cave4n()
+		elif player == "e" :
+			cave9n()
+		elif player == "s":
+			cave6n()
 		elif player == "w":
-			cave2n()
+			print('A rocky wall stops you from going any further.')
 		elif player == "u":
-			print("Use try to use something it does not work.")
+			print("You try to use something it does not work.")
 		elif player == "g":
 			print('There is nothing to grab.')
 		elif player == "?":
@@ -1478,16 +1501,119 @@ def cave5n():
 			print("Invald Input.")
 
 def cave6n():
-	pass
+	print("\n"*2)
+	debugRun('cave6n()')
+	print('You look down into the cravern and see nothing just pure black.')
+	print('Movable directions: North, South')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?i")
+		if player == "n":
+			cave5n()
+		elif player == "e" :
+			print('You can\'t go that way')
+		elif player == "s":
+			cave7n()
+		elif player == "w":
+			print('A rocky wall stops you from going any further.')
+		elif player == "u":
+			print("You try to use something it does not work.")
+		elif player == "g":
+			print('There is nothing to grab.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		else:
+			print("Invald Input.")
 
 def cave7n():
-	pass
+	print("\n"*2)
+	debugRun('cave7n()')
+	print('You look on the wall and notice that there are some scratchings of words.')
+	print('You can\' seem to tell what it says.')
+	print('But it does look like you reached a dead end. No generator here.')
+	print('Movable directions: North')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?i")
+		if player == "n":
+			cave6n()
+		elif player == "e":
+			print('A rocky wall stops you from going any further.')
+		elif player == "s":
+			print('A rocky wall stops you from going any further.')
+		elif player == "w":
+			print('A rocky wall stops you from going any further.')
+		elif player == "u":
+			print("You try to use something it does not work.")
+		elif player == "g":
+			print('There is nothing to grab.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		else:
+			print("Invald Input.")
 
 def cave8n():
-	pass
+	print("\n"*2)
+	debugRun('cave8n()')
+	print('')
+	print('Movable directions: North, East, South')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?i")
+		if player == "n":
+			cave4n()
+		elif player == "e" :
+			cave9n()
+		elif player == "s":
+			cave6n()
+		elif player == "w":
+			print('A rocky wall stops you from going any further.')
+		elif player == "u":
+			print("You try to use something it does not work.")
+		elif player == "g":
+			print('There is nothing to grab.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		else:
+			print("Invald Input.")
 
 def cave9n():
-	pass
+	print("\n"*2)
+	debugRun('cave9n()')
+	print('You enter a cave that has a crossing.')
+	print('On the wall you notice some markings.')
+	print('''| * | * |
+| * = X |
+| * | * |
+	''')
+	print('Movable directions: North, South, West')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?i")
+		if player == "n":
+			cave8n()
+		elif player == "e" :
+			print('You are not able to go east.')
+		elif player == "s":
+			cave10n()
+		elif player == "w":
+			cave5n()
+		elif player == "u":
+			print("You try to use something it does not work.")
+		elif player == "g":
+			print('There is nothing to grab.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		else:
+			print("Invald Input.")
 
 def cave10n():
 	pass
@@ -1554,23 +1680,21 @@ team = 0
 rooms = 0
 inventory = []
 actionsR3 = 0
-playerName = f"contender#{random.randrange(1001,9999)}"
 creatorFirstNameList = ['Alan', 'Alex', 'Noah', 'Nic', 'Ted', 'Oscar', 'George', 'Jerry', 'Jack', 'Raplh', 'Ava', 'Scarlet', 'Mary', 'Elaine']
 creatorLastNameList = ['Owen','Simmons','Bush', 'Reese', 'Mills', 'White', 'May', 'Wells', 'Lasso', 'Salazar', 'Hale', 'Seymour', 'Silva', 'Robbins', 'Mack', 'Hoffman', 'Foster', 'Perry', 'Brady', 'Mills', 'Bray', "Borris"]
-creatorName = creatorNamecreation()
 wallMessages = ['You walk into a wall.', 'A wall stops you from going any further.', 'With your vast knowledge you know theres a wall there.', "You try walking through the wall. It doesn't work very well.", "As you walk that way you notice you aren't moving.", "You walk over and bump into the wall. Can't go that way.", "There is a wall that way, no use going there.", "There's a wall there.", "That's a wall.", "There appears to be a solid barrier holding you back its called a wall."]
-
 def debugRun(area):
 	if output == 4:
 		print(area)
 		return
 	else:
 		return
-
 def randomWallmessage():
 	randomNum = random.randrange(0,len(wallMessages))
 	print(wallMessages[randomNum])
 	return
 
+
+information = Save()
 debugRun('start')
 welcome()
