@@ -7,7 +7,7 @@ class Save(object):
 	
 	@property
 	def inventory(self):
-		return self.inventory
+		return inventory
 	
 	@inventory.setter
 	def inventory(self, newItem):
@@ -17,7 +17,7 @@ class Save(object):
 			print('That Item is already in your inventory.')
 
 	def __str__(self):
-		print(f'Player Name: {self.playerName}. Scientist Name: {self.creatorName}')
+		return f'Player Name: {self.playerName}. Scientist Name: {self.creatorName}'
 
 def holder():
 	valid = False
@@ -1694,7 +1694,25 @@ def randomWallmessage():
 	print(wallMessages[randomNum])
 	return
 
+def saveToFile(room):
+	with open("text.txt", "w")as file:
+		file.write(f"{room}\n")
 
+def loadFromFile():
+	with open("text.txt", "r")as file:
+		roomes = file.read()
+		print("File Read")
+		function_dict[roomes]()
+
+#Put all rooms names in here. Like start. 
+function_dict = {'start\n':start }
 information = Save()
 debugRun('start')
+
+saveToFile("start\n")
+
+loadFromFile()
 welcome()
+
+
+
