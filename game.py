@@ -126,10 +126,16 @@ def develop_testing():
 def validate(values, prompt=f"What do you want to do?\n"):
 	while True:
 		response = input(prompt).lower()
-		if response[0] == "q":
-			gamelose("You left the game :(")
-		elif response[0] in values:
-			return response[0]
+		if response != '':
+			if response[0] == "q":
+				gamelose("You left the game :(")
+			elif response[0] not in values:
+				return
+			elif response[0] in values:
+				return response[0]
+		else:
+			return
+
 
 
 def displayInventory():
@@ -250,7 +256,7 @@ def doorR1():
 					part = inventory[i]
 					if part == "key":
 						inventory.remove(inventory[i])
-						rooms = 1
+						info.rooms = 1
 				mapR2()
 			else:
 				print("You try to open the door and notice it has a key hole in it.") 
@@ -671,7 +677,7 @@ def startR3():
 def largeHallway1R3():
 	print("\n"*2)
 	debugRun('largeHallwat1R3\n')
-	if actionsR3 == 2:
+	if info.actionsR3 == 2:
 		print('You walk into the Large hallway and notice a little slot open at the south end of the room.')
 		if 'small cube' in inventory:
 			if 'medium cube' not in inventory:
@@ -947,7 +953,7 @@ def topRoom2R3():
 						else:
 							count += 1
 					elif count == 5:
-						team = 1
+						info.team = 1
 						print("EDA: 'CONTENDER TERMINATION PROTOCAL ACTIVATED '")
 						cave1()
 		elif player == "e" :
@@ -1085,10 +1091,10 @@ def bottomRoom2R3():
 			print("You look around and you don't have anything to use your items on.")
 		elif player == "g":
 			if 'tiny cube' not in inventory:
-				if actionsR3 == 0:
+				if info.actionsR3 == 0:
 					inventory.append('tiny cube')
 					print('You grab the tiny cube.')
-					actionsR3 = 1
+					info.actionsR3 = 1
 				else:
 					print('You already grabbed the small cube')
 			else:
@@ -1135,7 +1141,7 @@ def bottomRoom3R3():
 				print('You walk over to the toy and put the tiny cube in.')
 				print('You hear a ding and it sounds like something opened somewere.')
 				inventory.remove('tiny cube')
-				actionsR3 = 2
+				info.actionsR3 = 2
 			else:
 				print('You walk over to the toy and think maybe there is something that would fit in there.')
 		elif player == "g":
@@ -1607,7 +1613,32 @@ def cave9n():
 			print("Invald Input.")
 
 def cave10n():
-	pass
+	print("\n"*2)
+	debugRun('cave10n\n')
+	print('You see a drawing of an arrow on a wall. It is pointing south.')
+	print('There are words on the arrow. It seems to be saying Generator.')
+	print('Movable directions: North, South')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?i")
+		if player == "n":
+			cave9n()
+		elif player == "e" :
+			print('You are not able to go east.')
+		elif player == "s":
+			cave11nGenerator()
+		elif player == "w":
+			print('You are not able to go west.')
+		elif player == "u":
+			print('It does not appear that anything an be used.')
+		elif player == "g":
+			pass
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		else:
+			print("Invald Input.")
 
 def cave11nGenerator():
 	pass
@@ -1666,6 +1697,8 @@ def cave2s():
 
 #Cave Room Rooms continued cave1e, cave2e, cave3e, cave4e, cave5e, cave6e, cave7e, cave8e, cave9e, cave10e, cave11e, cave1s, cave3s, cave2s
 
+#Generators are going to be 11n 3s and 9e or 3e
+
 # MAZE
 # = means that it is a hallway with nothin in it
 #  -----------------
@@ -1706,16 +1739,54 @@ def creatorNameCreating():
 
 # FUCNTIONS DO NOT GO PAST HERE
 
+class informationToSave(object):
+
+	def __init__(self):
+		self.__team = 0
+		self.__rooms = 0
+		self.__actionsR3 = 0
+
+	def __str__(self):
+		printer = f'Your team is {self.__team}\n'
+		printer += f'Your rooms is {self.__rooms}\n'
+		printer += f'Your actionsR3 is {self.__actionsR3}\n'
+		return printer
+
+	@property
+	def team(self):
+		return self.__team
+	
+	@property
+	def rooms(self):
+		return self.__rooms
+	
+	@property
+	def actionsR3(self):
+		return self.__actionsR3
+	
+	@team.setter
+	def team(self, newTeam):
+		if newTeam == 1:
+			self.__team = newTeam
+
+	@rooms.setter
+	def rooms(self, newRooms):
+		if newRooms == 1:
+			self.__rooms = newRooms
+
+	@actionsR3.setter
+	def actionsR3(self, actions):
+		self.__actionsR3 = actions
+
 # VARIABLES START HERE
 import random, pickle
-output = 0
-debugthing = 0
-gensActivated = 0
-team = 0
-rooms = 0
-room = 'start\n'
+
 inventory = []
-actionsR3 = 0
+output = 0
+room = 'start\n'
+
+gensActivated = 0
+
 creatorFirstNameList = ['Alan', 'Alex', 'Noah', 'Nic', 'Ted', 'Oscar', 'George', 'Jerry', 'Jack', 'Raplh', 'Ava', 'Scarlet', 'Mary', 'Elaine']
 creatorLastNameList = ['Owen','Simmons','Bush', 'Reese', 'Mills', 'White', 'May', 'Wells', 'Lasso', 'Salazar', 'Hale', 'Seymour', 'Silva', 'Robbins', 'Mack', 'Hoffman', 'Foster', 'Perry', 'Brady', 'Mills', 'Bray', "Borris"]
 wallMessages = ['You walk into a wall.', 'A wall stops you from going any further.', 'With your vast knowledge you know theres a wall there.', "You try walking through the wall. It doesn't work very well.", "As you walk that way you notice you aren't moving.", "You walk over and bump into the wall. Can't go that way.", "There is a wall that way, no use going there.", "There's a wall there.", "That's a wall.", "There appears to be a solid barrier holding you back its called a wall."]
@@ -1742,20 +1813,24 @@ def saveToFile(room):
 		pickle.dump(room,f)
 		pickle.dump(playerName,f)
 		pickle.dump(creatorName,f)
+		pickle.dump(info,f)
+		pickle.dump(gensActivated,f)
 	print("Game saved!")
 
 def loadFromFile():
-	global room, inventory, playerName, creatorName
+	global room, inventory, playerName, creatorName, info, gensActivated
 	try:
 		with open("game.dat",'rb') as f:
 			inventory = pickle.load(f)
 			room = pickle.load(f)
 			playerName = pickle.load(f)
 			creatorName = pickle.load(f)
+			info = pickle.load(f)
+			gensActivated = pickle.load(f)
+			#print(gensActivated)
 			#print(f"Creator Name: {creatorName}, Player Name: {playerName}")
 			if [] in inventory:
 				inventory.remove([])
-			print(room)
 		print("Game loaded!")
 		function_dict[room]()
 	except FileNotFoundError:
@@ -1777,8 +1852,7 @@ function_dict = {'start\n':start, 'keyR1\n':keyR1, 'doorR1\n':doorR1, 'fillerR1\
 				'startR3\n':startR3, 'largeHallway1R3\n':largeHallway1R3, 'longhallway1R3\n':longhallway1R3, 'longhallway2R3\n':longhallway2R3, 'longhallway3R3\n':longhallway3R3, 'topRoom1R3\n':topRoom1R3, 'topRoom2R3\n':topRoom2R3, 'topRoom3R3\n':topRoom3R3, 'bottomRoom1R3\n':bottomRoom1R3, 'bottomRoom2R3\n':bottomRoom2R3, 'bottomRoom3R3\n':bottomRoom3R3,
 				'cave1\n':cave1, 'cave2\n':cave2, 'cave3\n':cave3, 'cave4\n':cave4, 'cave5\n':mapR2, 'cave1n\n':cave1n, 'cave2n\n':cave2n, 'cave3n\n':cave3n, 'cave4n\n':cave4n, 'cave5n\n':cave5n, 'cave6n\n':cave6n, 'cave7n\n':cave7n, 'cave8n\n':cave8n, 'cave9n\n':cave9n, 'cave10n\n':cave10n, 'cave11nGenerator\n':cave11nGenerator, 'small_paper\n':small_paper, 'cave1e\n':cave1e, 'cave2e\n':cave2e, 'cave3e\n':cave3e, 'cave4e\n':cave4e, 'cave5e\n':cave5e, 'cave6e\n':cave6e, 'cave7e\n':cave7e, 'cave8e\n':cave8e, 'cave9e\n':cave9e, 'cave10e\n':cave10e, 'cave11e\n':cave11e, 'cave1s\n':cave1s, 'cave2s\n':cave2s, 'cave3s\n':cave3s, 
 				}
-
-
+info = informationToSave()
 welcome()
 
 
