@@ -1447,7 +1447,7 @@ def cave4n():
 	while not valid:
 		player = validate("nsewugq?i")
 		if player == "n":
-			print('You start walking and stop realizing you would fall into the cavern.')
+			cave3n()
 		elif player == "e" :
 			print('You start walking and stop realizing you would fall into the cavern.')
 		elif player == "s":
@@ -1670,7 +1670,7 @@ def cave11nGenerator():
 					gensOn += 1
 				if info.gen3on == True:
 					gensOn += 1
-				print(f"Generators activate: {gensOn}")
+				print(f"Generators active: {gensOn}")
 				print(f"Generators left: {3 - gensOn}")
 
 
@@ -1894,7 +1894,7 @@ def cave7e():
 		elif player == "u":
 			print('Doesn\'t seem useful in this room.')
 		elif player == "g":
-			print('Nothing in this room is worthy or taking.')
+			print('Nothing in this room is worthy of taking.')
 		elif player == "?":
 			helpdisplay()
 		elif player == "i":
@@ -1916,13 +1916,13 @@ def cave8e():
 		elif player == "e" :
 			randomWallmessage()
 		elif player == "s":
-			cave8e()
+			cave9e()
 		elif player == "w":
 			randomWallmessage()
 		elif player == "u":
 			print('Doesn\'t seem useful in this room.')
 		elif player == "g":
-			print('Nothing in this room is worthy or taking.')
+			print('Nothing in this room is worthy of taking.')
 		elif player == "?":
 			helpdisplay()
 		elif player == "i":
@@ -1931,22 +1931,281 @@ def cave8e():
 			print("Invald Input.")
 
 def cave9e():
-	pass
+	print("\n"*2)
+	debugRun('cave9e\n')
+	if info.gen2on != True:
+		print('You enter a cave with a generator in it.')
+		print('You need to activate it.')
+	else:
+		print('This is were the second generator was.')
+	print('Movable directions: North, West')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?i")
+		if player == "n":
+			cave8e()
+		elif player == "e" :
+			randomWallmessage()
+		elif player == "s":
+			randomWallmessage()
+		elif player == "w":
+			cave10e()
+		elif player == "u":
+			gensOn = 0
+			if info.gen2on != False:
+				print('The generator is already on.\n')
+			elif info.gen2on != True:
+				info.gen2on = True
+				print('You here a sput and the generator sparks to life.')
+				if info.gen1on == True:
+					gensOn += 1
+				if info.gen2on == True:
+					gensOn += 1
+				if info.gen3on == True:
+					gensOn += 1
+				print(f"Generators active: {gensOn}")
+				print(f"Generators left: {3 - gensOn}")
+
+		elif player == "g":
+			print('Nothing in this room is worthy of taking.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		else:
+			print("Invald Input.")
+
 
 def cave10e():
-	pass
+	print("\n"*2)
+	debugRun('cave10e\n')
+	print('You enter another cave.')
+	print('You see light coming from the west.')
+	print('Movable directions: East, West')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?i")
+		if player == "n":
+			randomWallmessage()
+		elif player == "e" :
+			cave9e()
+		elif player == "s":
+			randomWallmessage()
+		elif player == "w":
+			cave11e()
+		elif player == "u":
+			print('Doesn\'t seem useful in this room.')
+		elif player == "g":
+			print('Nothing in this room is worthy of taking.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		else:
+			print("Invald Input.")
 
 def cave11e():
-	pass
+	print("\n"*2)
+	debugRun('cave11e\n')
+	print('You enter another cave.')
+	print('You enter a room with a door to your east.')
+	print('This must be the exit.')
+	print('There is a button by the door.')
+	script = f'There are three lights above the door.\n'
+
+	if info.gen1on == True:
+		script += f'The light on the left is activated.\n'
+	else:
+		script += f'The light on the left is off.\n'
+	if info.gen2on == True:
+		script += f'The light in the middle is activated.\n'
+	else:
+		script += f'The light in the middle is off.\n'
+	if info.gen3on == True:
+		script += f'The light on the right is activated.\n'
+	else:
+		script += f'The light on the right is off.\n'
+	print(script)
+	print('Movable directions: East')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?i")
+		if player == "n":
+			randomWallmessage()
+		elif player == "e" :
+			cave10e()
+		elif player == "s":
+			randomWallmessage()
+		elif player == "w":
+			randomWallmessage()
+		elif player == "u":
+			if info.gen1on == True and info.gen2on == True and info.gen3on == True:
+				print('You press the button by the door and you here a ding.')
+				print('The doors slide open to reveal the inside of an elevator.')
+				print('You walk into the elevator.')
+				caveElevator()
+			else:
+				print('It seems that the button needs all of the lights to be on.')
+		elif player == "g":
+			print('Nothing in this room is worthy of taking.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		else:
+			print("Invald Input.")
 
 def cave1s():
-	pass
-
-def cave3s():
-	pass
+	print("\n"*2)
+	debugRun('cave1s\n')
+	print('You enter another cave.')
+	print('You here a weird sputtering coming from the south.')
+	print('Movable directions: East, South')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?i")
+		if player == "n":
+			randomWallmessage()
+		elif player == "e" :
+			cave5e()
+		elif player == "s":
+			cave2s()
+		elif player == "w":
+			randomWallmessage()
+		elif player == "u":
+			print('Doesn\'t seem useful in this room.')
+		elif player == "g":
+			print('Nothing in this room is worthy of taking.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		else:
+			print("Invald Input.")
 
 def cave2s():
-	pass
+	print("\n"*2)
+	debugRun('cave2s\n')
+	print('The sputtering sound is getting in louder.')
+	print('It seems like the sound is farther down south')
+	print('Movable directions: North, South')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?i")
+		if player == "n":
+			cave1s()
+		elif player == "e" :
+			randomWallmessage()
+		elif player == "s":
+			cave3s()
+		elif player == "w":
+			randomWallmessage()
+		elif player == "u":
+			print('Doesn\'t seem useful in this room.')
+		elif player == "g":
+			print('Nothing in this room is worthy of taking.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		else:
+			print("Invald Input.")
+
+def cave3s():
+	print("\n"*2)
+	debugRun('cave2s\n')
+	if info.gen3on == True:
+		print('This is were you activated the 3rd generator.')
+	else:
+		print('You walk into an actual room it looks like the ones you started in.')
+		print('The generator seems to be struggling to start.')
+		print('Maybe if you try starting it again.')
+	print('Movable directions: North')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?i")
+		if player == "n":
+			cave2s()
+		elif player == "e" :
+			randomWallmessage()
+		elif player == "s":
+			randomWallmessage()
+		elif player == "w":
+			randomWallmessage()
+		elif player == "u":
+			gensOn = 0
+			if info.gen3on != False:
+				print('The generator is already on.\n')
+			elif info.gen3on != True:
+				info.gen3on = True
+				print('You turn the generator off and try to turn it on.')
+				print('You here a sput and the generator sparks to life.')
+				print('It seems to be running smoothly now.')
+				print('You turn to walk away and a tiny cube launches from the generator hitting you.')
+				print('You turn around and take the cube.')
+				if info.gen1on == True:
+					gensOn += 1
+				if info.gen2on == True:
+					gensOn += 1
+				if info.gen3on == True:
+					gensOn += 1
+				print(f"Generators active: {gensOn}")
+				print(f"Generators left: {3 - gensOn}")
+		elif player == "g":
+			print('Nothing in this room is worthy of taking.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		else:
+			print("Invald Input.")
+
+# CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator 
+
+def caveElevator():
+	print("\n"*2)
+	debugRun('caveElevator\n')
+	print('The doors close behind you as you enter.')
+	print('You notice that there is only one button in the elevator.')
+	print('Its down.')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?i")
+		if player == "n":
+			print('You walk into the wall of the elevator.')
+		elif player == "e" :
+			print('You walk into the wall of the elevator.')
+		elif player == "s":
+			print('You walk into the wall of the elevator.')
+		elif player == "w":
+			print('You walk into the wall of the elevator.')
+		elif player == "u":
+			caveElevatorMoving()
+		elif player == "g":
+			print('Nothing in this room is worthy of taking.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		else:
+			print("Invald Input.")
+
+def caveElevatorMoving():
+	print("\n"*2)
+	debugRun('caveElevatorMoving\n')
+	print('You pressed the button to go down.')
+	print('The elevator jolts. It starts its adventure down.')
+	print('Its down.')
+	print('Press \'w\' to wait.')
+	timewaited = 0
+	valid = False
+	while not valid:
+		pass
+
+
+# CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator 
+
+
 
 #Cave Room Rooms continued cave1e, cave2e, cave3e, cave4e, cave5e, cave6e, cave7e, cave8e, cave9e, cave10e, cave11e, cave1s, cave3s, cave2s
 
@@ -2004,9 +2263,13 @@ class informationToSave(object):
 
 
 	def __str__(self):
-		printer = f'Your team is {self.__team}\n'
+		printer = f'This is some saved data:'
+		printer += f'Your team is {self.__team}\n'
 		printer += f'Your rooms is {self.__rooms}\n'
 		printer += f'Your actionsR3 is {self.__actionsR3}\n'
+		printer += f'Generator 1 is {self.__gen1on}\n'
+		printer += f'Generator 2 is {self.__gen2on}\n'
+		printer += f'Generator 3 is {self.__gen3on}\n'
 		return printer
 
 	@property
@@ -2092,7 +2355,7 @@ def randomWallmessage():
 def saveToFile(room):
 	with open('game.dat','wb') as f:
 		pickle.dump(inventory,f)
-		pickle.dump('cave11nGenerator\n',f)
+		pickle.dump(room,f)
 		pickle.dump(playerName,f)
 		pickle.dump(creatorName,f)
 		pickle.dump(info,f)
@@ -2125,6 +2388,7 @@ function_dict = {'start\n':start, 'keyR1\n':keyR1, 'doorR1\n':doorR1, 'fillerR1\
 		 		'mapR2\n':mapR2, 'hallWayR2\n':hallWayR2, 'lockedDoorR2\n':lockedDoorR2, 'hallWay2R2\n':hallWay2R2, 'doorR2\n':doorR2, 'keyR2\n':keyR2,
 				'startR3\n':startR3, 'largeHallway1R3\n':largeHallway1R3, 'longhallway1R3\n':longhallway1R3, 'longhallway2R3\n':longhallway2R3, 'longhallway3R3\n':longhallway3R3, 'topRoom1R3\n':topRoom1R3, 'topRoom2R3\n':topRoom2R3, 'topRoom3R3\n':topRoom3R3, 'bottomRoom1R3\n':bottomRoom1R3, 'bottomRoom2R3\n':bottomRoom2R3, 'bottomRoom3R3\n':bottomRoom3R3,
 				'cave1\n':cave1, 'cave2\n':cave2, 'cave3\n':cave3, 'cave4\n':cave4, 'cave5\n':mapR2, 'cave1n\n':cave1n, 'cave2n\n':cave2n, 'cave3n\n':cave3n, 'cave4n\n':cave4n, 'cave5n\n':cave5n, 'cave6n\n':cave6n, 'cave7n\n':cave7n, 'cave8n\n':cave8n, 'cave9n\n':cave9n, 'cave10n\n':cave10n, 'cave11nGenerator\n':cave11nGenerator, 'small_paper\n':small_paper, 'cave1e\n':cave1e, 'cave2e\n':cave2e, 'cave3e\n':cave3e, 'cave4e\n':cave4e, 'cave5e\n':cave5e, 'cave6e\n':cave6e, 'cave7e\n':cave7e, 'cave8e\n':cave8e, 'cave9e\n':cave9e, 'cave10e\n':cave10e, 'cave11e\n':cave11e, 'cave1s\n':cave1s, 'cave2s\n':cave2s, 'cave3s\n':cave3s, 
+				'caveElevator\n' : caveElevator, 'caveElevatorMoving\n': caveElevatorMoving,
 				}
 info = informationToSave()
 
