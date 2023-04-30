@@ -2231,6 +2231,74 @@ def caveElevatorMoving():
 # ROOM 4 START
 #
 
+# Map of room
+
+#---------   ---------
+#| * | * |   | * | * |
+#| + - + ----- + - + -
+#| * * * + * + * * * |
+#--------- + ---------
+
+def holder():
+	print("\n"*2)
+	debugRun('holder\n')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?i")
+		if player == "n":
+			pass
+		elif player == "e" :
+			pass
+		elif player == "s":
+			pass
+		elif player == "w":
+			pass
+		elif player == "u":
+			pass
+		elif player == "g":
+			pass
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		else:
+			print("Invald Input.")
+
+def leftHallway1():
+	pass
+
+def leftHallway2():
+	pass
+
+def leftHallway3():
+	pass
+
+def leftRoom1():
+	pass
+
+def leftRoom2():
+	pass
+
+def leftRoom3():
+	pass
+
+def rightRoom1():
+	pass
+
+def rightRoom2():
+	pass
+
+def rightRoom3():
+	pass
+
+def rightHallway1():
+	pass
+
+def rightHallway2():
+	pass
+
+def rightHallway3():
+	pass
 
 
 #
@@ -2389,6 +2457,7 @@ function_dict = {'start\n':start, 'keyR1\n':keyR1, 'doorR1\n':doorR1, 'fillerR1\
 				'startR3\n':startR3, 'largeHallway1R3\n':largeHallway1R3, 'longhallway1R3\n':longhallway1R3, 'longhallway2R3\n':longhallway2R3, 'longhallway3R3\n':longhallway3R3, 'topRoom1R3\n':topRoom1R3, 'topRoom2R3\n':topRoom2R3, 'topRoom3R3\n':topRoom3R3, 'bottomRoom1R3\n':bottomRoom1R3, 'bottomRoom2R3\n':bottomRoom2R3, 'bottomRoom3R3\n':bottomRoom3R3,
 				'cave1\n':cave1, 'cave2\n':cave2, 'cave3\n':cave3, 'cave4\n':cave4, 'cave5\n':mapR2, 'cave1n\n':cave1n, 'cave2n\n':cave2n, 'cave3n\n':cave3n, 'cave4n\n':cave4n, 'cave5n\n':cave5n, 'cave6n\n':cave6n, 'cave7n\n':cave7n, 'cave8n\n':cave8n, 'cave9n\n':cave9n, 'cave10n\n':cave10n, 'cave11nGenerator\n':cave11nGenerator, 'small_paper\n':small_paper, 'cave1e\n':cave1e, 'cave2e\n':cave2e, 'cave3e\n':cave3e, 'cave4e\n':cave4e, 'cave5e\n':cave5e, 'cave6e\n':cave6e, 'cave7e\n':cave7e, 'cave8e\n':cave8e, 'cave9e\n':cave9e, 'cave10e\n':cave10e, 'cave11e\n':cave11e, 'cave1s\n':cave1s, 'cave2s\n':cave2s, 'cave3s\n':cave3s, 
 				'caveElevator\n' : caveElevator, 'caveElevatorMoving\n': caveElevatorMoving,
+				'leftHallway1\n': leftHallway1, 'leftHallway2\n': leftHallway2, 'leftHallway3\n': leftHallway3, 'leftRoom1\n': leftRoom1, 'leftRoom2\n': leftRoom2, 'leftRoom3\n': leftRoom3, 'rigthHallway1\n': rightHallway1, 'rigthHallway2\n': rigthHallway2, 'rigthHallway3\n': rightHallway3, 'rightRoom1\n': rightRoom1, 'rightRoom2\n': rightRoom2, 'rightRoom3\n': rightRoom3, 
 				}
 info = informationToSave()
 
