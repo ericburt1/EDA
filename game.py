@@ -832,7 +832,9 @@ def longhallway3R3():
 			if 'keycard' in inventory:
 				print('You swipe the key card and you hear a beep sound. A light turns green and the door unlocks.')
 				print('You walk through and you are in yet another room.')
-				pass
+				print('You hear a cracking below you and you fall through the ground into a new room.')
+				print('EDA: Good job user you passed Room 3. See if you can get passed the final room.')
+				middleRoom()
 		elif player == "g":
 			print("Nothing important looking to grab.")
 		elif player == "?":
@@ -2242,9 +2244,10 @@ def caveElevatorMoving():
 def holder():
 	print("\n"*2)
 	debugRun('holder\n')
+	print('Movable directions: North, South')
 	valid = False
 	while not valid:
-		player = validate("nsewugq?i")
+		player = validate("nsewugq?im")
 		if player == "n":
 			pass
 		elif player == "e" :
@@ -2261,17 +2264,163 @@ def holder():
 			helpdisplay()
 		elif player == "i":
 			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+		---------   ---------
+		| * | * |   | * | * |
+		| + - + ----- + - + -
+		| * * * + X + * * * |
+		--------- + ---------
+				""",holder)
+		else:
+			print("Invald Input.")
+
+def middleRoom():
+	print("\n"*2)
+	debugRun('middleRoom\n')
+	print('You are standing on the rubble from when you fell through the floor.')
+	print('North of you is a window looking out into a city.')
+	print('Movable directions: East, West')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?im")
+		if player == "n":
+			randomWallmessage()
+		elif player == "e" :
+			rightHallway1()
+		elif player == "s":
+			print('It says you need to switch 4 levers for the door to open.')
+		elif player == "w":
+			leftHallway1()
+		elif player == "u":
+			print('No use.')
+		elif player == "g":
+			print('There is nothing to grab.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+		---------   ---------
+		| * | * |   | * | * |
+		| + - + ----- + - + -
+		| * * * + X + * * * |
+		--------- + ---------
+				""",middleRoom)
 		else:
 			print("Invald Input.")
 
 def leftHallway1():
-	pass
+	print("\n"*2)
+	debugRun('leftHallway1\n')
+	print('You seem to be in a very nice office building.')
+	print('A door is to your north.')
+	print('Movable directions: North, East, West')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?im")
+		if player == "n":
+			leftRoom1()
+		elif player == "e" :
+			middleRoom()
+		elif player == "s":
+			randomWallmessage()
+		elif player == "w":
+			leftHallway2()
+		elif player == "u":
+			print('No use.')
+		elif player == "g":
+			print('There is nothing to grab.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+		---------   ---------
+		| * | * |   | * | * |
+		| + - + ----- + - + -
+		| * * X + * + * * * |
+		--------- + ---------
+				""",leftHallway1)
+		else:
+			print("Invald Input.")
 
 def leftHallway2():
-	pass
+	print("\n"*2)
+	debugRun('leftHallway2\n')
+	print('On the wall there is a empty frame. It looks like something was riped from it.')
+	print('Movable directions: East, West')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?im")
+		if player == "n":
+			randomWallmessage()
+		elif player == "e" :
+			leftHallway1()
+		elif player == "s":
+			randomWallmessage()
+		elif player == "w":
+			leftHallway3()
+		elif player == "u":
+			print('No use.')
+		elif player == "g":
+			print('There is nothing to grab.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+		---------   ---------
+		| * | * |   | * | * |
+		| + - + ----- + - + -
+		| * X * + * + * * * |
+		--------- + ---------
+				""",leftHallway2)
+		else:
+			print("Invald Input.")
 
 def leftHallway3():
-	pass
+	print("\n"*2)
+	debugRun('leftHallway3\n')
+	print('A door is to your north.')
+	print('Movable directions: North, East')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?im")
+		if player == "n":
+			leftRoom1()
+		elif player == "e" :
+			leftHallway2()
+		elif player == "s":
+			randomWallmessage()
+		elif player == "w":
+			randomWallmessage()
+		elif player == "u":
+			print('No use.')
+		elif player == "g":
+			print('There is nothing to grab.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+		---------   ---------
+		| * | * |   | * | * |
+		| + - + ----- + - + -
+		| X * * + * + * * * |
+		--------- + ---------
+				""",leftHallway3)
+		else:
+			print("Invald Input.")
 
 def leftRoom1():
 	pass
@@ -2279,16 +2428,10 @@ def leftRoom1():
 def leftRoom2():
 	pass
 
-def leftRoom3():
-	pass
-
 def rightRoom1():
 	pass
 
 def rightRoom2():
-	pass
-
-def rightRoom3():
 	pass
 
 def rightHallway1():
@@ -2328,6 +2471,10 @@ class informationToSave(object):
 		self.__gen1on = False
 		self.__gen2on = False
 		self.__gen3on = False
+		self.__leverl1 = False
+		self.__leverl2 = False
+		self.__leverr1 = False
+		self.__leverr2 = False
 
 
 	def __str__(self):
@@ -2338,6 +2485,10 @@ class informationToSave(object):
 		printer += f'Generator 1 is {self.__gen1on}\n'
 		printer += f'Generator 2 is {self.__gen2on}\n'
 		printer += f'Generator 3 is {self.__gen3on}\n'
+		printer += f'Lever L1 pulled {self.__leverl1}\n'
+		printer += f'Lever L2 pulled {self.__leverl2}\n'
+		printer += f'Lever R1 pulled {self.__leverr1}\n'
+		printer += f'Lever R2 pulled {self.__leverr2}\n'
 		return printer
 
 	@property
@@ -2457,7 +2608,7 @@ function_dict = {'start\n':start, 'keyR1\n':keyR1, 'doorR1\n':doorR1, 'fillerR1\
 				'startR3\n':startR3, 'largeHallway1R3\n':largeHallway1R3, 'longhallway1R3\n':longhallway1R3, 'longhallway2R3\n':longhallway2R3, 'longhallway3R3\n':longhallway3R3, 'topRoom1R3\n':topRoom1R3, 'topRoom2R3\n':topRoom2R3, 'topRoom3R3\n':topRoom3R3, 'bottomRoom1R3\n':bottomRoom1R3, 'bottomRoom2R3\n':bottomRoom2R3, 'bottomRoom3R3\n':bottomRoom3R3,
 				'cave1\n':cave1, 'cave2\n':cave2, 'cave3\n':cave3, 'cave4\n':cave4, 'cave5\n':mapR2, 'cave1n\n':cave1n, 'cave2n\n':cave2n, 'cave3n\n':cave3n, 'cave4n\n':cave4n, 'cave5n\n':cave5n, 'cave6n\n':cave6n, 'cave7n\n':cave7n, 'cave8n\n':cave8n, 'cave9n\n':cave9n, 'cave10n\n':cave10n, 'cave11nGenerator\n':cave11nGenerator, 'small_paper\n':small_paper, 'cave1e\n':cave1e, 'cave2e\n':cave2e, 'cave3e\n':cave3e, 'cave4e\n':cave4e, 'cave5e\n':cave5e, 'cave6e\n':cave6e, 'cave7e\n':cave7e, 'cave8e\n':cave8e, 'cave9e\n':cave9e, 'cave10e\n':cave10e, 'cave11e\n':cave11e, 'cave1s\n':cave1s, 'cave2s\n':cave2s, 'cave3s\n':cave3s, 
 				'caveElevator\n' : caveElevator, 'caveElevatorMoving\n': caveElevatorMoving,
-				'leftHallway1\n': leftHallway1, 'leftHallway2\n': leftHallway2, 'leftHallway3\n': leftHallway3, 'leftRoom1\n': leftRoom1, 'leftRoom2\n': leftRoom2, 'leftRoom3\n': leftRoom3, 'rigthHallway1\n': rightHallway1, 'rigthHallway2\n': rigthHallway2, 'rigthHallway3\n': rightHallway3, 'rightRoom1\n': rightRoom1, 'rightRoom2\n': rightRoom2, 'rightRoom3\n': rightRoom3, 
+				'middleRoom': middleRoom, 'leftHallway1\n': leftHallway1, 'leftHallway2\n': leftHallway2, 'leftHallway3\n': leftHallway3, 'leftRoom1\n': leftRoom1, 'leftRoom2\n': leftRoom2, 'rigthHallway1\n': rightHallway1, 'rigthHallway2\n': rightHallway2, 'rigthHallway3\n': rightHallway3, 'rightRoom1\n': rightRoom1, 'rightRoom2\n': rightRoom2,
 				}
 info = informationToSave()
 
