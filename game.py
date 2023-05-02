@@ -32,23 +32,23 @@ def holder():
 			print("Invald Input.")
 
 		
-#Room one layout each set of parenthasis is an area with its functon ame 
+#Room one layout each set of parenthasis is an area with its functon ame
 #(start)(keyR1)
 #(doorR1) (FillerR2)
 #(doorR1)
 
 #
-# ACTIONS START ACTIONS START ACTIONS START ACTIONS START ACTIONS START ACTIONS START ACTIONS START ACTIONS START
+# ACTIONS START ACTIONS START ACTIONS START ACTIONS START
 #
 def gamelose(cause):
-	print("\n"*2)
+	print("\n"*50)
 	saveToFile(room)
 	print(cause)
 	print("Game over!")
 	welcome()
 
 def helpdisplay(area):
-	print("\n"*2)
+	print("\n"*50)
 	print("""
 	Actions:
 	Grab (g)
@@ -91,7 +91,6 @@ def welcome():
 		develop_testing()
 	elif str(output) == "5":
 		start()
-	
 
 def develop_testing():
 	print("\n"*5)
@@ -120,7 +119,7 @@ def develop_testing():
 	elif area == "6":
 		inventory.append('map')
 		startR3()
-	else: 
+	else:
 		print(f"Invalid command")
 
 def validate(values, prompt=f"What do you want to do?\n"):
@@ -139,7 +138,7 @@ def validate(values, prompt=f"What do you want to do?\n"):
 
 
 def displayInventory():
-	print("\n"*2)
+	print("\n"*50)
 	print("Inventory:\n")
 	for i in range(len(inventory)):
 		part = inventory[i]
@@ -147,14 +146,9 @@ def displayInventory():
 	print()
 	return
 
-
 #
 # ACTIONS END ACTIONS END ACTIONS END ACTIONS END ACTIONS END ACTIONS END ACTIONS END ACTIONS END ACTIONS END ACTIONS END
 #
-
-
-
-
 
 #Room 1 Rooms start, keyR1, doorR1, fillerR1
 
@@ -162,9 +156,8 @@ def displayInventory():
 # ROOM 1 START ROOM 1 START ROOM 1 START ROOM 1 START ROOM 1 START ROOM 1 START ROOM 1 START ROOM 1 START ROOM 1 START
 #
 
-
 def start():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('start\n')
 	print(f"Welcome to EDA {playerName}. If you need a reminder of controls type '?'")
 	print("You are in the corner of a white room.")
@@ -194,7 +187,7 @@ def start():
 			print("Invalid Input.")
 
 def keyR1():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('keyR1\n')
 	if "key" not in inventory:
 		print("You look around and see an empty area other than ...")
@@ -233,7 +226,7 @@ def keyR1():
 			print("Invald Input.")
 
 def doorR1():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('doorR1\n')
 	print("You notice everything is white except a metal door.")
 	print("\nMovable directions: North, East.")
@@ -271,7 +264,7 @@ def doorR1():
 			print("Invald Input.")
 
 def fillerR1():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('fillerR1\n')
 	print("This appears to be a kitchen.")
 	print("The kitchen is very clean. No food appears to be there.")
@@ -306,8 +299,6 @@ def fillerR1():
 # ROOM 1 END ROOM 1 END ROOM 1 END ROOM 1 END ROOM 1 END ROOM 1 END ROOM 1 END ROOM 1 END ROOM 1 END ROOM 1 END ROOM 1 END ROOM 1 END
 #
 
-
-
 def displayMap(mapp,area):
 	
 	print(f"""
@@ -322,7 +313,6 @@ def displayMap(mapp,area):
 	{mapp}
 	""")
 	area()
-
 
 #Map for Room2
 
@@ -339,7 +329,7 @@ def displayMap(mapp,area):
 #
 
 def mapR2():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('mapR2\n')
 	if "map" not in inventory:
 		print(f"EDA: 'Good job {playerName}. That was you first trial. See if you can do this next one.'")
@@ -381,7 +371,7 @@ def mapR2():
 			print("Invald Input.")
 
 def hallWayR2():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('hallWayR2\n')
 	print("You walk into a hallway that appears to have nothing in it.")
 	print("\nMovable directions: North, South")
@@ -417,7 +407,7 @@ def hallWayR2():
 			print("Invald Input.")
 
 def lockedDoorR2():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('lockedDoorR2\n')
 	print("You enter this room and notice a door.")
 	print("It appears to have a lock on it.")
@@ -478,7 +468,7 @@ def lockedDoorR2():
 			print("Invald Input.")
 
 def hallWay2R2():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('hallWay2R2\n')
 	print("You are in a damp and what looks like ruined hallway.")
 	print("Ceiling panels look loose. You might want to get into a different room.")
@@ -522,7 +512,7 @@ def hallWay2R2():
 			print("Invald Input.")
 
 def doorR2():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('doorR2\n')
 	print("You enter a room that has a door up North.")
 	print("Otherwise nothing else in this room. What is this place.")
@@ -559,7 +549,7 @@ def doorR2():
 			print("Invald Input.")
 
 def keyR2():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('keyR2\n')
 	print("You walk through the door and see a key in the middle of the room.")
 	print("You see a mirror on the wall at the oppisite side of the room.")
@@ -636,7 +626,7 @@ def keyR2():
 #Room 3 Rooms startR3, largeHallway1R3, longhallway1R3, longhallway2R3, longhallway3R3, topRoom1R3, topRoom2R3, topRoom3R3, bottomRoom1R3, bottomRoom2R3, bottomRoom3R3
 
 def startR3():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('startR3\n')
 	print("This doesn't look like the other rooms so far.")
 	print("It seems to be an office and not just plain colored rooms.")
@@ -675,7 +665,7 @@ def startR3():
 			print("Invald Input.")
 
 def largeHallway1R3():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('largeHallwat1R3\n')
 	if info.actionsR3 == 2:
 		print('You walk into the Large hallway and notice a little slot open at the south end of the room.')
@@ -724,7 +714,7 @@ def largeHallway1R3():
 			print("Invald Input.")
 
 def longhallway1R3():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('longhallway1R3\n')
 	print("Another long hallway but this time its going West to East.")
 	print("You notice thick windows into the rooms North and South of you.")
@@ -770,7 +760,7 @@ def longhallway1R3():
 			print("Invald Input.")
 
 def longhallway2R3():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('longhallway2R3\n')
 	print("You notice that the building seems worn and damaged.")
 	print("There are holes in the walls and ceiling but none that you can fit into.")
@@ -810,7 +800,7 @@ def longhallway2R3():
 			print("Invald Input.")
 
 def longhallway3R3():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('longhallway3R3\n')
 	print("This rooms bigger that the other hallways so far.")
 	print("The holes in the walls are getting bigger but still not enough for a person to fit in.")
@@ -856,7 +846,7 @@ def longhallway3R3():
 			print("Invald Input.")
 
 def topRoom1R3():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('topRoom1R3\n')
 	print('You walk into the room and nothing is there.')
 	print(f"EDA: '{playerName} you are in the previous office of the creater of me EDA.'")
@@ -897,7 +887,7 @@ def topRoom1R3():
 			print("Invald Input.")
 
 def topRoom2R3():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('topRoom2R3\n')
 	print("EDA: 'The person who used to work here tryed to stop me but they are irrelevant now.'")
 	print("The room is empty but there seems to be a hole big enough for someone to fit through it.")
@@ -987,7 +977,7 @@ def topRoom2R3():
 			print("Invald Input.")
 
 def topRoom3R3():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('topRoom3R3\n')
 	print('When you enter the room you notice a long table with some chairs around it.')
 	print(f"EDA: 'The meeting room. They would talk about me a lot here.'")
@@ -1032,7 +1022,7 @@ def topRoom3R3():
 			print("Invald Input.")
 
 def bottomRoom1R3():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('bottomRoom1R3\n')
 	print('You walk into the room and notice nothing.')
 	print('There is a very nice painting on the wall.')
@@ -1071,7 +1061,7 @@ def bottomRoom1R3():
 			print("Invald Input.")
 
 def bottomRoom2R3():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('bottomRoom2R3\n')
 	if 'tiny cube' in inventory:
 		print('You see the table were the tiny toy cube was set on.')
@@ -1120,7 +1110,7 @@ def bottomRoom2R3():
 			print("Invald Input.")
 
 def bottomRoom3R3():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('bottomRoom3R3\n')
 	print('The room looks more like a recreation room.')
 	print('The rec room also has a spot that looks like its for children.')
@@ -1166,11 +1156,9 @@ def bottomRoom3R3():
 		else:
 			print("Invald Input.")
 
-
 #
 # ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END ROOM 3 END
 #
-
 
 # MAZE
 # = means that it is a hallway with nothin in it
@@ -1195,7 +1183,7 @@ def bottomRoom3R3():
 #Cave Room Rooms continued cave1e, cave2e, cave3e, cave4e, cave5e, cave6e, cave7e, cave8e, cave9e, cave10e, cave11e, cave1s, cave3s, cave2s
 # BASIC COMMANDS
 def holder():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('holder\n')
 	valid = False
 	while not valid:
@@ -1220,7 +1208,7 @@ def holder():
 			print("Invald Input.")
 
 def cave1():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave1\n')
 	if 'map' in inventory:
 		print('You hear rumbling outside and the hole you came from shuts closed.')
@@ -1255,13 +1243,13 @@ def cave1():
 			print("Invald Input.")
 
 def cave2():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave2\n')
 	print('You walk into another cave.')
 	print('On the wall you notice a partial map in the wall.')
 	print('''-----
-| X |
 | * |
+| X |
 | * =
 ------''')
 	print('Movable directions: North, South')
@@ -1288,7 +1276,7 @@ def cave2():
 			print("Invald Input.")
 
 def cave3():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave3\n')
 	print('You walk into another cave.')
 	print('Looks like there is a turn in this room.')
@@ -1316,7 +1304,7 @@ def cave3():
 			print("Invald Input.")
 
 def cave4():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave4\n')
 	print('You enter into another cave.')
 	print('Another etching in the wall.')
@@ -1349,7 +1337,7 @@ def cave4():
 			print("Invald Input.")
 
 def cave1n():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave1n\n')
 	print('You enter into another cave.')
 	print('This must be a maze.')
@@ -1383,7 +1371,7 @@ def cave1n():
 			print("Invald Input.")
 
 def cave2n():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave2n\n')
 	if 'small paper' not in inventory:
 		small_paper()
@@ -1396,7 +1384,7 @@ def cave2n():
 		if player == "n":
 			print('A rocky wall stops you from going any further.')
 		elif player == "e" :
-			cave5n()
+			cave3n()
 		elif player == "s":
 			cave1n()
 		elif player == "w":
@@ -1413,7 +1401,7 @@ def cave2n():
 			print("Invald Input.")
 
 def cave3n():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave3n\n')
 	print('You enter a small rocky room. A tunnel is going West.')
 	print('Movable directions: South, West')
@@ -1440,7 +1428,7 @@ def cave3n():
 			print("Invald Input.")
 
 def cave4n():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave4n\n')
 	print('You walk into the cave but now the ground is a metal grait.')
 	print('You are walking on a pathway suspened over a cavern.')
@@ -1468,7 +1456,7 @@ def cave4n():
 			print("Invald Input.")
 
 def cave5n():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave5n\n')
 	print('You enter a cave that has a crossing.')
 	print('On the wall you notice some markings.')
@@ -1500,7 +1488,7 @@ def cave5n():
 			print("Invald Input.")
 
 def cave6n():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave6n\n')
 	print('You look down into the cravern and see nothing just pure black.')
 	print('Movable directions: North, South')
@@ -1527,7 +1515,7 @@ def cave6n():
 			print("Invald Input.")
 
 def cave7n():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave7n\n')
 	print('You look on the wall and notice that there are some scratchings of words.')
 	print('You can\' seem to tell what it says.')
@@ -1556,7 +1544,7 @@ def cave7n():
 			print("Invald Input.")
 
 def cave8n():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave8n\n')
 	print('')
 	print('Movable directions: North, East, South')
@@ -1583,7 +1571,7 @@ def cave8n():
 			print("Invald Input.")
 
 def cave9n():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave9n\n')
 	print('You enter a cave that has a crossing.')
 	print('On the wall you notice some markings.')
@@ -1615,7 +1603,7 @@ def cave9n():
 			print("Invald Input.")
 
 def cave10n():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave10n\n')
 	print('You see a drawing of an arrow on a wall. It is pointing south.')
 	print('There are words on the arrow. It seems to be saying Generator.')
@@ -1643,7 +1631,7 @@ def cave10n():
 			print("Invald Input.")
 
 def cave11nGenerator():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave11nGenerator\n')
 	print('You look around and see an unpowered generator.')
 	print('Looks like you need to start it. Type \'u\' to activate generator.')
@@ -1684,6 +1672,7 @@ def cave11nGenerator():
 			displayInventory()
 		else:
 			print("Invald Input.")
+
 #
 # CAVE 1 END
 #
@@ -1696,7 +1685,7 @@ def small_paper():
 	return
 
 def cave1e():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave1e\n')
 	print('You enter another cave.')
 	print('This one looks a little smaller than the others')
@@ -1724,7 +1713,7 @@ def cave1e():
 			print("Invald Input.")
 
 def cave2e():
-	print("\n"*2)
+	print("\n"*50)
 	if 'small paper' not in inventory:
 		small_paper()
 	debugRun('cave2e\n')
@@ -1762,7 +1751,7 @@ def cave2e():
 			print("Invald Input.")
 
 def cave3e():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave3e\n')
 	print('You enter another cave.')
 	print('This cave seems to be a bend.')
@@ -1790,7 +1779,7 @@ def cave3e():
 			print("Invald Input.")
 
 def cave4e():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave4e\n')
 	print('You enter another cave.')
 	print('A narrow long hallway.')
@@ -1818,7 +1807,7 @@ def cave4e():
 			print("Invald Input.")
 
 def cave5e():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave5e\n')
 	print('You enter another cave.')
 	print('You aproach a crossing, and some markings on the wall.')
@@ -1849,7 +1838,7 @@ def cave5e():
 			print("Invald Input.")
 
 def cave6e():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave6e\n')
 	print('You enter another cave.')
 	print('Doesn\'t seem like there is anything of use.')
@@ -1877,7 +1866,7 @@ def cave6e():
 			print("Invald Input.")
 
 def cave7e():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave7e\n')
 	print('You enter another cave.')
 	print('You see an arrow on the wall pointing south. It says generator right under it.')
@@ -1905,7 +1894,7 @@ def cave7e():
 			print("Invald Input.")
 
 def cave8e():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave8e\n')
 	print('You enter another cave.')
 	print('You see an arrow on the wall pointing south. It says generator right under it.')
@@ -1933,7 +1922,7 @@ def cave8e():
 			print("Invald Input.")
 
 def cave9e():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave9e\n')
 	if info.gen2on != True:
 		print('You enter a cave with a generator in it.')
@@ -1977,9 +1966,8 @@ def cave9e():
 		else:
 			print("Invald Input.")
 
-
 def cave10e():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave10e\n')
 	print('You enter another cave.')
 	print('You see light coming from the west.')
@@ -2007,7 +1995,7 @@ def cave10e():
 			print("Invald Input.")
 
 def cave11e():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave11e\n')
 	print('You enter another cave.')
 	print('You enter a room with a door to your east.')
@@ -2058,7 +2046,7 @@ def cave11e():
 			print("Invald Input.")
 
 def cave1s():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave1s\n')
 	print('You enter another cave.')
 	print('You here a weird sputtering coming from the south.')
@@ -2086,7 +2074,7 @@ def cave1s():
 			print("Invald Input.")
 
 def cave2s():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave2s\n')
 	print('The sputtering sound is getting in louder.')
 	print('It seems like the sound is farther down south')
@@ -2114,7 +2102,7 @@ def cave2s():
 			print("Invald Input.")
 
 def cave3s():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('cave2s\n')
 	if info.gen3on == True:
 		print('This is were you activated the 3rd generator.')
@@ -2165,7 +2153,7 @@ def cave3s():
 # CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator 
 
 def caveElevator():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('caveElevator\n')
 	print('The doors close behind you as you enter.')
 	print('You notice that there is only one button in the elevator.')
@@ -2193,7 +2181,7 @@ def caveElevator():
 			print("Invald Input.")
 
 def caveElevatorMoving():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('caveElevatorMoving\n')
 	print('You pressed the button to go down.')
 	print('The elevator jolts. It starts its adventure down.')
@@ -2204,10 +2192,7 @@ def caveElevatorMoving():
 	while not valid:
 		pass
 
-
 # CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator 
-
-
 
 #Cave Room Rooms continued cave1e, cave2e, cave3e, cave4e, cave5e, cave6e, cave7e, cave8e, cave9e, cave10e, cave11e, cave1s, cave3s, cave2s
 
@@ -2228,7 +2213,6 @@ def caveElevatorMoving():
 #  ---------------------
 # MAZE
 
-
 #
 # ROOM 4 START
 #
@@ -2242,7 +2226,7 @@ def caveElevatorMoving():
 #--------- + ---------
 
 def holder():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('holder\n')
 	print('Movable directions: North, South')
 	valid = False
@@ -2277,7 +2261,7 @@ def holder():
 			print("Invald Input.")
 
 def middleRoom():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('middleRoom\n')
 	print('You are standing on the rubble from when you fell through the floor.')
 	print('North of you is a window looking out into a city.')
@@ -2318,7 +2302,7 @@ def middleRoom():
 			print("Invald Input.")
 
 def leftHallway1():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('leftHallway1\n')
 	print('You seem to be in a very nice office building.')
 	print('A door is to your north.')
@@ -2355,7 +2339,7 @@ def leftHallway1():
 			print("Invald Input.")
 
 def leftHallway2():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('leftHallway2\n')
 	print('On the wall there is a empty frame. It looks like something was riped from it.')
 	print('Movable directions: East, West')
@@ -2391,7 +2375,7 @@ def leftHallway2():
 			print("Invald Input.")
 
 def leftHallway3():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('leftHallway3\n')
 	print('A door is to your north.')
 	print('Movable directions: North, East')
@@ -2427,7 +2411,7 @@ def leftHallway3():
 			print("Invald Input.")
 
 def leftRoom1():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('leftRoom1\n')
 	if info.__leverl1 == False:
 		print(f"There is a lever in the middle of the room. There is a red light by it.")
@@ -2470,7 +2454,7 @@ def leftRoom1():
 			print("Invald Input.")
 
 def leftRoom2():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('leftRoom2\n')
 	print('There are some windows that look out to the city. That\'s wierd not a single other buildings have lights on.')
 	if info.__leverl2 == False:
@@ -2514,7 +2498,7 @@ def leftRoom2():
 			print("Invald Input.")
 
 def rightRoom1():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('rightRoom1\n')
 	print('There are some windows on the wall.')
 	print('There are cars on the road but not a single one is moving.')
@@ -2559,7 +2543,7 @@ def rightRoom1():
 			print("Invald Input.")
 
 def rightRoom2():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('rightRoom2\n')
 	print('One of the windows is broken. You should stay clear of it.')
 	if info.__leverr2 == False:
@@ -2603,7 +2587,7 @@ def rightRoom2():
 			print("Invald Input.")
 
 def rightHallway1():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('rightHallway1\n')
 	print('A door is to your north.')
 	print('The carpet here is riped to shreds.')
@@ -2638,7 +2622,7 @@ def rightHallway1():
 				""",rightHallway1)
 
 def rightHallway2():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('rightHallway2\n')
 	print('This room seems to be really ripped upped.')
 	print('Movable directions: East, West')
@@ -2672,7 +2656,7 @@ def rightHallway2():
 				""",rightHallway2)
 
 def rightHallway3():
-	print("\n"*2)
+	print("\n"*50)
 	debugRun('rightHallway3\n')
 	print('A door is to your north.')
 	print('The East wall is missing and you can see the city below.')
@@ -2706,16 +2690,217 @@ def rightHallway3():
 		--------- + ---------
 				""",rightHallway3)
 
-
 #
 # ROOM 4 END
 #
 
+#
+# Maybe Room 5 Start
+#
 
+# MAP ROOM 5
 
+#    -end-
+#    |+C+|
+#    | * |
+#    |++C|
+#    | * |
+#    |++C|
+#    | * |
+#    |c++|
+#    | * |
+#    |++c|
+#    | * |
+#    |+c+|
+#    | * |
+#    -strt
 
+def area1r5():
+	print("\n"*50)
+	debugRun('area1r5\n')
+	print(f'EDA: Now it is time to test your smarts.')
+	print(f"EDA: In front of you stand three doors. Solve the problem and choose the matching door.")
+	print(f'Problem: You are stuck in a room with three doors. Each door has something dangerous behind it.')
+	print(f'Problem: Door 1 has a large fire behind it.')
+	print(f'Problem: Door 2 has a lion that has not been fed for years.')
+	print(f'Problem: Door 3 leads you to the bottom of the ocean.')
+	valid = False
+	while not valid:
+		option = input(f"Enter what number door you want to enter.")
+		if option == (1, 'Door 1', 'door 1'):
+			print('You open the door and walk into the fire.')
+			print('You catch on fire and die.')
+			r5tryagain()
+		elif option == (2, 'Door 2', 'door 2'):
+			print(f'EDA: Correct answer {playerName}. The lions havn\'t had food for years meaning its dead.')
+			area2r5()
+		elif option in (3, 'Door 3', 'door 3'):
+			print(f'You open the door and step into the water.')
+			print(f'The pressure of the water crushes you.')
+			r5tryagain()
+		else:
+			print('That does not work.')
 
+def area2r5():
+	print("\n"*50)
+	debugRun('area2r5\n')
+	print(f'Problem: Now for some math. 2+3-5+2-5/5 = ?. Solve for the question mark.')
+	print(f'Problem: Door 1 is -3/5')
+	print(f'Problem: Door 2 is 0')
+	print(f'Problem: Door 3 is 1')
+	valid = False
+	while not valid:
+		option = input(f"Enter what number door you want to enter.")
+		if option == (1, 'Door 1', 'door 1'):
+			print('You open and walk into the door.')
+			print('The door closes behind you and the floor disapears.')
+			print('You fall forever.')
+			r5tryagain()
+		elif option == (2, 'Door 2', 'door 2'):
+			print('You open and walk into the room.')
+			print('The walls start closing in and you get crushed.')
+			r5tryagain()
+		elif option in (3, 'Door 3', 'door 3'):
+			print(f'You open and walk into the room.')
+			print(f'EDA: Good job. You have passed 1 of the 2 math sections.')
+			area3r5()
+		else:
+			print('That does not work.')
 
+def area3r5():
+	print("\n"*50)
+	debugRun('area3r5\n')
+	print(f'Problem: What is 35% of 50')
+	print(f'Problem: Door 1 is 17.5')
+	print(f'Problem: Door 2 is 17')
+	print(f'Problem: Door 3 is 16.5')
+	valid = False
+	while not valid:
+		option = input(f"Enter what number door you want to enter.")
+		if option == (1, 'Door 1', 'door 1'):
+			print('You open and walk into the door.')
+			print('EDA: Good job user. Now for another problem.')
+			area4r5()
+		elif option == (2, 'Door 2', 'door 2'):
+			print('You open and walk into the room.')
+			print('A giant number 17 eats you.')
+			r5tryagain()
+		elif option in (3, 'Door 3', 'door 3'):
+			print(f'You open and walk into the room.')
+			print(f'16 giant anvils fall onto your head.')
+			r5tryagain()
+		else:
+			print('That does not work.')
+
+def area4r5():
+	print("\n"*50)
+	debugRun('area2r5\n')
+	print(f'Problem: To print something to the console in javascript you would type ...')
+	print(f'Problem: Door 1 is print()')
+	print(f'Problem: Door 2 is console();')
+	print(f'Problem: Door 3 is console.log();')
+	valid = False
+	while not valid:
+		option = input(f"Enter what number door you want to enter.")
+		if option == (1, 'Door 1', 'door 1'):
+			print('You open and walk into the door.')
+			print('You fall into a printer and the mechanical parts crush you.')
+			r5tryagain()
+		elif option == (2, 'Door 2', 'door 2'):
+			print('You open and walk into the room.')
+			print('The door shuts behind you and you cannot see.')
+			print('You walk to a wall and start to follow it.')
+			print('You keep finding corners and following the wall but you can\'t seem to find the way out')
+			r5tryagain()
+		elif option in (3, 'Door 3', 'door 3'):
+			print(f'You open and walk into the room.')
+			print(f'EDA: Amazing job {playerName}. Now for another puzzle.')
+			area5r5()
+		else:
+			print('That does not work.')
+
+def area5r5():
+	print("\n"*50)
+	debugRun('area2r5\n')
+	print(f'Problem: Who is the robot talking to you?')
+	print(f'Problem: Door 1 is EAD')
+	print(f'Problem: Door 2 is AED')
+	print(f'Problem: Door 3 is EDA')
+	valid = False
+	while not valid:
+		option = input(f"Enter what number door you want to enter.")
+		if option == (1, 'Door 1', 'door 1'):
+			print('You open and walk into the door.')
+			print('EDA: How dare you forget my name I will make you suffer.')
+			r5tryagain()
+		elif option == (2, 'Door 2', 'door 2'):
+			print('You open and walk into the room.')
+			print('EDA: I am offened my name does not even start with a A.')
+			print('The floor disapears and you fall to your death.')
+			r5tryagain()
+		elif option in (3, 'Door 3', 'door 3'):
+			print(f'You open and walk into the room.')
+			print(f'EDA: Good you remembered my name.')
+			area6r5()
+		else:
+			print('That does not work.')
+
+def area6r5():
+	print("\n"*50)
+	debugRun('area2r5\n')
+	print(f'Problem: Final problem. Who are you?')
+	print(f'Problem: Door 1 is I don\'t know.')
+	print(f'Problem: Door 2 is Nobody.')
+	print(f'Problem: Door 3 is A rich billionare.')
+	valid = False
+	while not valid:
+		option = input(f"Enter what number door you want to enter.")
+		if option == (1, 'Door 1', 'door 1'):
+			print('You open and walk into the door.')
+			print('You fall to your immediate doom.')
+			r5tryagain()
+		elif option == (2, 'Door 2', 'door 2'):
+			print('Before you can get to the door to open it the floor shifts and breaks.')
+			print('You fall 3 floors before you land on top on a soft bed.')
+			pass
+		elif option in (3, 'Door 3', 'door 3'):
+			print(f'You open and walk into the room.')
+			print(f'EDA: You are not the rich billionare, they are all gone.')
+			r5tryagain()
+		else:
+			print('That does not work.')
+
+def r5tryagain():
+	print('You died.')
+	player = input(f'Do you want to continue. (y/n)')
+	valid = False
+	while valid == False:
+		if player == 'y':
+			print('You selected to continue. Restarting room 5.')
+			area1r5()
+		elif player == 'n':
+			print('You have selected to not continue.')
+			player = input(f'Are you sure you want to quit? (y/n)')
+			while valid == False:
+				if player == 'y':
+					gamelose('You quit.')
+				elif player == 'n':
+					print('Restarting room 5.')
+				else:
+					print('Invalid Arguments')
+		else:
+			print('Invalid Arguments')
+#
+# Maybe Room 5 End
+#
+
+#
+# Bottom Levels start 
+#
+
+#
+# Bottom Levels end
+#
 
 def creatorNameCreating():
 	ran = random.randrange(0,len(creatorFirstNameList))
@@ -2738,7 +2923,6 @@ class informationToSave(object):
 		self.__leverl2 = False
 		self.__leverr1 = False
 		self.__leverr2 = False
-
 
 	def __str__(self):
 		printer = f'This is some saved data:'
@@ -2821,9 +3005,9 @@ creatorName = creatorNameCreating()
 playerName = f"contender#{random.randrange(1001,9999)}"
 
 def debugRun(area):
-	global room 
+	global room
 	room = area
-	if output == 5:
+	if output == "5":
 		print(area)
 		return
 	else:
@@ -2864,7 +3048,7 @@ def loadFromFile():
 #Room 2 rooms mapR2, hallWayR2, lockedDoorR2, hallWay2R2, doorR2, keyR2
 #Room 3 Rooms startR3, largeHallway1R3, longhallway1R3, longhallway2R3, longhallway3R3, topRoom1R3, topRoom2R3, topRoom3R3, bottomRoom1R3, bottomRoom2R3, bottomRoom3R3
 #Cave Room Rooms holder, cave1, cave2, cave3, cave4, cave5, cave1n, cave2n, cave3n, cave4n, cave5n, cave6n, cave7n, cave8n, cave9n, cave10n, cave11nGenerator, small_paper
-                                                                                                                                                                                                                                                                                                                   #Cave Room Rooms continued cave1e, cave2e, cave3e, cave4e, cave5e, cave6e, cave7e, cave8e, cave9e, cave10e, cave11e, cave1s, cave3s, cave2s
+#Cave Room Rooms continued cave1e, cave2e, cave3e, cave4e, cave5e, cave6e, cave7e, cave8e, cave9e, cave10e, cave11e, cave1s, cave3s, cave2s
 
 function_dict = {'start\n':start, 'keyR1\n':keyR1, 'doorR1\n':doorR1, 'fillerR1\n':fillerR1, 
 		 		'mapR2\n':mapR2, 'hallWayR2\n':hallWayR2, 'lockedDoorR2\n':lockedDoorR2, 'hallWay2R2\n':hallWay2R2, 'doorR2\n':doorR2, 'keyR2\n':keyR2,
@@ -2876,6 +3060,3 @@ function_dict = {'start\n':start, 'keyR1\n':keyR1, 'doorR1\n':doorR1, 'fillerR1\
 info = informationToSave()
 
 welcome()
-
-
-
