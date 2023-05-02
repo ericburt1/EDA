@@ -2294,7 +2294,11 @@ def middleRoom():
 		elif player == "w":
 			leftHallway1()
 		elif player == "u":
-			print('No use.')
+			if info.__leverl1 == True and info.__leverl2 == True and info.__leverr1 == True and info.__leverr2 == True:
+				print('You activated all of the levers.')
+				print('When you open the door there is an elevator, you walk in it.')
+			else:
+				print('One or more of the levers is not activated.')
 		elif player == "g":
 			print('There is nothing to grab.')
 		elif player == "?":
@@ -2423,25 +2427,284 @@ def leftHallway3():
 			print("Invald Input.")
 
 def leftRoom1():
-	pass
+	print("\n"*2)
+	debugRun('leftRoom1\n')
+	if info.__leverl1 == False:
+		print(f"There is a lever in the middle of the room. There is a red light by it.")
+	elif info.__leverl1 == True:
+		print('You already pulled the lever in this room. There is a green light by the switch.')
+	print('Movable directions: North, East')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?im")
+		if player == "n":
+			randomWallmessage()
+		elif player == "e" :
+			randomWallmessage()
+		elif player == "s":
+			leftHallway1()
+		elif player == "w":
+			randomWallmessage()
+		elif player == "u":
+			if info.__leverl1 != True:
+				info.__leverl1 = True
+				print('You pull the lever and the red light switchs to green.')
+			else:
+				print('You already pulled the lever.')
+		elif player == "g":
+			print('There is nothing to grab.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+		---------   ---------
+		| * | X |   | * | * |
+		| + - + ----- + - + -
+		| * * * + * + * * * |
+		--------- + ---------
+				""",leftRoom1)
+		else:
+			print("Invald Input.")
 
 def leftRoom2():
-	pass
+	print("\n"*2)
+	debugRun('leftRoom2\n')
+	print('There are some windows that look out to the city. That\'s wierd not a single other buildings have lights on.')
+	if info.__leverl2 == False:
+		print(f"There is a lever in the middle of the room. There is a red light by it.")
+	elif info.__leverl2 == True:
+		print('You already pulled the lever in this room. There is a green light by the switch.')
+	print('Movable directions: North, East')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?im")
+		if player == "n":
+			randomWallmessage()
+		elif player == "e" :
+			randomWallmessage()
+		elif player == "s":
+			leftHallway3()
+		elif player == "w":
+			randomWallmessage()
+		elif player == "u":
+			if info.__leverl2 != True:
+				info.__leverl2 = True
+				print('You pull the lever and the red light switchs to green.')
+			else:
+				print('You already pulled the lever.')
+		elif player == "g":
+			print('There is nothing to grab.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+		---------   ---------
+		| X | * |   | * | * |
+		| + - + ----- + - + -
+		| * * * + * + * * * |
+		--------- + ---------
+				""",leftRoom2)
+		else:
+			print("Invald Input.")
 
 def rightRoom1():
-	pass
+	print("\n"*2)
+	debugRun('rightRoom1\n')
+	print('There are some windows on the wall.')
+	print('There are cars on the road but not a single one is moving.')
+	if info.__leverr1 == False:
+		print(f"There is a lever in the middle of the room. There is a red light by it.")
+	elif info.__leverr1 == True:
+		print('You already pulled the lever in this room. There is a green light by the switch.')
+	print('Movable directions: North, East')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?im")
+		if player == "n":
+			randomWallmessage()
+		elif player == "e" :
+			randomWallmessage()
+		elif player == "s":
+			rightHallway1()
+		elif player == "w":
+			randomWallmessage()
+		elif player == "u":
+			if info.__leverr1 != True:
+				info.__leverr1 = True
+				print('You pull the lever and the red light switchs to green.')
+			else:
+				print('You already pulled the lever.')
+		elif player == "g":
+			print('There is nothing to grab.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+		---------   ---------
+		| * | * |   | X | * |
+		| + - + ----- + - + -
+		| * * * + * + * * * |
+		--------- + ---------
+				""",rightRoom1)
+		else:
+			print("Invald Input.")
 
 def rightRoom2():
-	pass
+	print("\n"*2)
+	debugRun('rightRoom2\n')
+	print('One of the windows is broken. You should stay clear of it.')
+	if info.__leverr2 == False:
+		print(f"There is a lever in the middle of the room. There is a red light by it.")
+	elif info.__leverr2 == True:
+		print('You already pulled the lever in this room. There is a green light by the switch.')
+	print('Movable directions: North, East')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?im")
+		if player == "n":
+			randomWallmessage()
+		elif player == "e" :
+			randomWallmessage()
+		elif player == "s":
+			rightHallway3()
+		elif player == "w":
+			randomWallmessage()
+		elif player == "u":
+			if info.__leverr2 != True:
+				info.__leverr2 = True
+				print('You pull the lever and the red light switchs to green.')
+			else:
+				print('You already pulled the lever.')
+		elif player == "g":
+			print('There is nothing to grab.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+		---------   ---------
+		| * | * |   | * | X |
+		| + - + ----- + - + -
+		| * * * + * + * * * |
+		--------- + ---------
+				""",rightRoom2)
+		else:
+			print("Invald Input.")
 
 def rightHallway1():
-	pass
+	print("\n"*2)
+	debugRun('rightHallway1\n')
+	print('A door is to your north.')
+	print('The carpet here is riped to shreds.')
+	print('Movable directions: North, East, West')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?im")
+		if player == "n":
+			rightRoom1()
+		elif player == "e" :
+			rightHallway2()
+		elif player == "s":
+			randomWallmessage()
+		elif player == "w":
+			middleRoom()
+		elif player == "u":
+			print('No use.')
+		elif player == "g":
+			print('There is nothing to grab.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+		---------   ---------
+		| * | * |   | * | * |
+		| + - + ----- + - + -
+		| * * * + * + X * * |
+		--------- + ---------
+				""",rightHallway1)
 
 def rightHallway2():
-	pass
+	print("\n"*2)
+	debugRun('rightHallway2\n')
+	print('This room seems to be really ripped upped.')
+	print('Movable directions: East, West')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?im")
+		if player == "n":
+			randomWallmessage()
+		elif player == "e" :
+			rightHallway3()
+		elif player == "s":
+			randomWallmessage()
+		elif player == "w":
+			rightHallway2()
+		elif player == "u":
+			print('No use.')
+		elif player == "g":
+			print('There is nothing to grab.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+		---------   ---------
+		| * | * |   | * | * |
+		| + - + ----- + - + -
+		| * * * + * + * X * |
+		--------- + ---------
+				""",rightHallway2)
 
 def rightHallway3():
-	pass
+	print("\n"*2)
+	debugRun('rightHallway3\n')
+	print('A door is to your north.')
+	print('The East wall is missing and you can see the city below.')
+	print('Movable directions: North, West')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?im")
+		if player == "n":
+			rightRoom2()
+		elif player == "e" :
+			randomWallmessage()
+		elif player == "s":
+			randomWallmessage()
+		elif player == "w":
+			middleRoom()
+		elif player == "u":
+			print('No use.')
+		elif player == "g":
+			print('There is nothing to grab.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		elif player == "m":
+			if "map" in inventory:
+				displayMap("""
+		---------   ---------
+		| * | * |   | * | * |
+		| + - + ----- + - + -
+		| * * * + * + * * X |
+		--------- + ---------
+				""",rightHallway3)
 
 
 #
