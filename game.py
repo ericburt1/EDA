@@ -2908,11 +2908,59 @@ def r5tryagain():
 #
 
 #
-# Bottom Levels start 
+# ENDING 1 (Not the cave path)
 #
 
+def Ending1p1():
+	debugRun('start\n')
+	print(f'EDA: Good job {playerName}. You have made it to the end of your trials.')
+	print(f'EDA: How did you feel about the trials?')
+	valid = False
+	while valid == False:
+		option = input("""
+	1) I thought it was a interesting experience.
+	2) It was just OKAY.
+	3) That was horrible. Not fun or interesting.
+	4) Eh
+	""")
+		if option == 1:
+			print('EDA: I am glad that you found it interesting.')
+			print('EDA: I know something else that might interest you ...')
+			while valid == False:
+				option = input('''
+			1) Did I win some money?
+			2) Am I able to go home?
+			3) What is it?
+			''')
+				if option == 1:
+					pass
+				elif option == 2:
+					pass
+				elif option == 3:
+					pass
+				else:
+					print('That was not an option.')
+		elif option == 2:
+			pass
+		elif option == 3:
+			pass
+		elif option == 4:
+			pass
+		else:
+			print('That was not an option.')
+
+def endGame():
+	endingsFound = info.__EndingsFound
+	print('Good job. You finished the game.')
+	if info.__Ending1Found == True:
+		endingsFound +=1
+	if info.__Ending2Found == True:
+		endingsFound +=1
+	print(f'You have found {endingsFound} endings out of 2 endings.')
+	
+
 #
-# Bottom Levels end
+# ENDING 1
 #
 
 def creatorNameCreating():
@@ -2936,6 +2984,9 @@ class informationToSave(object):
 		self.__leverl2 = False
 		self.__leverr1 = False
 		self.__leverr2 = False
+		self.__EndingsFound = 0
+		self.__Ending1Found = False
+		self.__Ending2Found = False
 
 	def __str__(self):
 		printer = f'This is some saved data:'
@@ -2949,6 +3000,7 @@ class informationToSave(object):
 		printer += f'Lever L2 pulled {self.__leverl2}\n'
 		printer += f'Lever R1 pulled {self.__leverr1}\n'
 		printer += f'Lever R2 pulled {self.__leverr2}\n'
+		printer += f'You have found {self.__EndingsFound} out of 2 endings. Ending 1 = {self.__Ending1Found}. Ending 2 = {self.__Ending2Found}'
 		return printer
 
 	@property
