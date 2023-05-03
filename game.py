@@ -300,8 +300,9 @@ def fillerR1():
 #
 
 def displayMap(mapp,area):
-	
-	print(f"""
+	valid = False
+	while valid != True:
+		print(f"""
 	Key:
 	X is player (if it takes up more than one space then you are in a large room)
 	|, --- are walls
@@ -311,8 +312,13 @@ def displayMap(mapp,area):
 	
 	MAP:
 	{mapp}
-	""")
-	area()
+		""")
+		option = input('To continue back to game type \'y\'\n')
+		if option == 'y':
+			area()
+		else:
+			pass
+
 
 #Map for Room2
 
@@ -820,11 +826,17 @@ def longhallway3R3():
 			longhallway2R3()
 		elif player == "u":
 			if 'keycard' in inventory:
-				print('You swipe the key card and you hear a beep sound. A light turns green and the door unlocks.')
-				print('You walk through and you are in yet another room.')
-				print('You hear a cracking below you and you fall through the ground into a new room.')
-				print('EDA: Good job user you passed Room 3. See if you can get passed the final room.')
-				middleRoom()
+				ert = False
+				while ert != True:
+					print('You swipe the key card and you hear a beep sound. A light turns green and the door unlocks.')
+					print('You walk through and you are in yet another room.')
+					print('You hear a cracking below you and you fall through the ground into a new room.')
+					print('EDA: Good job user you passed Room 3. See if you can get passed the final room.')
+					option = input('To contonue type \'y\'\n')
+					if option.lower() == 'y':
+						middleRoom()
+					else:
+						print('Type \'y\' to continue.')
 		elif player == "g":
 			print("Nothing important looking to grab.")
 		elif player == "?":
@@ -2278,9 +2290,10 @@ def middleRoom():
 		elif player == "w":
 			leftHallway1()
 		elif player == "u":
-			if info.__leverl1 == True and info.__leverl2 == True and info.__leverr1 == True and info.__leverr2 == True:
+			if info.leverl1 == True and info.leverl2 == True and info.leverr1 == True and info.leverr2 == True:
 				print('You activated all of the levers.')
 				print('When you open the door there is an elevator, you walk in it.')
+				area1r5()
 			else:
 				print('One or more of the levers is not activated.')
 		elif player == "g":
@@ -2413,9 +2426,9 @@ def leftHallway3():
 def leftRoom1():
 	print("\n"*50)
 	debugRun('leftRoom1\n')
-	if info.__leverl1 == False:
+	if info.leverl1 == False:
 		print(f"There is a lever in the middle of the room. There is a red light by it.")
-	elif info.__leverl1 == True:
+	elif info.leverl1 == True:
 		print('You already pulled the lever in this room. There is a green light by the switch.')
 	print('Movable directions: North, East')
 	valid = False
@@ -2430,8 +2443,8 @@ def leftRoom1():
 		elif player == "w":
 			randomWallmessage()
 		elif player == "u":
-			if info.__leverl1 != True:
-				info.__leverl1 = True
+			if info.leverl1 != True:
+				info.leverl1 = True
 				print('You pull the lever and the red light switchs to green.')
 			else:
 				print('You already pulled the lever.')
@@ -2457,9 +2470,9 @@ def leftRoom2():
 	print("\n"*50)
 	debugRun('leftRoom2\n')
 	print('There are some windows that look out to the city. That\'s wierd not a single other buildings have lights on.')
-	if info.__leverl2 == False:
+	if info.leverl2 == False:
 		print(f"There is a lever in the middle of the room. There is a red light by it.")
-	elif info.__leverl2 == True:
+	elif info.leverl2 == True:
 		print('You already pulled the lever in this room. There is a green light by the switch.')
 	print('Movable directions: North, East')
 	valid = False
@@ -2474,8 +2487,8 @@ def leftRoom2():
 		elif player == "w":
 			randomWallmessage()
 		elif player == "u":
-			if info.__leverl2 != True:
-				info.__leverl2 = True
+			if info.leverl2 != True:
+				info.leverl2 = True
 				print('You pull the lever and the red light switchs to green.')
 			else:
 				print('You already pulled the lever.')
@@ -2502,9 +2515,9 @@ def rightRoom1():
 	debugRun('rightRoom1\n')
 	print('There are some windows on the wall.')
 	print('There are cars on the road but not a single one is moving.')
-	if info.__leverr1 == False:
+	if info.leverr1 == False:
 		print(f"There is a lever in the middle of the room. There is a red light by it.")
-	elif info.__leverr1 == True:
+	elif info.leverr1 == True:
 		print('You already pulled the lever in this room. There is a green light by the switch.')
 	print('Movable directions: North, East')
 	valid = False
@@ -2519,8 +2532,8 @@ def rightRoom1():
 		elif player == "w":
 			randomWallmessage()
 		elif player == "u":
-			if info.__leverr1 != True:
-				info.__leverr1 = True
+			if info.leverr1 != True:
+				info.leverr1 = True
 				print('You pull the lever and the red light switchs to green.')
 			else:
 				print('You already pulled the lever.')
@@ -2546,9 +2559,9 @@ def rightRoom2():
 	print("\n"*50)
 	debugRun('rightRoom2\n')
 	print('One of the windows is broken. You should stay clear of it.')
-	if info.__leverr2 == False:
+	if info.leverr2 == False:
 		print(f"There is a lever in the middle of the room. There is a red light by it.")
-	elif info.__leverr2 == True:
+	elif info.leverr2 == True:
 		print('You already pulled the lever in this room. There is a green light by the switch.')
 	print('Movable directions: North, East')
 	valid = False
@@ -2563,8 +2576,8 @@ def rightRoom2():
 		elif player == "w":
 			randomWallmessage()
 		elif player == "u":
-			if info.__leverr2 != True:
-				info.__leverr2 = True
+			if info.leverr2 != True:
+				info.leverr2 = True
 				print('You pull the lever and the red light switchs to green.')
 			else:
 				print('You already pulled the lever.')
@@ -2939,6 +2952,23 @@ class informationToSave(object):
 		return printer
 
 	@property
+	def leverl1(self):
+		return self.__leverl1
+	
+	@property
+	def leverl2(self):
+		return self.__leverl2
+
+	@property
+	def leverr1(self):
+		return self.__leverr1
+
+	@property
+	def leverr2(self):
+		return self.__leverr2
+	
+
+	@property
 	def team(self):
 		return self.__team
 	
@@ -2962,6 +2992,26 @@ class informationToSave(object):
 	def actionsR3(self):
 		return self.__actionsR3
 	
+	@leverl1.setter
+	def leverl1(self, newLever):
+		if self.__leverl1 != True:
+			self.__leverl1 = newLever
+
+	@leverl2.setter
+	def leverl2(self,newLever):
+		if self.__lever21 != True:
+			self.__lever21 = newLever
+
+	@leverr1.setter
+	def leverr1(self, newLever):
+		if self.__leverr1 != True:
+			self.__leverr1 = newLever
+
+	@leverr2.setter
+	def leverr2(self, newLever):
+		if self.__leverr2 != True:
+			self.__leverr2 = newLever
+
 	@team.setter
 	def team(self, newTeam):
 		if newTeam == 1:
@@ -3055,7 +3105,8 @@ function_dict = {'start\n':start, 'keyR1\n':keyR1, 'doorR1\n':doorR1, 'fillerR1\
 				'startR3\n':startR3, 'largeHallway1R3\n':largeHallway1R3, 'longhallway1R3\n':longhallway1R3, 'longhallway2R3\n':longhallway2R3, 'longhallway3R3\n':longhallway3R3, 'topRoom1R3\n':topRoom1R3, 'topRoom2R3\n':topRoom2R3, 'topRoom3R3\n':topRoom3R3, 'bottomRoom1R3\n':bottomRoom1R3, 'bottomRoom2R3\n':bottomRoom2R3, 'bottomRoom3R3\n':bottomRoom3R3,
 				'cave1\n':cave1, 'cave2\n':cave2, 'cave3\n':cave3, 'cave4\n':cave4, 'cave5\n':mapR2, 'cave1n\n':cave1n, 'cave2n\n':cave2n, 'cave3n\n':cave3n, 'cave4n\n':cave4n, 'cave5n\n':cave5n, 'cave6n\n':cave6n, 'cave7n\n':cave7n, 'cave8n\n':cave8n, 'cave9n\n':cave9n, 'cave10n\n':cave10n, 'cave11nGenerator\n':cave11nGenerator, 'small_paper\n':small_paper, 'cave1e\n':cave1e, 'cave2e\n':cave2e, 'cave3e\n':cave3e, 'cave4e\n':cave4e, 'cave5e\n':cave5e, 'cave6e\n':cave6e, 'cave7e\n':cave7e, 'cave8e\n':cave8e, 'cave9e\n':cave9e, 'cave10e\n':cave10e, 'cave11e\n':cave11e, 'cave1s\n':cave1s, 'cave2s\n':cave2s, 'cave3s\n':cave3s, 
 				'caveElevator\n' : caveElevator, 'caveElevatorMoving\n': caveElevatorMoving,
-				'middleRoom': middleRoom, 'leftHallway1\n': leftHallway1, 'leftHallway2\n': leftHallway2, 'leftHallway3\n': leftHallway3, 'leftRoom1\n': leftRoom1, 'leftRoom2\n': leftRoom2, 'rigthHallway1\n': rightHallway1, 'rigthHallway2\n': rightHallway2, 'rigthHallway3\n': rightHallway3, 'rightRoom1\n': rightRoom1, 'rightRoom2\n': rightRoom2,
+				'middleRoom\n': middleRoom, 'leftHallway1\n': leftHallway1, 'leftHallway2\n': leftHallway2, 'leftHallway3\n': leftHallway3, 'leftRoom1\n': leftRoom1, 'leftRoom2\n': leftRoom2, 'rigthHallway1\n': rightHallway1, 'rigthHallway2\n': rightHallway2, 'rigthHallway3\n': rightHallway3, 'rightRoom1\n': rightRoom1, 'rightRoom2\n': rightRoom2,
+				'area1r5\n': area1r5, 'area2r5\n': area2r5, 'area3r5\n': area3r5, 'area4r5\n': area4r5, 'area5r5\n': area5r5, 'area6r5': area6r5,  
 				}
 info = informationToSave()
 
