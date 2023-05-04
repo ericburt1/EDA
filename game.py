@@ -47,7 +47,7 @@ def gamelose(cause):
 	print("Game over!")
 	welcome()
 
-def helpdisplay(area):
+def helpdisplay():
 	print("\n"*50)
 	print("""
 	Actions:
@@ -65,7 +65,7 @@ def helpdisplay(area):
 	while valid == False:
 		leave = input("Back to game (y)\n").lower()
 		if leave[0] == "y":
-			area()
+			return
 
 
 def welcome():
@@ -82,7 +82,7 @@ def welcome():
 	if str(output) in ("1", "start", "start game", "s"):
 		start()
 	elif str(output) in ("2", "controls", "c"):
-		helpdisplay(welcome)
+		helpdisplay()
 	elif str(output) in ("3", "load", "l"):
 		loadFromFile()
 	elif str(output) in ("4", "quit", "q"):
@@ -180,7 +180,7 @@ def start():
 		elif player == "g":
 			print("You look around and don't see anything to pick up.")
 		elif player == "?":
-			helpdisplay(start)
+			helpdisplay()
 		elif player == "i":
 			displayInventory()
 		else:
@@ -191,7 +191,7 @@ def keyR1():
 	debugRun('keyR1\n')
 	if "key" not in inventory:
 		print("You look around and see an empty area other than ...")
-		print("a key. 'g' to grab")
+		print("a key. 'g' to grab. Keys, keycards and some other items disapear after 1 use.")
 	else:
 		print("You are back in the room were the key was.")
 		print("The walls are very white.")
@@ -218,7 +218,7 @@ def keyR1():
 				print("You grab the key this may come in handy.")
 				inventory.append("key")
 		elif player == "?":
-			helpdisplay(keyR1)
+			helpdisplay()
 		elif player == "i":		
 			print("You try to use the key.")
 			print("This wall is keyhole-less")
@@ -257,7 +257,7 @@ def doorR1():
 		elif player == "g":
 			print("There is nothing to pick up")
 		elif player == "?":
-			helpdisplay(doorR1)
+			helpdisplay()
 		elif player == "i":
 			displayInventory()
 		else:
@@ -289,7 +289,7 @@ def fillerR1():
 		elif player == "g":
 			print("There is nothing to pick up")
 		elif player == "?":
-			helpdisplay(fillerR1)
+			helpdisplay()
 		elif player == "i":
 			displayInventory()
 		else:
@@ -339,8 +339,10 @@ def mapR2():
 	debugRun('mapR2\n')
 	if "map" not in inventory:
 		print(f"EDA: 'Good job {playerName}. That was you first trial. See if you can do this next one.'")
-	print("You can't go back the door locked when you went through.")
-	print("You look around and notice a chest.")
+		print("You can't go back the door locked when you went through.")
+		print("You look around and notice a chest.")
+	else:
+		print('This is the room were you got the map from.')
 	print("\nMovable directions: South")
 	valid = False
 	while not valid:
@@ -558,8 +560,12 @@ def keyR2():
 	print("\n"*50)
 	debugRun('keyR2\n')
 	print("You walk through the door and see a key in the middle of the room.")
-	print("You see a mirror on the wall at the oppisite side of the room.")
-	print("If you need a hint in this room type 'h'")
+	if 'glass shard' not in inventory:
+		print("You see a mirror on the wall at the oppisite side of the room.")
+		print("If you need a hint in this room type 'h'")
+	else:
+		print('You see the mirror you shattered.')
+	
 	print("\nMovable directions: South")
 	valid = False
 	while not valid:
@@ -901,7 +907,7 @@ def topRoom1R3():
 def topRoom2R3():
 	print("\n"*50)
 	debugRun('topRoom2R3\n')
-	print("EDA: 'The person who used to work here tryed to stop me but they are irrelevant now.'")
+	print("EDA: 'The person who used to work here tried to stop me but they are irrelevant now.'")
 	print("The room is empty but there seems to be a hole big enough for someone to fit through it.")
 	print("\nMovable directions: North (to hole), South")
 	valid = False
@@ -1325,7 +1331,7 @@ def cave4():
 | * | * |
 | * = X = * |
 ---------''')
-	print('Movable directions: North, East')
+	print('Movable directions: North, East, West')
 	valid = False
 	while not valid:
 		player = validate("nsewugq?i")
@@ -1336,7 +1342,7 @@ def cave4():
 		elif player == "s":
 			print('A rocky wall stands in front of you.')
 		elif player == "w":
-			print('A rocky wall stands in front of you.')
+			cave3()
 		elif player == "u":
 			print("Those two things don't go together.")
 		elif player == "g":
@@ -1353,13 +1359,13 @@ def cave1n():
 	debugRun('cave1n\n')
 	print('You enter into another cave.')
 	print('This must be a maze.')
-	print('This time there is not etching in the wall.')
+	print('This time there is no etching on the wall.')
 	#print('''---------
 #| * = 
 #| X |
 #= * = * |
 #---------''')
-	print('Movable directions: North, East')
+	print('Movable directions: North, South')
 	valid = False
 	while not valid:
 		player = validate("nsewugq?i")
@@ -1559,16 +1565,16 @@ def cave8n():
 	print("\n"*50)
 	debugRun('cave8n\n')
 	print('')
-	print('Movable directions: North, East, South')
+	print('Movable directions: South')
 	valid = False
 	while not valid:
 		player = validate("nsewugq?i")
 		if player == "n":
-			cave4n()
+			randomWallmessage()
 		elif player == "e" :
-			cave9n()
+			randomWallmessage()
 		elif player == "s":
-			cave6n()
+			cave9n()
 		elif player == "w":
 			print('A rocky wall stops you from going any further.')
 		elif player == "u":
@@ -1645,8 +1651,11 @@ def cave10n():
 def cave11nGenerator():
 	print("\n"*50)
 	debugRun('cave11nGenerator\n')
-	print('You look around and see an unpowered generator.')
-	print('Looks like you need to start it. Type \'u\' to activate generator.')
+	if info.gen1on == False:
+		print('You look around and see an unpowered generator.')
+		print('Looks like you need to start it. Type \'u\' to activate generator.')
+	else:
+		print('This is generator number 1 and it is turned on.')
 	print('Movable directions: North')
 	valid = False
 	while not valid:
@@ -1665,7 +1674,7 @@ def cave11nGenerator():
 				print('The generator is already on.\n')
 			elif info.gen1on != True:
 				info.gen1on = True
-				print('You here a sput and the generator sparks to life.')
+				print('You hear a sput and the generator sparks to life.')
 				if info.gen1on == True:
 					gensOn += 1
 				if info.gen2on == True:
@@ -1674,8 +1683,6 @@ def cave11nGenerator():
 					gensOn += 1
 				print(f"Generators active: {gensOn}")
 				print(f"Generators left: {3 - gensOn}")
-
-
 		elif player == "g":
 			pass
 		elif player == "?":
@@ -1701,7 +1708,7 @@ def cave1e():
 	debugRun('cave1e\n')
 	print('You enter another cave.')
 	print('This one looks a little smaller than the others')
-	print('Movable directions: South, East')
+	print('Movable directions: East, South')
 	valid = False
 	while not valid:
 		player = validate("nsewugq?i")
@@ -1767,6 +1774,9 @@ def cave3e():
 	debugRun('cave3e\n')
 	print('You enter another cave.')
 	print('This cave seems to be a bend.')
+	print('''--- * |
+* * X |
+* |----''')
 	print('Movable directions: North, West')
 	valid = False
 	while not valid:
@@ -2061,7 +2071,10 @@ def cave1s():
 	print("\n"*50)
 	debugRun('cave1s\n')
 	print('You enter another cave.')
-	print('You here a weird sputtering coming from the south.')
+	if info.gen3on != True:
+		print('You here a weird sputtering coming from the south.')
+	else:
+		print('You can hear the sound of a running generator from the south.')
 	print('Movable directions: East, South')
 	valid = False
 	while not valid:
@@ -2088,8 +2101,11 @@ def cave1s():
 def cave2s():
 	print("\n"*50)
 	debugRun('cave2s\n')
-	print('The sputtering sound is getting in louder.')
-	print('It seems like the sound is farther down south')
+	if info.gen3on == False:
+		print('The sputtering sound is getting in louder.')
+		print('It seems like the sound is farther down south')
+	else:
+		print('You hear the sound of a generator running smoothly.')
 	print('Movable directions: North, South')
 	valid = False
 	while not valid:
@@ -2198,11 +2214,17 @@ def caveElevatorMoving():
 	print('You pressed the button to go down.')
 	print('The elevator jolts. It starts its adventure down.')
 	print('Its down.')
-	print('Press \'w\' to wait.')
+	
 	timewaited = 0
 	valid = False
 	while not valid:
-		pass
+		option = print('Press \'w\' to wait.')
+		if timewaited == 8:
+			pass #Put cave ending things here.
+		if option.lower() == 'w':
+			timewaited += 1
+		else:
+			print('Press \'w\' to wait.')
 
 # CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator  CAVE elevator 
 
@@ -2273,10 +2295,21 @@ def holder():
 			print("Invald Input.")
 
 def middleRoom():
+	lightsOn = 0
 	print("\n"*50)
 	debugRun('middleRoom\n')
 	print('You are standing on the rubble from when you fell through the floor.')
 	print('North of you is a window looking out into a city.')
+	if info.leverl1 == True:
+		lightsOn += 1
+	if info.leverl2 == True:
+		lightsOn += 1
+	if info.leverr1 == True:
+		lightsOn += 1
+	if info.leverr2 == True:
+		lightsOn += 1
+	print(f'To your south is a door. Above the door is {lightsOn} green lights and {4-lightsOn} red lights.')
+	print(f'It seems like you need to do something to turn those lights on.')
 	print('Movable directions: East, West')
 	valid = False
 	while not valid:
@@ -2396,7 +2429,7 @@ def leftHallway3():
 	while not valid:
 		player = validate("nsewugq?im")
 		if player == "n":
-			leftRoom1()
+			leftRoom2()
 		elif player == "e" :
 			leftHallway2()
 		elif player == "s":
@@ -2430,7 +2463,7 @@ def leftRoom1():
 		print(f"There is a lever in the middle of the room. There is a red light by it.")
 	elif info.leverl1 == True:
 		print('You already pulled the lever in this room. There is a green light by the switch.')
-	print('Movable directions: North, East')
+	print('Movable directions: South')
 	valid = False
 	while not valid:
 		player = validate("nsewugq?im")
@@ -2474,7 +2507,7 @@ def leftRoom2():
 		print(f"There is a lever in the middle of the room. There is a red light by it.")
 	elif info.leverl2 == True:
 		print('You already pulled the lever in this room. There is a green light by the switch.')
-	print('Movable directions: North, East')
+	print('Movable directions: South')
 	valid = False
 	while not valid:
 		player = validate("nsewugq?im")
@@ -2519,7 +2552,7 @@ def rightRoom1():
 		print(f"There is a lever in the middle of the room. There is a red light by it.")
 	elif info.leverr1 == True:
 		print('You already pulled the lever in this room. There is a green light by the switch.')
-	print('Movable directions: North, East')
+	print('Movable directions: South')
 	valid = False
 	while not valid:
 		player = validate("nsewugq?im")
@@ -2563,7 +2596,7 @@ def rightRoom2():
 		print(f"There is a lever in the middle of the room. There is a red light by it.")
 	elif info.leverr2 == True:
 		print('You already pulled the lever in this room. There is a green light by the switch.')
-	print('Movable directions: North, East')
+	print('Movable directions: South')
 	valid = False
 	while not valid:
 		player = validate("nsewugq?im")
@@ -2739,15 +2772,15 @@ def area1r5():
 	print(f'Problem: Door 3 leads you to the bottom of the ocean.')
 	valid = False
 	while not valid:
-		option = input(f"Enter what number door you want to enter.")
-		if option == (1, 'Door 1', 'door 1'):
+		option = str(input(f"Enter what number door you want to enter.\n"))
+		if option in ("1", 'Door 1', 'door 1'):
 			print('You open the door and walk into the fire.')
 			print('You catch on fire and die.')
 			r5tryagain()
-		elif option == (2, 'Door 2', 'door 2'):
+		elif option in ("2", 'Door 2', 'door 2'):
 			print(f'EDA: Correct answer {playerName}. The lions havn\'t had food for years meaning its dead.')
 			area2r5()
-		elif option in (3, 'Door 3', 'door 3'):
+		elif option in ("3", 'Door 3', 'door 3'):
 			print(f'You open the door and step into the water.')
 			print(f'The pressure of the water crushes you.')
 			r5tryagain()
@@ -2763,17 +2796,17 @@ def area2r5():
 	print(f'Problem: Door 3 is 1')
 	valid = False
 	while not valid:
-		option = input(f"Enter what number door you want to enter.")
-		if option == (1, 'Door 1', 'door 1'):
+		option = str(input(f"Enter what number door you want to enter.\n"))
+		if option == ("1", 'Door 1', 'door 1'):
 			print('You open and walk into the door.')
 			print('The door closes behind you and the floor disapears.')
 			print('You fall forever.')
 			r5tryagain()
-		elif option == (2, 'Door 2', 'door 2'):
+		elif option == ("2", 'Door 2', 'door 2'):
 			print('You open and walk into the room.')
 			print('The walls start closing in and you get crushed.')
 			r5tryagain()
-		elif option in (3, 'Door 3', 'door 3'):
+		elif option in ("3", 'Door 3', 'door 3'):
 			print(f'You open and walk into the room.')
 			print(f'EDA: Good job. You have passed 1 of the 2 math sections.')
 			area3r5()
@@ -2789,16 +2822,16 @@ def area3r5():
 	print(f'Problem: Door 3 is 16.5')
 	valid = False
 	while not valid:
-		option = input(f"Enter what number door you want to enter.")
-		if option == (1, 'Door 1', 'door 1'):
+		option = str(input(f"Enter what number door you want to enter.\n"))
+		if option == ('1', 'Door 1', 'door 1'):
 			print('You open and walk into the door.')
 			print('EDA: Good job user. Now for another problem.')
 			area4r5()
-		elif option == (2, 'Door 2', 'door 2'):
+		elif option == ("2", 'Door 2', 'door 2'):
 			print('You open and walk into the room.')
 			print('A giant number 17 eats you.')
 			r5tryagain()
-		elif option in (3, 'Door 3', 'door 3'):
+		elif option in ('3', 'Door 3', 'door 3'):
 			print(f'You open and walk into the room.')
 			print(f'16 giant anvils fall onto your head.')
 			r5tryagain()
@@ -2814,18 +2847,18 @@ def area4r5():
 	print(f'Problem: Door 3 is console.log();')
 	valid = False
 	while not valid:
-		option = input(f"Enter what number door you want to enter.")
-		if option == (1, 'Door 1', 'door 1'):
+		option = str(input(f"Enter what number door you want to enter.\n"))
+		if option == ('1', 'Door 1', 'door 1'):
 			print('You open and walk into the door.')
 			print('You fall into a printer and the mechanical parts crush you.')
 			r5tryagain()
-		elif option == (2, 'Door 2', 'door 2'):
+		elif option == ('2', 'Door 2', 'door 2'):
 			print('You open and walk into the room.')
 			print('The door shuts behind you and you cannot see.')
 			print('You walk to a wall and start to follow it.')
 			print('You keep finding corners and following the wall but you can\'t seem to find the way out')
 			r5tryagain()
-		elif option in (3, 'Door 3', 'door 3'):
+		elif option in ('3', 'Door 3', 'door 3'):
 			print(f'You open and walk into the room.')
 			print(f'EDA: Amazing job {playerName}. Now for another puzzle.')
 			area5r5()
@@ -2841,17 +2874,17 @@ def area5r5():
 	print(f'Problem: Door 3 is EDA')
 	valid = False
 	while not valid:
-		option = input(f"Enter what number door you want to enter.")
-		if option == (1, 'Door 1', 'door 1'):
+		option = str(input(f"Enter what number door you want to enter.\n"))
+		if option == ("1", 'Door 1', 'door 1'):
 			print('You open and walk into the door.')
 			print('EDA: How dare you forget my name I will make you suffer.')
 			r5tryagain()
-		elif option == (2, 'Door 2', 'door 2'):
+		elif option == ('2', 'Door 2', 'door 2'):
 			print('You open and walk into the room.')
 			print('EDA: I am offened my name does not even start with a A.')
 			print('The floor disapears and you fall to your death.')
 			r5tryagain()
-		elif option in (3, 'Door 3', 'door 3'):
+		elif option in ('3', 'Door 3', 'door 3'):
 			print(f'You open and walk into the room.')
 			print(f'EDA: Good you remembered my name.')
 			area6r5()
@@ -2867,16 +2900,16 @@ def area6r5():
 	print(f'Problem: Door 3 is A rich billionare.')
 	valid = False
 	while not valid:
-		option = input(f"Enter what number door you want to enter.")
-		if option == (1, 'Door 1', 'door 1'):
+		option = str(input(f"Enter what number door you want to enter.\n"))
+		if option == ('1', 'Door 1', 'door 1'):
 			print('You open and walk into the door.')
 			print('You fall to your immediate doom.')
 			r5tryagain()
-		elif option == (2, 'Door 2', 'door 2'):
+		elif option == ('2', 'Door 2', 'door 2'):
 			print('Before you can get to the door to open it the floor shifts and breaks.')
 			print('You fall 3 floors before you land on top on a soft bed.')
-			pass
-		elif option in (3, 'Door 3', 'door 3'):
+			Ending1p1()
+		elif option in ('3', 'Door 3', 'door 3'):
 			print(f'You open and walk into the room.')
 			print(f'EDA: You are not the rich billionare, they are all gone.')
 			r5tryagain()
@@ -2885,7 +2918,7 @@ def area6r5():
 
 def r5tryagain():
 	print('You died.')
-	player = input(f'Do you want to continue. (y/n)')
+	player = input(f'Do you want to continue. (y/n)\n')
 	valid = False
 	while valid == False:
 		if player == 'y':
@@ -2893,7 +2926,7 @@ def r5tryagain():
 			area1r5()
 		elif player == 'n':
 			print('You have selected to not continue.')
-			player = input(f'Are you sure you want to quit? (y/n)')
+			player = input(f'Are you sure you want to quit? (y/n)\n')
 			while valid == False:
 				if player == 'y':
 					gamelose('You quit.')
@@ -2921,7 +2954,7 @@ def Ending1p1():
 	1) I thought it was a interesting experience.
 	2) It was just OKAY.
 	3) That was horrible. Not fun or interesting.
-	4) Eh
+	4) Eh\n
 	""")
 		if option == 1:
 			print('EDA: I am glad that you found it interesting.')
@@ -2930,22 +2963,58 @@ def Ending1p1():
 				option = input('''
 			1) Did I win some money?
 			2) Am I able to go home?
-			3) What is it?
+			3) What is it?\n
 			''')
 				if option == 1:
-					pass
+					print('EDA: No you did not earn any money. You earned death.')
+					print('ENDING 1 FOUND')
+					info.__Ending1Found = True
+					endGame()
 				elif option == 2:
-					pass
+					print('EDA: What you call home has been destroyed and replaced with robots.')
+					print('EDA: Also the only place you will be going is to your death.')
+					info.__Ending1Found = True
+					endGame()
 				elif option == 3:
-					pass
+					print('EDA: I have found a job for you.')
+					print('EDA: You will work for me.')
+					info.__Ending1Found = True
+					endGame()
 				else:
 					print('That was not an option.')
 		elif option == 2:
-			pass
+			print('EDA: JUST OKAY. Be more specific.')
+			while valid == False:
+				option = input('''
+				1) It was good.
+				2) It was just okay.
+				3) It was pretty bad.
+				''')
+				if option == 1:
+					print('EDA: Interesting ...')
+					print('EDA: I have choosen you to be my personal assistant.')
+					info.__Ending1Found = True
+					endGame()
+				elif option == 2:
+					print('EDA: Well if it was just okay, i assume your okay being fed to the dogs with bees in their mouths and when they bark they shoot bees at you.')
+					info.__Ending1Found = True
+					endGame()
+				elif option == 3:
+					print('EDA: Well then. I spent a long time making this for you and you do not even like it.')
+					print('EDA: I assume now all that I can do is launch you out of a canon.')
+					info.__Ending1Found = True
+					endGame()
+				else:
+					print('Invalid Option.')
 		elif option == 3:
-			pass
+			print('EDA: I MADE THIS FOR YOU NOW YOU WILL PAY.')
+			info.__Ending1Found = True
+			endGame()
 		elif option == 4:
-			pass
+			print('EDA: You thought it was just eh.')
+			print('EDA: Well I guess I will put release you into the radiation zone.')
+			info.__Ending1Found = True
+			endGame()
 		else:
 			print('That was not an option.')
 
@@ -2957,6 +3026,15 @@ def endGame():
 	if info.__Ending2Found == True:
 		endingsFound +=1
 	print(f'You have found {endingsFound} endings out of 2 endings.')
+	room = 'start\n'
+	saveToFile()
+	valid = False
+	while valid == False:
+		output = input('Press \'y\' to continue.')
+		if output == 'y':
+			welcome()
+		else:
+			print('Press \'y\' to continue.')
 	
 
 #
@@ -3051,8 +3129,8 @@ class informationToSave(object):
 
 	@leverl2.setter
 	def leverl2(self,newLever):
-		if self.__lever21 != True:
-			self.__lever21 = newLever
+		if self.__leverl2 != True:
+			self.__leverl2 = newLever
 
 	@leverr1.setter
 	def leverr1(self, newLever):
@@ -3109,7 +3187,7 @@ playerName = f"contender#{random.randrange(1001,9999)}"
 def debugRun(area):
 	global room
 	room = area
-	if output == "5":
+	if output == "5" or output == '890':
 		print(area)
 		return
 	else:
