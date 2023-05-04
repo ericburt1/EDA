@@ -3082,7 +3082,7 @@ def Ending1p1():
 
 def endGame():
 	endingsFound = 0
-	print('Good job. You finished the game.')M
+	print('Good job. You finished the game.')
 	if info.Ending1Found == True:
 		endingsFound +=1
 	if info.EndingsFound == True:
