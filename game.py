@@ -108,7 +108,7 @@ def develop_testing():
 	elif area == "2":
 		keyR1()
 	elif area == "3":
-		Ending1p1()
+		caveElevator()
 	elif area == "4":
 		inventory.append('map')
 		mapR2()
@@ -689,12 +689,12 @@ def largeHallway1R3():
 	debugRun('largeHallway1R3\n')
 	if info.actionsR3 == 2:
 		print('You walk into the Large hallway and notice a little slot open at the south end of the room.')
-		if 'small cube' in inventory:
-			if 'medium cube' not in inventory:
-				print('This looks very similar to the cube from the last room. But this one more of a medium size.')
-				print('You grab the cube. It may come in handy later')
-			else:
-				print('You look at the spot were the medium cube used to be.')
+		if 'medium cube' not in inventory:
+			print('This looks very similar to the cube from the last room. But this one more of a medium size.')
+			print('You grab the cube. It may come in handy later')
+			inventory.append('medium cube')
+		else:
+			print('You look at the spot were the medium cube used to be.')
 	else:
 		print("You enter one long hallway")
 		print("There are some chairs and tables with decorations on the west and east side of the hallway.")
@@ -2231,14 +2231,20 @@ def caveElevatorMoving():
 	print('You pressed the button to go down.')
 	print('The elevator jolts. It starts its adventure down.')
 	print('Its down.')
-	
 	timewaited = 0
 	valid = False
 	while not valid:
-		option = print('Press \'w\' to wait.')
-		if timewaited == 8:
-			lowerFloorsE()
-		if option.lower() == 'w':
+		option = input('Press \'w\' to wait.\n')
+		if timewaited > 8:
+			ect = False
+			while ect == False:
+				print('The elevator stops and the doors open.')
+				opte = input('To continue type \'y\'\n').lower()
+				if opte != 'y':
+					print('Type \'y\' to continue')
+				else:
+					lowerFloorsE()
+		if option == 'w':
 			timewaited += 1
 		else:
 			print('Press \'w\' to wait.')
@@ -2249,6 +2255,7 @@ def caveElevatorMoving():
 
 #Generators are going to be 11n 3s and 9e or 3e
 
+
 #Start of blowing up EDA.
 
 # |-------|
@@ -2258,8 +2265,92 @@ def caveElevatorMoving():
 # |-------|
 
 def lowerFloorsE():
+	print("\n"*50)
+	debugRun('lowerFloorsE\n')
+	print('You are in the elevator.')
+	print('The only way out is south.')
+	print('Movable directions: South')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?i")
+		if player == "n":
+			print('You walk into the wall of the elevator.')
+		elif player == "e" :
+			print('You walk into the wall of the elevator.')
+		elif player == "s":
+			lowerFloors7()
+		elif player == "w":
+			print('You walk into the wall of the elevator.')
+		elif player == "u":
+			print('No use.')
+		elif player == "g":
+			print('Nothing to grab.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		else:
+			print("Invald Input.")
+
+def lowerFloors1():
 	pass
 
+def lowerFloors2():
+	pass
+
+def lowerFloors3():
+	pass
+
+def lowerFloors4():
+	pass
+
+def lowerFloors5():
+	pass
+
+def lowerFloors6():
+	pass
+
+def lowerFloors7():
+	print("\n"*50)
+	debugRun('lowerFloors7\n')
+	print('The elevator is to the north of you.')
+	print('On the wall to the south it says. EDA\'s core. In case EDA turns evil put Cubes in slots on the North, East, South, and West walls.')
+	print('If not all cubes are available there is a chance EDA will be shut down. ')
+	print('Under neath that warning is a slot for a medium cube.')
+	print('Movable directions: North, East, West')
+	valid = False
+	while not valid:
+		player = validate("nsewugq?i")
+		if player == "n":
+			lowerFloorsE()
+		elif player == "e" :
+			lowerFloors8()
+		elif player == "s":
+			randomWallmessage()
+		elif player == "w":
+			lowerFloors6()
+		elif player == "u":
+			if 'medium cube' in inventory:
+				print('You put the medium cube into the slot and it starts to shine.')
+				inventory.remove('medium cube')
+				info.mediumCubeIn = True
+				info.totalCubesIn += 1
+			elif info.mediumCubeIn == True:
+				print('You see the some what glowing medium cube in it\'s slot.')
+			else:
+				print('You do not have the medium cube.')
+			
+		elif player == "g":
+			print('Nothing to grab.')
+		elif player == "?":
+			helpdisplay()
+		elif player == "i":
+			displayInventory()
+		else:
+			print("Invald Input.")
+
+def lowerFloors8():
+	pass
 
 # MAZE
 # = means that it is a hallway with nothin in it
@@ -2388,7 +2479,7 @@ def leftHallway1():
 	print('You seem to be in a very nice office building.')
 	print('A door is to your north.')
 	print('Movable directions: North, East, West')
-	valid = False
+	valid = Falseavaliable
 	while not valid:
 		player = validate("nsewugq?im")
 		if player == "n":
@@ -3142,6 +3233,11 @@ class informationToSave(object):
 		self.Ending1Found = False
 		self.Ending2Found = False
 		self.output = 0
+		self.totalCubesIn = 0
+		self.mediumCubeIn = False
+		self.tinyCubeIn = False
+		self.smallCubeIn = False
+		self.largeCubeIn = False
 
 	def __str__(self):
 		printer = f'This is some saved data:'
@@ -3314,6 +3410,7 @@ function_dict = {'start\n':start, 'keyR1\n':keyR1, 'doorR1\n':doorR1, 'fillerR1\
 				'caveElevator\n' : caveElevator, 'caveElevatorMoving\n': caveElevatorMoving,
 				'middleRoom\n': middleRoom, 'leftHallway1\n': leftHallway1, 'leftHallway2\n': leftHallway2, 'leftHallway3\n': leftHallway3, 'leftRoom1\n': leftRoom1, 'leftRoom2\n': leftRoom2, 'rightHallway1\n': rightHallway1, 'rightHallway2\n': rightHallway2, 'rightHallway3\n': rightHallway3, 'rightRoom1\n': rightRoom1, 'rightRoom2\n': rightRoom2,
 				'area1r5\n': area1r5, 'area2r5\n': area2r5, 'area3r5\n': area3r5, 'area4r5\n': area4r5, 'area5r5\n': area5r5, 'area6r5\n': area6r5,  
+				'lowerFloorsE\n': lowerFloorsE, 'lowerFloors1\n': lowerFloors1, 'lowerFloors2\n': lowerFloors2, 'lowerFloors3\n': lowerFloors3, 'lowerFloors4\n': lowerFloors4, 'lowerFloors5\n': lowerFloors5, 'lowerFloors6\n': lowerFloors6, 'lowerFloors7\n': lowerFloors7, 'lowerFloors8\n': lowerFloorsE,
 				}
 info = informationToSave()
 
