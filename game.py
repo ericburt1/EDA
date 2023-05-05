@@ -30,7 +30,6 @@ def holder():
 				""",mapR2)
 		else:
 			print("Invald Input.")
-
 		
 #Room one layout each set of parenthasis is an area with its functon ame
 #(start)(keyR1)
@@ -138,7 +137,7 @@ def validate(values, prompt=f"What do you want to do?\n"):
 
 
 def displayInventory():
-	print("\n"*50)
+	print("\n"*2)
 	print("Inventory:\n")
 	for i in range(len(inventory)):
 		part = inventory[i]
@@ -159,7 +158,9 @@ def displayInventory():
 def start():
 	print("\n"*50)
 	debugRun('start\n')
-	print(f"Welcome to EDA {playerName}. If you need a reminder of controls type '?'")
+	print(f"EDA: Welcome {playerName}. If you need a reminder of controls type '?'")
+	print(f'I am your guide EDA. I will watch you while you participate in this experiment.')
+	print('There is a bed in the North West corner.')
 	print("You are in the corner of a white room.")
 	print("You notice a door south of you.")
 	print("\nMoveable directions: East, South.")
@@ -198,6 +199,7 @@ def keyR1():
 	print("\nMovable directions: South, West.")
 	valid = False
 	while not valid:
+		
 		player = validate("nsewugq?im")
 		if player == "n":
 			randomWallmessage()
@@ -220,8 +222,7 @@ def keyR1():
 		elif player == "?":
 			helpdisplay()
 		elif player == "i":		
-			print("You try to use the key.")
-			print("This wall is keyhole-less")
+			displayInventory()
 		else:
 			print("Invald Input.")
 
@@ -698,7 +699,7 @@ def largeHallway1R3():
 		print("You enter one long hallway")
 		print("There are some chairs and tables with decorations on the west and east side of the hallway.")
 		print("Eveything appears to be bolted down. You notice a door on the east side of the hallway.")
-	print("\nMovable directions: East")
+	print("\nMovable directions: North, East")
 	valid = False
 	while not valid:
 		player = validate("nsewugq?im")
@@ -2174,8 +2175,9 @@ def cave3s():
 				print('You turn the generator off and try to turn it on.')
 				print('You here a sput and the generator sparks to life.')
 				print('It seems to be running smoothly now.')
-				print('You turn to walk away and a tiny cube launches from the generator hitting you.')
+				print('You turn to walk away and a large cube launches from the generator hitting you.')
 				print('You turn around and take the cube.')
+				inventory.append('large cube')
 				if info.gen1on == True:
 					gensOn += 1
 				if info.gen2on == True:
@@ -2235,7 +2237,7 @@ def caveElevatorMoving():
 	while not valid:
 		option = print('Press \'w\' to wait.')
 		if timewaited == 8:
-			pass #Put cave ending things here.
+			lowerFloorsE()
 		if option.lower() == 'w':
 			timewaited += 1
 		else:
@@ -2246,6 +2248,18 @@ def caveElevatorMoving():
 #Cave Room Rooms continued cave1e, cave2e, cave3e, cave4e, cave5e, cave6e, cave7e, cave8e, cave9e, cave10e, cave11e, cave1s, cave3s, cave2s
 
 #Generators are going to be 11n 3s and 9e or 3e
+
+#Start of blowing up EDA.
+
+# |-------|
+# | 1 2 3 |
+# | 4 E 5 |
+# | 6 7 8 |
+# |-------|
+
+def lowerFloorsE():
+	pass
+
 
 # MAZE
 # = means that it is a hallway with nothin in it
@@ -2703,7 +2717,7 @@ def rightHallway2():
 		elif player == "s":
 			randomWallmessage()
 		elif player == "w":
-			rightHallway2()
+			rightHallway1()
 		elif player == "u":
 			print('No use.')
 		elif player == "g":
@@ -2738,7 +2752,7 @@ def rightHallway3():
 		elif player == "s":
 			randomWallmessage()
 		elif player == "w":
-			middleRoom()
+			rightHallway2()
 		elif player == "u":
 			print('No use.')
 		elif player == "g":
